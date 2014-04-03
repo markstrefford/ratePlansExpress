@@ -1,0 +1,3010 @@
+{
+    "OTA_HotelAvailRS": {
+        "Version": "1.003",
+        "POS": {
+            "Source": {
+                "RequestorID": {
+                    "URL": "http://www.laterooms.com",
+                    "Type": "Exclusive",
+                    "ID": "99621664"
+                }
+            }
+        },
+        "RoomStays": {
+            "RoomStay": {
+                "IsAlternate": "false",
+                "RoomTypes": {
+                    "RoomType": [
+                        {
+                            "RoomTypeCode": "OSNNIDU0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS" }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIDU0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS" }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIDU0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS" }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIDU0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS" }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIDU0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS" }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIDH0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "LATEROOMS ADVANCE PURCHASE" }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIDH0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "LATEROOMS ADVANCE PURCHASE" }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIDH0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "LATEROOMS ADVANCE PURCHASE" }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIDH0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "LATEROOMS ADVANCE PURCHASE" }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIDH0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "LATEROOMS ADVANCE PURCHASE" }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKB0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS BREAKFAST" }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKB0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS BREAKFAST" }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKB0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS BREAKFAST" }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKB0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS BREAKFAST" }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKB0G",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "LATEROOMS BREAKFAST" }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKA0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "TPI 00P AP BKF GSTCC" }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKA0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "TPI 00P AP BKF GSTCC" }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKA0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "TPI 00P AP BKF GSTCC" }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKA0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "TPI 00P AP BKF GSTCC" }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKA0G",
+                            "ReqdGuaranteeType": "DX",
+                            "RoomDescription": { "Text": "TPI 00P AP BKF GSTCC" }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKPSG",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "TPI 00P PKSTGOGST CC" }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKPSG",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "TPI 00P PKSTGOGST CC" }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKPSG",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "TPI 00P PKSTGOGST CC" }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKPSG",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "TPI 00P PKSTGOGST CC" }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKPSG",
+                            "ReqdGuaranteeType": "GX",
+                            "RoomDescription": { "Text": "TPI 00P PKSTGOGST CC" }
+                        }
+                    ]
+                },
+                "RatePlans": {
+                    "RatePlan": [
+                        {
+                            "RatePlanCode": "IDU0G",
+                            "Guarantee": {
+                                "GuaranteeType": "GuaranteeRequired",
+                                "GuaranteesAccepted": {
+                                    "GuaranteeAccepted": [
+                                        {
+                                            "PaymentCard": { "CardCode": "AX" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "MC" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "VS" }
+                                        }
+                                    ]
+                                }
+                            },
+                            "CancelPenalties": {
+                                "CancelPenalty": {
+                                    "Start": "2014-04-01",
+                                    "NonRefundable": "false",
+                                    "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                    "AmountPercent": { "NmbrOfNights": "1" },
+                                    "PenaltyDescription": [
+                                        { "Text": "No show Cancel Penalty information" },
+                                        {
+                                            "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                            "
+                                        }
+                                    ]
+                                }
+                            },
+                            "Commission": {
+                                "Comment": {
+                                    "Name": "Percentage",
+                                    "Text": "COMMISSIONABLE"
+                                }
+                            }
+                        },
+                        {
+                            "RatePlanCode": "IDH0G",
+                            "Guarantee": {
+                                "GuaranteeType": "Deposit",
+                                "GuaranteesAccepted": {
+                                    "GuaranteeAccepted": [
+                                        {
+                                            "PaymentCard": { "CardCode": "AX" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "MC" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "VS" }
+                                        }
+                                    ]
+                                }
+                            },
+                            "CancelPenalties": {
+                                "CancelPenalty": {
+                                    "NonRefundable": "true",
+                                    "Deadline": {
+                                        "OffsetTimeUnit": "Day",
+                                        "OffsetUnitMultiplier": "999"
+                                    },
+                                    "PenaltyDescription": [
+                                        { "Text": "No show Cancel Penalty information" },
+                                        { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                    ]
+                                }
+                            },
+                            "Commission": {
+                                "Comment": {
+                                    "Name": "Percentage",
+                                    "Text": "COMMISSIONABLE"
+                                }
+                            }
+                        },
+                        {
+                            "RatePlanCode": "IKB0G",
+                            "Guarantee": {
+                                "GuaranteeType": "GuaranteeRequired",
+                                "GuaranteesAccepted": {
+                                    "GuaranteeAccepted": [
+                                        {
+                                            "PaymentCard": { "CardCode": "AX" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "MC" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "VS" }
+                                        }
+                                    ]
+                                }
+                            },
+                            "CancelPenalties": {
+                                "CancelPenalty": {
+                                    "Start": "2014-04-01",
+                                    "NonRefundable": "false",
+                                    "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                    "AmountPercent": { "NmbrOfNights": "1" },
+                                    "PenaltyDescription": [
+                                        { "Text": "No show Cancel Penalty information" },
+                                        {
+                                            "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                            "
+                                        }
+                                    ]
+                                }
+                            },
+                            "Commission": {
+                                "Comment": {
+                                    "Name": "Percentage",
+                                    "Text": "COMMISSIONABLE"
+                                }
+                            }
+                        },
+                        {
+                            "RatePlanCode": "IKA0G",
+                            "Guarantee": {
+                                "GuaranteeType": "Deposit",
+                                "GuaranteesAccepted": {
+                                    "GuaranteeAccepted": [
+                                        {
+                                            "PaymentCard": { "CardCode": "AX" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "MC" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "VS" }
+                                        }
+                                    ]
+                                }
+                            },
+                            "CancelPenalties": {
+                                "CancelPenalty": {
+                                    "NonRefundable": "true",
+                                    "Deadline": {
+                                        "OffsetTimeUnit": "Day",
+                                        "OffsetUnitMultiplier": "999"
+                                    },
+                                    "PenaltyDescription": [
+                                        { "Text": "No show Cancel Penalty information" },
+                                        { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                    ]
+                                }
+                            },
+                            "Commission": {
+                                "Comment": {
+                                    "Name": "Percentage",
+                                    "Text": "COMMISSIONABLE"
+                                }
+                            }
+                        },
+                        {
+                            "RatePlanCode": "IKPSG",
+                            "Guarantee": {
+                                "GuaranteeType": "GuaranteeRequired",
+                                "GuaranteesAccepted": {
+                                    "GuaranteeAccepted": [
+                                        {
+                                            "PaymentCard": { "CardCode": "AX" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "MC" }
+                                        },
+                                        {
+                                            "PaymentCard": { "CardCode": "VS" }
+                                        }
+                                    ]
+                                }
+                            },
+                            "CancelPenalties": {
+                                "CancelPenalty": {
+                                    "Start": "2014-04-01",
+                                    "NonRefundable": "false",
+                                    "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                    "AmountPercent": { "NmbrOfNights": "1" },
+                                    "PenaltyDescription": [
+                                        { "Text": "No show Cancel Penalty information" },
+                                        {
+                                            "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                            "
+                                        }
+                                    ]
+                                }
+                            },
+                            "Commission": {
+                                "Comment": {
+                                    "Name": "Percentage",
+                                    "Text": "COMMISSIONABLE"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "RoomRates": {
+                    "RoomRate": [
+                        {
+                            "RoomTypeCode": "OSNNIDU0G",
+                            "RatePlanCode": "IDU0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "83.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "83.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS",
+                                            "Average Nightly Rate: - 83.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "1 DOUBLE BED NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIDU0G",
+                            "RatePlanCode": "IDU0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "83.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "83.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS",
+                                            "Average Nightly Rate: - 83.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "2 DOUBLE BEDS STANDARD ROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIDU0G",
+                            "RatePlanCode": "IDU0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "103.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "103.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS",
+                                            "Average Nightly Rate: - 103.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE KING BEDROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIDU0G",
+                            "RatePlanCode": "IDU0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "103.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "103.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "103.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS",
+                                            "Average Nightly Rate: - 103.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE TWIN RM 2 DBL BEDS NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIDU0G",
+                            "RatePlanCode": "IDU0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "83.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "83.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "83.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS",
+                                            "Average Nightly Rate: - 83.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "STANDARD ROOM",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIDH0G",
+                            "RatePlanCode": "IDH0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "72.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "72.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS ADVANCE PURCHASE",
+                                            "Average Nightly Rate: - 72.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "1 DOUBLE BED NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIDH0G",
+                            "RatePlanCode": "IDH0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "72.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "72.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS ADVANCE PURCHASE",
+                                            "Average Nightly Rate: - 72.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "2 DOUBLE BEDS STANDARD ROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIDH0G",
+                            "RatePlanCode": "IDH0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "89.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "89.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS ADVANCE PURCHASE",
+                                            "Average Nightly Rate: - 89.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE KING BEDROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIDH0G",
+                            "RatePlanCode": "IDH0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "89.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "89.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "89.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS ADVANCE PURCHASE",
+                                            "Average Nightly Rate: - 89.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE TWIN RM 2 DBL BEDS NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIDH0G",
+                            "RatePlanCode": "IDH0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "72.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "72.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "72.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS ADVANCE PURCHASE",
+                                            "Average Nightly Rate: - 72.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "STANDARD ROOM",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKB0G",
+                            "RatePlanCode": "IKB0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "93.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "93.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS BREAKFAST",
+                                            "Average Nightly Rate: - 93.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "1 DOUBLE BED NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKB0G",
+                            "RatePlanCode": "IKB0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "93.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "93.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS BREAKFAST",
+                                            "Average Nightly Rate: - 93.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "2 DOUBLE BEDS STANDARD ROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKB0G",
+                            "RatePlanCode": "IKB0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "113.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "113.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS BREAKFAST",
+                                            "Average Nightly Rate: - 113.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE KING BEDROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKB0G",
+                            "RatePlanCode": "IKB0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "113.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "113.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "113.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS BREAKFAST",
+                                            "Average Nightly Rate: - 113.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE TWIN RM 2 DBL BEDS NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKB0G",
+                            "RatePlanCode": "IKB0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "93.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "93.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "93.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "LATEROOMS BREAKFAST",
+                                            "Average Nightly Rate: - 93.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "STANDARD ROOM",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKA0G",
+                            "RatePlanCode": "IKA0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "82.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "82.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P AP BKF GSTCC",
+                                            "Average Nightly Rate: - 82.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "1 DOUBLE BED NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKA0G",
+                            "RatePlanCode": "IKA0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "82.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "82.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P AP BKF GSTCC",
+                                            "Average Nightly Rate: - 82.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "2 DOUBLE BEDS STANDARD ROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKA0G",
+                            "RatePlanCode": "IKA0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "99.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "99.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P AP BKF GSTCC",
+                                            "Average Nightly Rate: - 99.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE KING BEDROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKA0G",
+                            "RatePlanCode": "IKA0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "99.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "99.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "99.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P AP BKF GSTCC",
+                                            "Average Nightly Rate: - 99.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE TWIN RM 2 DBL BEDS NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKA0G",
+                            "RatePlanCode": "IKA0G",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "82.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": {
+                                                "OffsetTimeUnit": "Day",
+                                                "OffsetUnitMultiplier": "999"
+                                            },
+                                            "PenaltyDescription": { "Text": "Canceling your reservation or failing to arrive will result in forfeiture of your deposit. Taxes may apply." }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "DEPOSIT",
+                                                "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "82.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "82.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P AP BKF GSTCC",
+                                            "Average Nightly Rate: - 82.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "true",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": {
+                                            "AdvPur": "true",
+                                            "MinDay": "5",
+                                            "MaxDay": "0"
+                                        },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "ENTIRE_STAY"
+                                        },
+                                        "DepositPolicy": {
+                                            "AtBkng": "false",
+                                            "DepBasisType": "ENTIRE_STAY",
+                                            "Description": { "Text": "A deposit for the entire stay is due at time of booking." }
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "STANDARD ROOM",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "OSNNIKPSG",
+                            "RatePlanCode": "IKPSG",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "98.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "98.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P PKSTGOGST CC",
+                                            "Average Nightly Rate: - 98.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "1 DOUBLE BED NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TOTNIKPSG",
+                            "RatePlanCode": "IKPSG",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "98.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "98.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P PKSTGOGST CC",
+                                            "Average Nightly Rate: - 98.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "2 DOUBLE BEDS STANDARD ROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "KEXNIKPSG",
+                            "RatePlanCode": "IKPSG",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "118.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "118.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P PKSTGOGST CC",
+                                            "Average Nightly Rate: - 118.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE KING BEDROOM NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "TEXNIKPSG",
+                            "RatePlanCode": "IKPSG",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "118.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "118.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "118.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P PKSTGOGST CC",
+                                            "Average Nightly Rate: - 118.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "4",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "EXECUTIVE TWIN RM 2 DBL BEDS NONSMOKING",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        },
+                        {
+                            "RoomTypeCode": "CSTNIKPSG",
+                            "RatePlanCode": "IKPSG",
+                            "Rates": {
+                                "Rate": {
+                                    "AgeQualifyingCode": "10",
+                                    "Base": {
+                                        "AmountBeforeTax": "98.00",
+                                        "CurrencyCode": "GBP"
+                                    },
+                                    "Fees": {
+                                        "Fee": {
+                                            "TaxInclusive": "true",
+                                            "Type": "Exclusive",
+                                            "Percent": "20.00",
+                                            "Description": { "Text": " 20% per night included in rate effective 1 April, 2014 thru 2 April, 2014" }
+                                        }
+                                    },
+                                    "CancelPolicies": {
+                                        "CancelPenalty": {
+                                            "Deadline": { "AbsoluteDeadline": "2014-04-01T16:00:00" },
+                                            "PenaltyDescription": {
+                                                "Text": "Canceling your reservation before 4:00 PM (local hotel time) on Tuesday, 1 April, 2014 will result in no charge. Canceling your reservation after 4:00 PM (local hotel time) on 1 April, 2014, or failing to show, will result in a charge of 1 night per room to your credit card. Taxes may apply. Failing to call or show before check-out time after the first night of a reservation will result in cancellation of the remainder of your reservation.
+                                                "
+                                            }
+                                        }
+                                    },
+                                    "PaymentPolicies": {
+                                        "GuaranteePayment": [
+                                            {
+                                                "PaymentCode": "GX",
+                                                "Deadline": { "AbsoluteDeadline": "16:00:00" },
+                                                "Description": [
+                                                    { "Text": "GuaranteeRequired=true" },
+                                                    { "Text": "A standard guarantee for a reservation" }
+                                                ]
+                                            },
+                                            {
+                                                "PaymentCode": "CommPol",
+                                                "Description": { "Text": "This Rate is Commissionable" }
+                                            }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "Taxes": {
+                                            "Amount": "98.00",
+                                            "CurrencyCode": "GBP",
+                                            "Tax": [
+                                                {
+                                                    "Code": "TMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax" }
+                                                },
+                                                {
+                                                    "Code": "AMT",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total AmountAfterTax Excluding Extra Person Charge" }
+                                                },
+                                                {
+                                                    "Code": "TTR",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Total BaseRate" }
+                                                },
+                                                {
+                                                    "Code": "AVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly base rate" }
+                                                },
+                                                {
+                                                    "Code": "XVG",
+                                                    "Amount": "98.00",
+                                                    "TaxDescription": { "Text": "Average Nightly rate including extra person charges" }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "RateDescription": {
+                                        "Text": [
+                                            "TPI 00P PKSTGOGST CC",
+                                            "Average Nightly Rate: - 98.0"
+                                        ]
+                                    },
+                                    "TPA_Extensions": {
+                                        "MaxOccupancy": "2",
+                                        "MealsIncluded": {
+                                            "Breakfast": "false",
+                                            "Lunch": "false",
+                                            "Dinner": "false"
+                                        },
+                                        "AdvBkRule": { "AdvPur": "false" },
+                                        "CxlBasisType": {
+                                            "Policy": "NO_SHOW_PENALTY",
+                                            "#text": "NUMBER_OF_NIGHTS"
+                                        }
+                                    }
+                                }
+                            },
+                            "RoomRateDescription": {
+                                "Text": "STANDARD ROOM",
+                                "URL": "http://www.holidayinn.com/redirect?path=rates&brandCode=hi&localeCode=en&regionCode=1&hotelCode=NCLUK&checkInDate=1&checkInMonthYear=32014&checkOutDate=2&checkOutMonthYear=32014&numberOfAdults=2&numberOfChildren=0&numberOfRooms=1&dp=true"
+                            }
+                        }
+                    ]
+                },
+                "GuestCounts": {
+                    "IsPerRoom": "true",
+                    "GuestCount": {
+                        "AgeQualifyingCode": "10",
+                        "Count": "2"
+                    }
+                },
+                "TimeSpan": {
+                    "Start": "2014-04-01",
+                    "End": "2014-04-02"
+                },
+                "BasicPropertyInfo": {
+                    "ChainCode": "HI",
+                    "BrandCode": "HI",
+                    "BrandName": "HOLI",
+                    "HotelCode": "NCLUK",
+                    "HotelName": "NEWCASTLE - GOSFORTH PARK",
+                    "VendorMessages": {
+                        "VendorMessage": {
+                            "InfoType": "1",
+                            "SubSection": {
+                                "SubTitle": "Hotel Description",
+                                "Paragraph": {
+                                    "Text": {
+                                        "Language": "en",
+                                        "#text": " Relax in your spacious Guest room at the peaceful Holiday Inn Newcastle Upon Tyne hotel, close to the well-linked A1 and A19. Getting to the hotel is easy, with Newcastle Central rail station and Newcastle Airport both 6 miles away. You can leave your vehicle in our complimentary car park if you're driving, with the convenient A19 and A1 roads just minutes away. Holiday Inn Newcastle Upon Tyne occupies a rural setting surrounded by 16 acres of countryside, 6 miles from Newcastle city centre . Holiday Inn Newcastle Upon Tyne has 11 meeting rooms for up to 400 guests. You can keep in touch with wireless Internet throughout the hotel. Choose one of our Family rooms and take the kids to the ramparts and turrets of the medieval Alnwick Castle , featured in the Harry Potter movies. Our friendly staff will direct you to the brooding beauty of the nearby Northumberland coastline . "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Address": {
+                        "AddressLine": [
+                            "GREAT NORTH ROAD",
+                            "SEATON BURN"
+                        ],
+                        "CityName": "NEWCASTLE UPON TYNE",
+                        "PostalCode": "NE13 6BP",
+                        "CountryName": {
+                            "Code": "GB",
+                            "#text": "ENGLAND"
+                        }
+                    },
+                    "ContactNumbers": {
+                        "ContactNumber": [
+                            {
+                                "PhoneUseType": "5",
+                                "PhoneTechType": "1",
+                                "PhoneNumber": "44-191-2019988"
+                            },
+                            {
+                                "PhoneUseType": "5",
+                                "PhoneTechType": "3",
+                                "PhoneNumber": "44-191-2368091"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
