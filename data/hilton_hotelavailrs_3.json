@@ -1,0 +1,301 @@
+{
+    "OTA_HotelAvailRS": {
+        "Target": "Test",
+        "PrimaryLangID": "en-us",
+        "Version": "3.0",
+        "TimeStamp": "2014-02-17T09:31:55.04-06:00",
+        "RoomStays": {
+            "RoomStay": {
+                "RatePlans": {
+                    "RatePlan": {
+                        "RatePlanCode": "SDLRW11",
+                        "CancelPenalties": {
+                            "CancelPenalty": {
+                                "PenaltyDescription": { "Text": "24 HR CANCELLATION REQUIRED" }
+                            }
+                        },
+                        "RatePlanDescription": { "Text": "LATEROOMS" }
+                    }
+                },
+                "RoomRates": {
+                    "RoomRate": [
+                        {
+                            "BookingCode": "STANDARD",
+                            "RatePlanCode": "SDLRW11",
+                            "RoomTypeCode": "DBT-E10",
+                            "EffectiveDate": "2014-03-19",
+                            "ExpireDate": "2014-03-20",
+                            "NumberOfUnits": "2",
+                            "Rates": {
+                                "Rate": {
+                                    "EffectiveDate": "2014-03-19",
+                                    "ExpireDate": "2014-03-20",
+                                    "RateMode": "1",
+                                    "Base": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountBeforeTax": "100"
+                                    },
+                                    "PaymentPolicies": {
+                                        "RequiredPayment": [
+                                            { "PaymentCode": "TA" },
+                                            { "PaymentCode": "CC" },
+                                            { "PaymentCode": "CR" }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountAfterTax": "100",
+                                        "Taxes": {
+                                            "Tax": [
+                                                {
+                                                    "Code": "14",
+                                                    "Amount": "0.00",
+                                                    "CurrencyCode": "USD"
+                                                },
+                                                {
+                                                    "Code": "17",
+                                                    "Amount": "20.71",
+                                                    "CurrencyCode": "USD"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "Features": {
+                                "Feature": [
+                                    { "RoomAmenity": "7" },
+                                    {
+                                        "Description": { "Text": "2 DOUBLE BEDS-DELUXE ROOM-NONSMOKING...COMP HI SPEED-SWEET DREAMS EXPERIENCE BED...UPGRADED AMMENITIES-BATHROBE-42 INCH LCD TV" }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "BookingCode": "STANDARD",
+                            "RatePlanCode": "SDLRW11",
+                            "RoomTypeCode": "DUS-E10",
+                            "EffectiveDate": "2014-03-19",
+                            "ExpireDate": "2014-03-20",
+                            "NumberOfUnits": "4",
+                            "Rates": {
+                                "Rate": {
+                                    "EffectiveDate": "2014-03-19",
+                                    "ExpireDate": "2014-03-20",
+                                    "RateMode": "1",
+                                    "Base": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountBeforeTax": "100"
+                                    },
+                                    "PaymentPolicies": {
+                                        "RequiredPayment": [
+                                            { "PaymentCode": "TA" },
+                                            { "PaymentCode": "CC" },
+                                            { "PaymentCode": "CR" }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountAfterTax": "100",
+                                        "Taxes": {
+                                            "Tax": [
+                                                {
+                                                    "Code": "14",
+                                                    "Amount": "0.00",
+                                                    "CurrencyCode": "USD"
+                                                },
+                                                {
+                                                    "Code": "17",
+                                                    "Amount": "24.51",
+                                                    "CurrencyCode": "USD"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "Features": {
+                                "Feature": [
+                                    { "RoomAmenity": "7" },
+                                    {
+                                        "Description": { "Text": "1 KING BED JUNIOR SUITE-NONSMOKING...COMP HI SPEED-SWEET DREAMS EXPERIENCE BED...SITTING AREA-RAIN SHOWER-UPGRADED AMMENITIES" }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "BookingCode": "STANDARD",
+                            "RatePlanCode": "SDLRW11",
+                            "RoomTypeCode": "TPL-E10",
+                            "EffectiveDate": "2014-03-19",
+                            "ExpireDate": "2014-03-20",
+                            "NumberOfUnits": "9",
+                            "Rates": {
+                                "Rate": {
+                                    "EffectiveDate": "2014-03-19",
+                                    "ExpireDate": "2014-03-20",
+                                    "RateMode": "1",
+                                    "Base": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountBeforeTax": "99.00"
+                                    },
+                                    "PaymentPolicies": {
+                                        "RequiredPayment": [
+                                            { "PaymentCode": "TA" },
+                                            { "PaymentCode": "CC" },
+                                            { "PaymentCode": "CR" }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "CurrencyCode": "GBP",
+                                        "AmountAfterTax": "117.81",
+                                        "Taxes": {
+                                            "Tax": [
+                                                {
+                                                    "Code": "14",
+                                                    "Amount": "0.00",
+                                                    "CurrencyCode": "USD"
+                                                },
+                                                {
+                                                    "Code": "17",
+                                                    "Amount": "18.81",
+                                                    "CurrencyCode": "USD"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "Features": {
+                                "Feature": [
+                                    { "RoomAmenity": "7" },
+                                    {
+                                        "Description": { "Text": "1 KING BED-NONSMOKING...COMP HI SPEED-SWEET DREAMS EXPERIENCE BED...37 INCH FLAT SCREEN TV-IN RM SAFE-MP3 CLOCK" }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "BookingCode": "STANDARD",
+                            "RatePlanCode": "SDLRW11",
+                            "RoomTypeCode": "NK1D",
+                            "EffectiveDate": "2014-03-01",
+                            "ExpireDate": "2014-03-02",
+                            "NumberOfUnits": "2",
+                            "Rates": {
+                                "Rate": {
+                                    "EffectiveDate": "2014-03-01",
+                                    "ExpireDate": "2014-03-02",
+                                    "RateMode": "1",
+                                    "Base": {
+                                        "CurrencyCode": "USD",
+                                        "AmountBeforeTax": "109.00"
+                                    },
+                                    "PaymentPolicies": {
+                                        "RequiredPayment": [
+                                            { "PaymentCode": "TA" },
+                                            { "PaymentCode": "CC" },
+                                            { "PaymentCode": "CR" }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "CurrencyCode": "USD",
+                                        "AmountAfterTax": "129.71",
+                                        "Taxes": {
+                                            "Tax": [
+                                                {
+                                                    "Code": "14",
+                                                    "Amount": "0.00",
+                                                    "CurrencyCode": "USD"
+                                                },
+                                                {
+                                                    "Code": "17",
+                                                    "Amount": "20.71",
+                                                    "CurrencyCode": "USD"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "Features": {
+                                "Feature": [
+                                    { "RoomAmenity": "7" },
+                                    {
+                                        "Description": { "Text": "1 KING BED-DELUXE ROOM-NONSMOKING...COMP HI SPEED-SWEET DREAMS EXPERIENCE BED...UPGRADED AMMENITIES-BATHROBE-42 INCH LCD TV" }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "BookingCode": "STANDARD",
+                            "RatePlanCode": "SDLRW11",
+                            "RoomTypeCode": "ND2",
+                            "EffectiveDate": "2014-03-01",
+                            "ExpireDate": "2014-03-02",
+                            "NumberOfUnits": "9",
+                            "Rates": {
+                                "Rate": {
+                                    "EffectiveDate": "2014-03-01",
+                                    "ExpireDate": "2014-03-02",
+                                    "RateMode": "1",
+                                    "Base": {
+                                        "CurrencyCode": "USD",
+                                        "AmountBeforeTax": "99.00"
+                                    },
+                                    "PaymentPolicies": {
+                                        "RequiredPayment": [
+                                            { "PaymentCode": "TA" },
+                                            { "PaymentCode": "CC" },
+                                            { "PaymentCode": "CR" }
+                                        ]
+                                    },
+                                    "Total": {
+                                        "CurrencyCode": "USD",
+                                        "AmountAfterTax": "117.81",
+                                        "Taxes": {
+                                            "Tax": [
+                                                {
+                                                    "Code": "14",
+                                                    "Amount": "0.00",
+                                                    "CurrencyCode": "USD"
+                                                },
+                                                {
+                                                    "Code": "17",
+                                                    "Amount": "18.81",
+                                                    "CurrencyCode": "USD"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "Features": {
+                                "Feature": [
+                                    { "RoomAmenity": "7" },
+                                    {
+                                        "Description": { "Text": "2 DOUBLE BEDS-NONSMOKING...COMP HI SPEED-SWEET DREAMS EXPERIENCE BED...37 INCH FLAT SCREEN TV-IN RM SAFE-MP3 CLOCK" }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "TimeSpan": {
+                    "Start": "2014-03-01",
+                    "Duration": "P1D"
+                },
+                "BasicPropertyInfo": {
+                    "BrandCode": "DT",
+                    "HotelName": "DoubleTree by Hilton Mexico City",
+                    "HotelCode": "MEXCT"
+                }
+            }
+        },
+        "Criteria": {
+            "Criterion": {
+                "HotelRef": { "HotelCode": "MEXCT" }
+            }
+        }
+    }
+}
