@@ -28,7 +28,9 @@ module.exports = function (db, app) {
     var getRatePlan = function (rateplan_id, callback) {
         db.get(rateplan_id, function (error, result) {
             if (error) callback(error);
-            else {console.log(JSON.stringify(result.value)); callback(null, result.value);}
+            else {
+                //console.log(JSON.stringify(result.value));
+                callback(null, result.value);}
         })
     }
 }
