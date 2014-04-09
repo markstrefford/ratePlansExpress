@@ -1,20 +1,87 @@
 /**
  *
  * Created by markstrefford on 02/04/2014.
+ *
+ *  * {"query":{"bool":{"must":[{"range":{"couchbaseDocument.doc.EffectiveDate":{"gte":"2014-03-03"}}},{"range":{"couchbaseDocument.doc.ExpireDate":{"lte":"2014-03-04"}}}],"must_not":[],"should":[]}},"from":0,"size":50,"sort":[],"facets":{}}
+
  */
 
 var _ = require('underscore'),
-    moment = require('moment');
+    moment = require('moment'),
+    url = require('url'),
+    elasticsearch = require('elasticsearch');
+;
 //      request = require('request');
 
-/**
- *
- * {"query":{"bool":{"must":[{"range":{"couchbaseDocument.doc.EffectiveDate":{"gte":"2014-03-03"}}},{"range":{"couchbaseDocument.doc.ExpireDate":{"lte":"2014-03-04"}}}],"must_not":[],"should":[]}},"from":0,"size":50,"sort":[],"facets":{}}
- *
- * /
+var parseUrlParams = function (req, res, next) {
+    req.urlParams = url.parse(req.url, true);
+    next();
+}
 
-module.exports = function (ratePlanDb, rateAvailDb, app) {
-    /**
+module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
+
+    /*
+     * Get rateplans that fit my requirements
+     */
+    app.get('/rateplans/search', parseUrlParams, function (req, res) {
+            console.log("/rateplans/search: " + JSON.stringify(req.urlParams.query));
+            esClient.search({host: 'localhost:9200',
+                    index: 'rates_and_availability',
+                    body: {
+                        "query": {
+                            "bool": {
+                                "must": [
+                                    {"range": {"couchbaseDocument.doc.EffectiveDate": {"gte": "2014-03-03"}}},
+                                    {"range": {"couchbaseDocument.doc.ExpireDate": {"lte": "2014-03-04"}}}
+                                ], "must_not": [], "should": []
+                            }
+                        },
+                        "from": 0, "size": 50, "sort": [], "facets": {
+                        }
+                    }
+                }
+            ).then(function (body) {
+                    var numRateAvail = body.hits.total;
+                    var rateAvailRes = body.hits.hits;
+                    var response = {};
+                    console.log("rateplans/search : " + numRateAvail + " possible rates available");
+                    _.each(rateAvailRes, function (rateAvail) {
+                        getPulledRateAvail(rateAvail._id, function (error, raRes) {
+                            response[raRes.RoomTypeCode] = {
+                                "BookingInfo": {
+                                    "RatePlanCode": raRes.RatePlanCode,
+                                    "BookingCode": raRes.BookingCode,
+                                },
+                                "Base": raRes.Rates.Rate.Base,
+                                "Taxes": raRes.Rates.Rate.Total.Taxes,
+                                "Features": raRes.Features
+                            }
+                            //console.log(response[raRes.RoomTypeCode]);
+                        });
+                    })
+                    console.log("Response: " + response);
+                    res.send(response);
+
+                }, function (error) {
+                    console.trace(error.message);
+                    res.send(404);
+                });
+            ;
+        }
+    );
+
+    // Get rates and availability
+    var getPulledRateAvail = function (rateAvailKey, callback) {
+        rateAvailDb.get(rateAvailKey, function (error, result) {
+            if (error) callback(error);
+            else {
+                //console.log("getPulledRateAvail: " + JSON.stringify(result.value));
+                callback(null, result.value);
+            }
+        })
+    }
+
+    /*
      * Saving rateplan stuff
      */
     app.post('/rateplans/pulled', function (req, res) {
@@ -46,7 +113,7 @@ module.exports = function (ratePlanDb, rateAvailDb, app) {
         })
     }
 
-    // saveRatesAndAvailability for push providers
+// saveRatesAndAvailability for push providers
     var saveRatesAndAvailability = function (ratePlanKey, rateplan, callback) {
         var meta = {};                                        // TODO - Set expiry!!
         var roomRate = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.RoomRates.RoomRate;
@@ -69,8 +136,8 @@ module.exports = function (ratePlanDb, rateAvailDb, app) {
 
     }
 
-    /**
-     * Reading rateplan stuff    (this is for push or pull!)
+    /*
+     * Reading rateplan stuff
      */
     app.get('/rateplans/:rateplanId', function (req, res) {
         var rateplan_id = req.params.rateplanId;
@@ -81,8 +148,8 @@ module.exports = function (ratePlanDb, rateAvailDb, app) {
         })
     });
 
-    // Specific request to get pulled rateplan
-    // TODO - May change this back to a generic function for push and pull!!
+// Specific request to get pulled rateplan
+// TODO - May change this back to a generic function for push and pull!!
     var getPulledRatePlan = function (rateplan_id, callback) {
         ratePlanDb.get(rateplan_id, function (error, result) {
             if (error) callback(error);
@@ -93,7 +160,8 @@ module.exports = function (ratePlanDb, rateAvailDb, app) {
         })
     }
 
-    /**
+
+    /*
      * Stuff related to getting price and availability
      */
 }
