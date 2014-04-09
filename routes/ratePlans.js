@@ -43,24 +43,31 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
             ).then(function (body) {
                     var numRateAvail = body.hits.total;
                     var rateAvailRes = body.hits.hits;
-                    var response = {};
+                    var response = [];
                     console.log("rateplans/search : " + numRateAvail + " possible rates available");
-                    _.each(rateAvailRes, function (rateAvail) {
-                        getPulledRateAvail(rateAvail._id, function (error, raRes) {
-                            response[raRes.RoomTypeCode] = {
+                    // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
+                    rateAvailRes.forEach(function(rateAvail) {
+                        console.log("rateAvail:" + JSON.stringify(rateAvail));
+                        getPulledRateAvail(rateAvail._id, function(error, raRes){
+                            // TODO - Handle errors!
+                            console.log("raRes:" + raRes);
+                            var r = {
                                 "BookingInfo": {
+                                    "RoomTypeCode" : raRes.RoomTypeCode,
                                     "RatePlanCode": raRes.RatePlanCode,
-                                    "BookingCode": raRes.BookingCode,
+                                    "BookingCode": raRes.BookingCode
                                 },
                                 "Base": raRes.Rates.Rate.Base,
                                 "Taxes": raRes.Rates.Rate.Total.Taxes,
                                 "Features": raRes.Features
                             }
-                            //console.log(response[raRes.RoomTypeCode]);
-                        });
-                    })
-                    console.log("Response: " + response);
-                    res.send(response);
+                            console.log(r);
+                            response.push(r);
+                            if(response.length == rateAvailRes.length) {
+                                console.log("Response: " + response);
+                                res.send(response);                            }
+                        })
+                    });
 
                 }, function (error) {
                     console.trace(error.message);
@@ -69,6 +76,28 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
             ;
         }
     );
+
+    // Get the json ready to return to the client based on a single Rate_And_Avail document
+    var processRateAvailDetails = function(rateAvail, callback) {
+        getPulledRateAvail(rateAvail._id, function (error, raRes) {
+            if (error) callback(error);
+            else {
+                var result = {
+                    "BookingInfo": {
+                        "RoomTypeCode" : raRes.RoomTypeCode,
+                        "RatePlanCode": raRes.RatePlanCode,
+                        "BookingCode": raRes.BookingCode
+                    },
+                    "Base": raRes.Rates.Rate.Base,
+                    "Taxes": raRes.Rates.Rate.Total.Taxes,
+                    "Features": raRes.Features
+                }
+                callback(null, result);
+            };
+        })
+    }
+
+
 
     // Get rates and availability
     var getPulledRateAvail = function (rateAvailKey, callback) {
