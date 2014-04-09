@@ -179,13 +179,13 @@
                             "BookingCode": "STANDARD",
                             "RatePlanCode": "SDLRW12",
                             "RoomTypeCode": "NK1D",
-                            "EffectiveDate": "2014-03-01",
-                            "ExpireDate": "2014-03-02",
+                            "EffectiveDate": "2014-03-03",
+                            "ExpireDate": "2014-03-04",
                             "NumberOfUnits": "2",
                             "Rates": {
                                 "Rate": {
-                                    "EffectiveDate": "2014-03-01",
-                                    "ExpireDate": "2014-03-02",
+                                    "EffectiveDate": "2014-03-03",
+                                    "ExpireDate": "2014-03-04",
                                     "RateMode": "1",
                                     "Base": {
                                         "CurrencyCode": "USD",
@@ -231,13 +231,13 @@
                             "BookingCode": "STANDARD",
                             "RatePlanCode": "SDLRW12",
                             "RoomTypeCode": "ND2",
-                            "EffectiveDate": "2014-03-01",
-                            "ExpireDate": "2014-03-02",
+                            "EffectiveDate": "2014-03-03",
+                            "ExpireDate": "2014-03-04",
                             "NumberOfUnits": "9",
                             "Rates": {
                                 "Rate": {
-                                    "EffectiveDate": "2014-03-01",
-                                    "ExpireDate": "2014-03-02",
+                                    "EffectiveDate": "2014-03-03",
+                                    "ExpireDate": "2014-03-04",
                                     "RateMode": "1",
                                     "Base": {
                                         "CurrencyCode": "USD",
@@ -282,7 +282,7 @@
                     ]
                 },
                 "TimeSpan": {
-                    "Start": "2014-03-01",
+                    "Start": "2014-03-03",
                     "Duration": "P1D"
                 },
                 "BasicPropertyInfo": {
