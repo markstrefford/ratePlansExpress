@@ -10,7 +10,12 @@ var _ = require('underscore'),
     moment = require('moment'),
     url = require('url'),
     elasticsearch = require('elasticsearch');
-;
+
+var product = "hotel",
+    brand = "hilton",
+    baseUrl = "/rates/" + product + "/" + brand + "/";
+console.log(baseUrl);
+
 //      request = require('request');
 
 var parseUrlParams = function (req, res, next) {
@@ -23,8 +28,8 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     /*
      * Get rateplans that fit my requirements
      */
-    app.get('/rateplans/search', parseUrlParams, function (req, res) {
-            console.log("/rateplans/search: " + JSON.stringify(req.urlParams.query));
+    app.get(baseUrl + 'search', parseUrlParams, function (req, res) {
+            console.log(baseUrl+"/search: " + JSON.stringify(req.urlParams.query));
             esClient.search({host: 'localhost:9200',
                     index: 'rates_and_availability',
                     body: {
@@ -44,16 +49,16 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
                     var numRateAvail = body.hits.total;
                     var rateAvailRes = body.hits.hits;
                     var response = [];
-                    console.log("rateplans/search : " + numRateAvail + " possible rates available");
+                    console.log(baseUrl + "search : " + numRateAvail + " possible rates available");
                     // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
-                    rateAvailRes.forEach(function(rateAvail) {
+                    rateAvailRes.forEach(function (rateAvail) {
                         console.log("rateAvail:" + JSON.stringify(rateAvail));
-                        getPulledRateAvail(rateAvail._id, function(error, raRes){
+                        getPulledRateAvail(rateAvail._id, function (error, raRes) {
                             // TODO - Handle errors!
                             console.log("raRes:" + raRes);
                             var r = {
                                 "BookingInfo": {
-                                    "RoomTypeCode" : raRes.RoomTypeCode,
+                                    "RoomTypeCode": raRes.RoomTypeCode,
                                     "RatePlanCode": raRes.RatePlanCode,
                                     "BookingCode": raRes.BookingCode
                                 },
@@ -63,9 +68,10 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
                             }
                             console.log(r);
                             response.push(r);
-                            if(response.length == rateAvailRes.length) {
+                            if (response.length == rateAvailRes.length) {
                                 console.log("Response: " + response);
-                                res.send(response);                            }
+                                res.send(response);
+                            }
                         })
                     });
 
@@ -78,13 +84,13 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     );
 
     // Get the json ready to return to the client based on a single Rate_And_Avail document
-    var processRateAvailDetails = function(rateAvail, callback) {
+    var processRateAvailDetails = function (rateAvail, callback) {
         getPulledRateAvail(rateAvail._id, function (error, raRes) {
             if (error) callback(error);
             else {
                 var result = {
                     "BookingInfo": {
-                        "RoomTypeCode" : raRes.RoomTypeCode,
+                        "RoomTypeCode": raRes.RoomTypeCode,
                         "RatePlanCode": raRes.RatePlanCode,
                         "BookingCode": raRes.BookingCode
                     },
@@ -93,10 +99,10 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
                     "Features": raRes.Features
                 }
                 callback(null, result);
-            };
+            }
+            ;
         })
     }
-
 
 
     // Get rates and availability
@@ -113,7 +119,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     /*
      * Saving rateplan stuff
      */
-    app.post('/rateplans/pulled', function (req, res) {
+    app.post(baseUrl + 'rates', function (req, res) {
         var rateplan = req.body;
 
         savePullRatePlan(rateplan, function (error, srpResult) {
@@ -168,7 +174,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     /*
      * Reading rateplan stuff
      */
-    app.get('/rateplans/:rateplanId', function (req, res) {
+    app.get(baseUrl + 'rates/:rateplanId', function (req, res) {
         var rateplan_id = req.params.rateplanId;
         getPulledRatePlan(rateplan_id, function (error, rateplan) {
             console.log(rateplan);
@@ -189,9 +195,5 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
         })
     }
 
-
-    /*
-     * Stuff related to getting price and availability
-     */
 }
 

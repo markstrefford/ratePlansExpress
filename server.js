@@ -55,7 +55,7 @@ var esClient = elasticsearch.Client({
 });
 
 var routes = require('./routes'),
-    rateplans = require('./routes/rateplans.js')(ratePlansDb, rateAvailDb, esClient, app)
+    rateplans = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, app)
 
 // Set up routes
 app.get('/', routes.index);

@@ -14,6 +14,7 @@ Architecture overview:
 
 Useful links:
 
+http://docs.couchbase.com/couchbase-elastic-search/
 http://stackoverflow.com/questions/22464169/fail-to-install-couchbase-plugin-for-elasticsearch
 Currently using a latest build (!!!) for the Couchbase / Elasticsearch 1.0.1 plugin
 
