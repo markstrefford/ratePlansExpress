@@ -33,6 +33,9 @@ For example, http://localhost:8001/rateplans/DT_MEXAP_SDTLW1 retrieves rateplan 
 
 
 
+4) Create new rate plan
+curl -XPOST localhost:8001/hotel/hilton -H "Content-Type: application/json" -d @hilton_hotelavailrs_3.json
+
 
 
 

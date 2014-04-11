@@ -10,7 +10,7 @@ var _ = require('underscore'),
     elasticsearch = require('elasticsearch');
 
 var product = "hotel",
-    brand = "hilton",
+    brand = "eviivo",
     baseUrl = "/rates/" + product + "/" + brand + "/";
 console.log(baseUrl);
 
@@ -97,7 +97,10 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
      * Saving rateplan stuff
      */
     app.post(baseUrl + 'rates', function (req, res) {
+        console.log(baseUrl + 'rates');
         var rateplan = req.body;
+
+        console.log(rateplan);
 
         savePullRatePlan(rateplan, function (error, srpResult) {
             if (error) res.send(500);
@@ -106,21 +109,25 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     });
 
     var savePullRatePlan = function (rateplan, callback) {
+        /*
+         * Create unique key for the rate response from Eviivo
+         *
+         * brandCode::hotelCode::adults::children
+         *
+         */
         var brandCode = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.Name;
-        var hotelCode = UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ProviderID_List.ID;
-        var consumerCount = UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ConsumerCandidate.ConsumerCounts.ConsumerCount;
+        var hotelCode = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ProviderID_List.ID;
+        var consumerCount = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ConsumerCandidate.ConsumerCounts.ConsumerCount;
+        // Get occupancy as part of unique key
         var occupancy={
-            "adult":0,
-            "child":0
-        };
+            'adult':'0',
+            'child':'0'
+            };
         for (c in consumerCount) {
-            if (c.AqeQualifyingCode = 'Adult') {occupancy.adult= c.Count};
-            if (c.AgeQualifyingCode = 'Child') {occupancy.child= c.Count};
+            occupancy[consumerCount[c].AgeQualifyingCode.toLowerCase()]=consumerCount[c].Count;
         }
-
         //var ratePlanCode = ''   // TODO - Do we need to add anything else here??
         var key = brandCode + "::" + hotelCode + "::" + occupancy.adult + "::" + occupancy.child // + "::" + ratePlanCode;
-
         console.log("savePullRatePlan: " + key);
         ratePlanDb.set(key, rateplan, function (error, srpResult) {
             if (error) callback(error);
@@ -138,18 +145,21 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
 // saveRatesAndAvailability for push providers
     var saveRatesAndAvailability = function (ratePlanKey, rateplan, callback) {
         var meta = {};                                        // TODO - Set expiry!!
-        var roomRate = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.RoomRates.RoomRate;
+        var ProductTypes = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ProductTypes;
         // Iterate through room rates and save individually
-        _.each(roomRate, function (rr) {
+        // pt = ProductType
+        console.log(ProductTypes);
+        _.each(ProductTypes, function (pt) {
             // TODO - Write a create key function
             // TODO - Key probably needs occupancy as well!
-            var bookingCode = rr.BookingCode;
-            var roomTypeCode = rr.RoomTypeCode;
-            var effectiveDate = rr.Rates.Rate.EffectiveDate;
-            var expireDate = rr.Rates.Rate.ExpireDate;
+            console.log(pt);
+            var bookingCode = pt.ID;
+            var roomTypeCode = pt.ProductTypeCode;
+            var effectiveDate = moment(pt.TimeSlots.TimeSlot.Start).format('YYYY-MM-DD');
+            var expireDate = moment(pt.TimeSlots.TimeSlot.End).format('YYYY-MM-DD');
             var rateAvailKey = ratePlanKey + "::" + bookingCode + "::" + roomTypeCode + "::" + effectiveDate + "::" + expireDate;
             console.log("Writing rate " + rateAvailKey);
-            rateAvailDb.set(rateAvailKey, rr, meta, function (error, sraResult) {
+            rateAvailDb.set(rateAvailKey, pt, meta, function (error, sraResult) {
                     if (error) callback(error);
                     else callback(null, sraResult);
                 }
