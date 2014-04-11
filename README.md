@@ -43,3 +43,13 @@ Design Decisions:
 2) The rates and availability information provided in it subsequently stored as key-value pairs of the format hotel::rateplan::arrival_date::date
    (note that for most purposes the arrival_date and date will be the same but for occurances where LOS>1 then they may be different).
    <b>This needs validating!!!</b>
+
+
+
+Useful javascript:
+
+var parseString = require('xml2js').parseString;
+parseString(xml, {explicitArray: false, mergeAttrs: true}, function (err, result) { console.log(util.inspect(result, false, null)) });
+
+Object.keys(obj)[0];
+_.keys(obj)[0];

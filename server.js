@@ -55,13 +55,12 @@ var esClient = elasticsearch.Client({
 });
 
 var routes = require('./routes'),
-    rateplans = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, app)
+    // TODO - Option to split each provider into seperate code base
+    hotelHilton = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, app),
+    hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, app);
 
 // Set up routes
 app.get('/', routes.index);
-//var ratePlanRoutes =    rateplan.addRatePlanRoutes(app, ratePlanProvider);
-//var channelRoutes =     channel.addChannelRoutes(app, channelProvider);
-//var rateRoutes =        rate.addRateRoutes(app, rateProvider, ratePlanProvider, channelProvider);
 
 
 // Now create the server

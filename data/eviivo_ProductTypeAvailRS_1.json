@@ -1,0 +1,95 @@
+{
+    "UTSv_ABS_ProductTypeAvailRS": {
+        "xmlns": "http://www.eviivo.com/UTSv/2004/01/01",
+        "TimeStamp": "2014-03-21T10:04:47.459327+00:00",
+        "Target": "Test",
+        "Version": "1.1",
+        "TransactionStatusCode": "Start",
+        "UseCache": "True",
+        "PayPalAllowCustomDeposits": "true",
+        "Suppliers": {
+            "Supplier": {
+                "ID": "d1cec0a3-03d9-4b3e-bcdc-b6c6ba95a977",
+                "Name": "Eviivo_UK_ONE",
+                "HasIntegratedBookingSupport": "True",
+                "PaymentOptions": {
+                    "PaymentOption": { "Name": "POA" }
+                },
+                "ProductGroupings": {
+                    "ProductGrouping": {
+                        "AllowPayPal": "true",
+                        "AllowThreeDSecure": "true",
+                        "AllowIvr": "true",
+                        "AllowAmex": "false",
+                        "ProviderID_List": { "ID": "TestProperty" },
+                        "ShortName_List": { "ShortName": "TestProperty" },
+                        "PaymentOptions": {
+                            "PaymentOption": { "Name": "POA" }
+                        },
+                        "ConsumerCandidate": {
+                            "ConsumerCounts": {
+                                "ConsumerCount": [
+                                    {
+                                        "AgeQualifyingCode": "Adult",
+                                        "Count": "2"
+                                    },
+                                    {
+                                        "AgeQualifyingCode": "Child",
+                                        "Count": "0"
+                                    }
+                                ]
+                            }
+                        },
+                        "ProductTypes": {
+                            "ProductType": {
+                                "ID": "40d41a58-2acb-49b0-a5f7-e49855cb6dc9",
+                                "IsBaseProduct": "true",
+                                "ProductTypeCode": "D01",
+                                "BaseProductTypeId": "40d41a58-2acb-49b0-a5f7-e49855cb6dc9",
+                                "IsTaxExempt": "true",
+                                "MaxCapacity": "4",
+                                "AmountAvail": "1",
+                                "NoOfRooms": "0",
+                                "AvailReqType": "Normal",
+                                "TaxRate": "0",
+                                "Name": "Double room",
+                                "TotalRate": {
+                                    "Amount": "100.00",
+                                    "Depreciated": "true",
+                                    "CurrencyCode": "GBP"
+                                },
+                                "TimeSlots": {
+                                    "TimeSlot": {
+                                        "Start": "2014-03-31T14:00:00",
+                                        "End": "2014-04-01T10:00:00",
+                                        "TotalRate": "100.00",
+                                        "RackRate": "0",
+                                        "BookingDeposit": "0",
+                                        "CustomDeposit": "100.00",
+                                        "DistributorDeposit": "0",
+                                        "CurrencyCode": "GBP"
+                                    }
+                                },
+                                "CancelPenalties": {
+                                    "CancelPenalty": {
+                                        "Deadline": {
+                                            "AbsoluteDeadline": "14:00",
+                                            "OffsetTimeUnit": "Hour",
+                                            "OffsetUnitMultiplier": "48",
+                                            "OffsetDropTime": "BeforeArrival"
+                                        },
+                                        "AmountPercent": {
+                                            "NmbrOfNights": "1",
+                                            "BasisType": "Nights"
+                                        },
+                                        "PenaltyDescription": { "Text": "Bookings can be cancelled up to 2 days before check in free of charge. Cancellation after this time will incur a charge of the first night stay" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -106,10 +106,20 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     });
 
     var savePullRatePlan = function (rateplan, callback) {
-        var brandCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.BasicPropertyInfo.BrandCode;
-        var hotelCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.BasicPropertyInfo.HotelCode;
-        var ratePlanCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.RatePlans.RatePlan.RatePlanCode;
-        var key = brandCode + "::" + hotelCode + "::" + ratePlanCode;
+        var brandCode = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.Name;
+        var hotelCode = UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ProviderID_List.ID;
+        var consumerCount = UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ConsumerCandidate.ConsumerCounts.ConsumerCount;
+        var occupancy={
+            "adult":0,
+            "child":0
+        };
+        for (c in consumerCount) {
+            if (c.AqeQualifyingCode = 'Adult') {occupancy.adult= c.Count};
+            if (c.AgeQualifyingCode = 'Child') {occupancy.child= c.Count};
+        }
+
+        //var ratePlanCode = ''   // TODO - Do we need to add anything else here??
+        var key = brandCode + "::" + hotelCode + "::" + occupancy.adult + "::" + occupancy.child // + "::" + ratePlanCode;
 
         console.log("savePullRatePlan: " + key);
         ratePlanDb.set(key, rateplan, function (error, srpResult) {
