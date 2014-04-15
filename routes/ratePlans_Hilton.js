@@ -65,7 +65,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                                 "Taxes": raRes.Rates.Rate.Total.Taxes,
                                 "Features": raRes.Features
                             }
-                            console.log(r);
+                            //console.log(r);
                             response.push(r);
                             if (response.length == rateAvailRes.length) {
                                 console.log("Response: " + response);

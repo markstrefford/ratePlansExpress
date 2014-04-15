@@ -78,7 +78,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                                     ]
                                 }
                             }
-                            console.log(r);
+                            //console.log(r);
                             response.push(r);
                             if (response.length == rateAvailRes.length) {
                                 console.log("Response: " + response);
