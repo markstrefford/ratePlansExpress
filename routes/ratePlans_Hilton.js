@@ -19,24 +19,43 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
 
 //      request = require('request');
 
+    // TODO - Make these a generic function that is added by require();
+
+    // Get query string
     var parseUrlParams = function (req, res, next) {
         req.urlParams = url.parse(req.url, true);
         next();
     }
+
+    // Parse query string for the rates call
+    var parseRatesParams = function (queryString) {
+        // TODO - Handle errors here, perhaps making this a callback!!
+        // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
+        return {
+            "hotelCode": queryString.hid,
+            "startDate": queryString.sd,
+            "endDate": queryString.ed,
+            "adults": queryString.ad,
+            "children": queryString.ch
+        }
+    }
+
     /*
      * Get rateplans that fit my requirements
      */
     app.get(productUrl + 'rates', parseUrlParams, function (req, res) {
-            console.log(productUrl+"/rates: " + JSON.stringify(req.urlParams.query));
+            console.log(productUrl + "rates: " + JSON.stringify(req.urlParams.query));
+            var params = parseRatesParams(req.urlParams.query);
+
             esClient.search({host: 'localhost:9200',
                     index: 'rates_and_availability',
                     body: {
                         "query": {
                             "bool": {
                                 "must": [
-                                    {"query_string": {"default_field":"couchbaseDocument.doc.hotelCode","query":"MEXAP"}},
-                                    {"range": {"couchbaseDocument.doc.EffectiveDate": {"gte": "2014-03-19"}}},
-                                    {"range": {"couchbaseDocument.doc.ExpireDate": {"lte": "2014-03-20"}}}
+                                    {"query_string": {"default_field": "couchbaseDocument.doc.hotelCode", "query": params.hotelCode}},
+                                    {"range": {"couchbaseDocument.doc.EffectiveDate": {"gte": params.startDate}}},
+                                    {"range": {"couchbaseDocument.doc.ExpireDate": {"lte": params.endDate}}}
                                 ], "must_not": [], "should": []
                             }
                         },
@@ -46,33 +65,39 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                 }
             ).then(function (body) {
                     var numRateAvail = body.hits.total;
-                    var rateAvailRes = body.hits.hits;
-                    var response = [];
-                    console.log(productUrl + "search : " + numRateAvail + " possible rates available");
-                    // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
-                    rateAvailRes.forEach(function (rateAvail) {
-                        console.log("rateAvail:" + JSON.stringify(rateAvail));
-                        getPulledRateAvail(rateAvail._id, function (error, raRes) {
-                            // TODO - Handle errors!
-                            console.log("raRes:" + raRes);
-                            var r = {
-                                "BookingInfo": {
-                                    "RoomTypeCode": raRes.RoomTypeCode,
-                                    "RatePlanCode": raRes.RatePlanCode,
-                                    "BookingCode": raRes.BookingCode
-                                },
-                                "Base": raRes.Rates.Rate.Base,
-                                "Taxes": raRes.Rates.Rate.Total.Taxes,
-                                "Features": raRes.Features
-                            }
-                            //console.log(r);
-                            response.push(r);
-                            if (response.length == rateAvailRes.length) {
-                                console.log("Response: " + response);
-                                res.send(response);
-                            }
+                    if (numRateAvail = 0) {
+                        console.log("*** CALL CONNECTIVITY - NO RATE AVAILABLE!! ***");
+                    }
+                    else {
+                        var rateAvailRes = body.hits.hits;
+                        var response = [];
+                        console.log(productUrl + "search : " + numRateAvail + " possible rates available");
+                        // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
+                        rateAvailRes.forEach(function (rateAvail) {
+                            console.log("rateAvail:" + JSON.stringify(rateAvail));
+                            getPulledRateAvail(rateAvail._id, function (error, raRes) {
+                                // TODO - Handle errors!
+                                console.log("raRes:" + raRes);
+                                var r = {
+                                    "BookingInfo": {
+                                        "RoomTypeCode": raRes.RoomTypeCode,
+                                        "RatePlanCode": raRes.RatePlanCode,
+                                        "BookingCode": raRes.BookingCode
+                                    },
+                                    "Base": raRes.Rates.Rate.Base,
+                                    "Taxes": raRes.Rates.Rate.Total.Taxes,
+                                    "Features": raRes.Features
+                                }
+                                //console.log(r);
+                                response.push(r);
+                                if (response.length == rateAvailRes.length) {
+                                    console.log("Response: " + response);
+                                    res.send(response);
+                                }
+                            })
                         })
-                    });
+                    }
+                    ;
 
                 }, function (error) {
                     console.trace(error.message);
