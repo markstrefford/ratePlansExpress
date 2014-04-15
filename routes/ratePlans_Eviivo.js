@@ -55,13 +55,13 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                             console.log("raRes:" + raRes);
                             var r = {
                                 "BookingInfo": {
-                                    "RoomTypeCode": raRes.RoomTypeCode,
-                                    "RatePlanCode": raRes.RatePlanCode,
-                                    "BookingCode": raRes.BookingCode
+                                    "RoomTypeCode": raRes.ProductTypeCode,
+                                    "RatePlanCode": raRes.BaseProdutTypeId
+                                    // "BookingCode": raRes.BookingCode
                                 },
-                                "Base": raRes.Rates.Rate.Base,
-                                "Taxes": raRes.Rates.Rate.Total.Taxes,
-                                "Features": raRes.Features
+                                "Base": raRes.TimeSlots.TimeSlot.TotalRate,
+                                "Taxes": "0",
+                                "Features": { "Description" : raRes.Name }
                             }
                             console.log(r);
                             response.push(r);
@@ -160,7 +160,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
             // Add these for easier searching!
             pt.brandCode=brandCode;
             pt.hotelCode=hotelCode;
-            console.log("Writing rate " + rateAvailKey));
+            console.log("Writing rate " + rateAvailKey);
             rateAvailDb.set(rateAvailKey, pt, meta, function (error, sraResult) {
                     if (error) callback(error);
                     else callback(null, sraResult);
