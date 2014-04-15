@@ -9,25 +9,23 @@ var _ = require('underscore'),
     url = require('url'),
     elasticsearch = require('elasticsearch');
 
-var product = "hotel",
-    brand = "eviivo",
-    baseUrl = "/rates/" + product + "/" + brand + "/";
-console.log(baseUrl);
-
-//      request = require('request');
-
 var parseUrlParams = function (req, res, next) {
     req.urlParams = url.parse(req.url, true);
     next();
 }
 
-module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
+module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
 
+    var product = "hotel",
+        brand = "eviivo",
+        productUrl = config.apiUrl + "/" + product + "/" + brand + "/";
+
+    console.log(productUrl + "online");
     /*
      * Get rateplans that fit my requirements
      */
-    app.get(baseUrl + 'search', parseUrlParams, function (req, res) {
-            console.log(baseUrl+"/search: " + JSON.stringify(req.urlParams.query));
+    app.get(productUrl + 'search', parseUrlParams, function (req, res) {
+            console.log(productUrl+"/search: " + JSON.stringify(req.urlParams.query));
             esClient.search({host: 'localhost:9200',
                     index: 'rates_and_availability',
                     body: {
@@ -47,7 +45,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
                     var numRateAvail = body.hits.total;
                     var rateAvailRes = body.hits.hits;
                     var response = [];
-                    console.log(baseUrl + "search : " + numRateAvail + " possible rates available");
+                    console.log(productUrl + "search : " + numRateAvail + " possible rates available");
                     // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
                     rateAvailRes.forEach(function (rateAvail) {
                         console.log("rateAvail:" + JSON.stringify(rateAvail));
@@ -96,8 +94,8 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     /*
      * Saving rateplan stuff
      */
-    app.post(baseUrl + 'rates', function (req, res) {
-        console.log(baseUrl + 'rates');
+    app.post(productUrl + 'rates', function (req, res) {
+        console.log(productUrl + 'rates');
         var rateplan = req.body;
 
         console.log(rateplan);
@@ -171,7 +169,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, app) {
     /*
      * Reading rateplan stuff
      */
-    app.get(baseUrl + 'rates/:rateplanId', function (req, res) {
+    app.get(productUrl + 'rates/:rateplanId', function (req, res) {
         var rateplan_id = req.params.rateplanId;
         getPulledRatePlan(rateplan_id, function (error, rateplan) {
             console.log(rateplan);

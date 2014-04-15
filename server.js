@@ -28,7 +28,10 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Dev / prod config options
-var config = {};
+var config = {
+    "apiHost" : "localhost",
+    "apiUrl" : ""
+};
 
 app.configure('development', function () {
     config.dbHost = 'localhost:8091';
@@ -56,8 +59,8 @@ var esClient = elasticsearch.Client({
 
 var routes = require('./routes'),
     // TODO - Option to split each provider into seperate code base
-    hotelHilton = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, app),
-    hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, app);
+    hotelHilton = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, config, app),
+    hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, config, app);
 
 // Set up routes
 app.get('/', routes.index);
