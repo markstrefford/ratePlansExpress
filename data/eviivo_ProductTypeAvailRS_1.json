@@ -21,8 +21,8 @@
                         "AllowThreeDSecure": "true",
                         "AllowIvr": "true",
                         "AllowAmex": "false",
-                        "ProviderID_List": { "ID": "TestProperty" },
-                        "ShortName_List": { "ShortName": "TestProperty" },
+                        "ProviderID_List": { "ID": "EHOTEL1" },
+                        "ShortName_List": { "ShortName": "EHOTEL1" },
                         "PaymentOptions": {
                             "PaymentOption": { "Name": "POA" }
                         },

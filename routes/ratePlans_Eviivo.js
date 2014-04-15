@@ -24,22 +24,23 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
     /*
      * Get rateplans that fit my requirements
      */
-    app.get(productUrl + 'search', parseUrlParams, function (req, res) {
-            console.log(productUrl+"/search: " + JSON.stringify(req.urlParams.query));
+    app.get(productUrl + 'rates', parseUrlParams, function (req, res) {
+            console.log(productUrl+"/rates: " + JSON.stringify(req.urlParams.query));
             esClient.search({host: 'localhost:9200',
                     index: 'rates_and_availability',
                     body: {
-                        "query": {
-                            "bool": {
+                        "query":{
+                            "bool":{
                                 "must": [
-                                    {"range": {"couchbaseDocument.doc.EffectiveDate": {"gte": "2014-03-03"}}},
-                                    {"range": {"couchbaseDocument.doc.ExpireDate": {"lte": "2014-03-04"}}}
-                                ], "must_not": [], "should": []
+                                    {"query_string":{"default_field":"couchbaseDocument.doc.hotelCode","query":"EHOTEL1"}},
+                                    {"range":{"couchbaseDocument.doc.TimeSlots.TimeSlot.Start":{"gte":"2014-03-31"}}},
+                                    {"range":{"couchbaseDocument.doc.TimeSlots.TimeSlot.End":{"lte":"2014-04-01"}}}
+                                ],
+                                "must_not":[],
+                                "should":[]
                             }
                         },
-                        "from": 0, "size": 50, "sort": [], "facets": {
-                        }
-                    }
+                        "from":0, "size":10, "sort":[], "facets":{}}
                 }
             ).then(function (body) {
                     var numRateAvail = body.hits.total;
@@ -131,7 +132,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
             if (error) callback(error);
             else {
                 console.log("Calling saveRatesAndAvailability " + key);
-                saveRatesAndAvailability(key, rateplan, function (error, sraResult) {
+                saveRatesAndAvailability(brandCode, hotelCode, key, rateplan, function (error, sraResult) {
                     if (error) callback(error)
                     else callback(null, sraResult);
                 })
@@ -141,7 +142,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
     }
 
 // saveRatesAndAvailability for push providers
-    var saveRatesAndAvailability = function (ratePlanKey, rateplan, callback) {
+    var saveRatesAndAvailability = function (brandCode, hotelCode, ratePlanKey, rateplan, callback) {
         var meta = {};                                        // TODO - Set expiry!!
         var ProductTypes = rateplan.UTSv_ABS_ProductTypeAvailRS.Suppliers.Supplier.ProductGroupings.ProductGrouping.ProductTypes;
         // Iterate through room rates and save individually
@@ -156,7 +157,10 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
             var effectiveDate = moment(pt.TimeSlots.TimeSlot.Start).format('YYYY-MM-DD');
             var expireDate = moment(pt.TimeSlots.TimeSlot.End).format('YYYY-MM-DD');
             var rateAvailKey = ratePlanKey + "::" + bookingCode + "::" + roomTypeCode + "::" + effectiveDate + "::" + expireDate;
-            console.log("Writing rate " + rateAvailKey);
+            // Add these for easier searching!
+            pt.brandCode=brandCode;
+            pt.hotelCode=hotelCode;
+            console.log("Writing rate " + rateAvailKey));
             rateAvailDb.set(rateAvailKey, pt, meta, function (error, sraResult) {
                     if (error) callback(error);
                     else callback(null, sraResult);
@@ -169,7 +173,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
     /*
      * Reading rateplan stuff
      */
-    app.get(productUrl + 'rates/:rateplanId', function (req, res) {
+    app.get(productUrl + 'rateplan/:rateplanId', function (req, res) {
         var rateplan_id = req.params.rateplanId;
         getPulledRatePlan(rateplan_id, function (error, rateplan) {
             console.log(rateplan);

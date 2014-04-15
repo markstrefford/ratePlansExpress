@@ -26,8 +26,8 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
     /*
      * Get rateplans that fit my requirements
      */
-    app.get(productUrl + 'search', parseUrlParams, function (req, res) {
-            console.log(productUrl+"/search: " + JSON.stringify(req.urlParams.query));
+    app.get(productUrl + 'rates', parseUrlParams, function (req, res) {
+            console.log(productUrl+"/rates: " + JSON.stringify(req.urlParams.query));
             esClient.search({host: 'localhost:9200',
                     index: 'rates_and_availability',
                     body: {
@@ -139,6 +139,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
             var effectiveDate = rr.Rates.Rate.EffectiveDate;
             var expireDate = rr.Rates.Rate.ExpireDate;
             var rateAvailKey = ratePlanKey + "::" + bookingCode + "::" + roomTypeCode + "::" + effectiveDate + "::" + expireDate;
+            // Add these for easier searching!
             rr.brandCode = brandCode;
             rr.hotelCode = hotelCode;
             console.log("Writing rate " + rateAvailKey);
@@ -154,7 +155,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
     /*
      * Reading rateplan stuff
      */
-    app.get(productUrl + 'rates/:rateplanId', function (req, res) {
+    app.get(productUrl + 'rateplan/:rateplanId', function (req, res) {
         var rateplan_id = req.params.rateplanId;
         getPulledRatePlan(rateplan_id, function (error, rateplan) {
             console.log(rateplan);

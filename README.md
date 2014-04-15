@@ -59,6 +59,9 @@ Design Decisions:
    These have json entities added for the brand and hotel codes to facilitate easier searching!
 
 
+Considerations:
+
+1) May be better to have per-provider buckets, but this depends on the overlap of json entity names / complexity of managing them all in one place
 
 Useful javascript:
 
