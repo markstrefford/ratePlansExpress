@@ -59,9 +59,24 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                                     "RatePlanCode": raRes.BaseProdutTypeId
                                     // "BookingCode": raRes.BookingCode
                                 },
-                                "Base": raRes.TimeSlots.TimeSlot.TotalRate,
-                                "Taxes": "0",
-                                "Features": { "Description" : raRes.Name }
+                                "Base": {
+                                    "CurrencyCode" : "GBP",
+                                    "AmountBeforeTax" : raRes.TimeSlots.TimeSlot.TotalRate
+                                },
+                                "Taxes": {
+                                    "Tax" : [
+                                        {
+                                            "code" : "14",
+                                            "amount" : "0",
+                                            "currency" : "GBP"
+                                        }
+                                    ]
+                                },
+                                "Features": {
+                                    "Feature" : [
+                                        { "Description": raRes.Name}
+                                    ]
+                                }
                             }
                             console.log(r);
                             response.push(r);
