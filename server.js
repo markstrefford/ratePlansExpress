@@ -59,6 +59,7 @@ var esClient = elasticsearch.Client({
 
 var routes = require('./routes'),
     // TODO - Option to split each provider into seperate code base
+    hotelLiberate = require('./routes/ratePlans_Liberate.js')(ratePlansDb, rateAvailDb, esClient, config, app),
     hotelHilton = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, config, app),
     hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, config, app);
 
