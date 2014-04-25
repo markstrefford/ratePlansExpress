@@ -2,10 +2,18 @@
  *
  * Created by markstrefford on 02/04/2014.
  *
+ * Liberate AIF / Push provider processing for OTA2004B
+ *
+ * Restrictions:
+ *
+ * 1) Currently assumes that messages arrive in the order rateplan, restrictions, rateplan rates, availability
+ * 2) Assumes LOS is appended to the rateplan code in the message
+ *
  */
 
 var _ = require('underscore'),
     moment = require('moment'),
+    range = require('moment-range'),
     url = require('url'),
     elasticsearch = require('elasticsearch');
 
@@ -124,71 +132,115 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
      */
     app.post(productUrl + 'rates', function (req, res) {
 
-        // Function to call the right function for each message type!!
-        var processOTAHotelMessage = function (OTAHotelMessageType, OTAHotelMessage, callback) {
-            console.log(OTAHotelMessageType);
-            //if (typeof OTAHotelActions[OTAHotelMessageType] !== 'function') {
-            //    callback('Invalid message type.');
-            //}
-            //console.log('Processing ' + productUrl + 'rates : ' + OTAHotelMessageType);
+            // Process OTA_HotelAvailNotifRQ message
+            var processOTAHotelAvailNotifRQ = function (OTAProviderID, OTAHotelMessage, callback) {
+                console.log('processOTAHotelAvailNotifRQ: Processing ' + OTAHotelMessage);
+                callback(null, OTAHotelMessage);
+            };
 
-
-
-            //OTAHotelActions[OTAHotelMessageType](OTAHotelMessage, function (error, processedOTAHotelMessage) {
-            //    if (error) callback(error)
-            //    else {
-            //        console.log('Callback received from OTAHotelMessage Processor for ' + OTAHotelMessageType);
-            //        callback(null, processedOTAHotelMessage);
-            //    }
-            //});
-        }
-
-        // Process OTA_HotelAvailNotifRQ message
-        var processOTAHotelAvailNotifRQ = function (OTAHotelMessage, callback) {
-            console.log('processOTAHotelAvailNotifRQ: Processing ' + OTAHotelMessage);
-            callback(null, OTAHotelMessage);
-        };
-
-        // Process processOTAHotelRatePlanNotifRQ message
-        var processOTAHotelRatePlanNotifRQ = function (OTAHotelMessage, callback) {
-            console.log('processOTAHotelRatePlanNotifRQ: Processing ' + OTAHotelMessage);
-            //callback(null, true);
-        };
-
-
-        // Get the OTA message from the request body, then get the key which determines the message type
-        var OTAHotelMessage = req.body;
-        var OTAHotelMessageType = _.keys(OTAHotelMessage);
-        console.log('Determined message type is ' + OTAHotelMessageType);
-
-        // Call the function for the right message type!
-        if (OTAHotelMessageType == 'OTA_HotelAvailNotifRQ') {
-            console.log('Calling OTA_HotelAvailNotifRQ message processor');
-            processOTAHotelAvailNotifRQ(OTAHotelMessage, function (error, result) {
-                if (error) res.send(500);
-                else {
-                    console.log('Callback received from OTAHotelMessage Processor for ' + OTAHotelMessageType);
-                    res.send(result);
+            // Process processOTAHotelRatePlanNotifRQ message
+            var processOTAHotelRatePlanNotifRQ = function (OTAProviderID, OTARatePlanMessage, callback) {
+                console.log('processOTAHotelRatePlanNotifRQ: Processing ' + OTARatePlanMessage);
+                var ratePlanRates = OTARatePlanMessage.OTA_HotelRatePlanNotifRQ.RatePlans.RatePlan;
+                var messageKeys = _.keys(ratePlanRates);
+                if (_.contains(messageKeys, 'RatePlanCode')) {
+                    console.log('RatePlan Message received for RatePlan ' + OTARatePlanMessage.RatePlanCode);
+                } else {
+                    console.log('RatePlanRates Message received, saving individual rates');
+                    var response = [];
+                    ratePlanRates.forEach(function (ratePlanRate) {
+                        saveRatePlanRates(OTAProviderID, ratePlanRate, function (error, rprResult) {
+                            if (error) callback(error)
+                            else response.push(rprResult);
+                            if (response.length == ratePlanRates.length) {
+                                console.log("Response: " + response);
+                                //res.send(response);
+                                callback(null, response);
+                            }
+                        })
+                    })
                 }
-            })
-        } else {
-            if (OTAHotelMessageType == 'OTA_HotelRatePlanNotifRQ') {
+                callback(null, OTARatePlanMessage);
+            };
 
+            var createKey = function () {
+                var separator = "::";
+                var key = arguments[0];
+                // Iterate through arguments, adding each argument and the separator to the key
+                _.rest(arguments).forEach(function (arg) {
+                    key += separator + arg;
+                });
+                // Now add the last argument without the separator
+                console.log("Generated key=" + key);
+                return key;
+            }
+
+            // Save Liberate Rate Plan Rates
+            var saveRatePlanRates = function (OTAProviderID, ratePlanRate, callback) {
+                var meta = {};                                        // TODO - Set expiry!!
+                var invCode = ratePlanRate.SellableProducts.SellableProduct.InvCode;
+                var ratePlanCode = ratePlanRate.RatePlanCode;
+                var LOS = _.last(ratePlanCode.split('-'));     // TODO - Remember this is specific to Liberate rate plan codes!!
+                console.log('Processing ' + ratePlanCode + ', room:' + invCode + ', LOS:' + LOS);
+                var rates = ratePlanRate.Rates.Rate;
+                rates.forEach(function (rate) {
+                        console.log(rate);
+                        var startDate = moment(rate.Start);
+                        var endDate = moment(rate.End);
+                        var baseByGuestAmt = rate.BaseByGuestAmts.BaseByGuestAmt;
+                        var occupancy = baseByGuestAmt.NumberOfGuests;
+                        // TODO - Handle child occupancies here!
+                        if (LOS == 1) {
+                            // handle LOS = 1
+                            var range = moment().range(startDate, endDate);
+                            range.by('day', function (d) {
+                                    var rateKey = createKey(OTAProviderID, ratePlanCode, invCode, occupancy, moment(d).format('YYYY-MM-DD'));
+                                    console.log("Writing rate " + rateKey);
+                                    // TODO - Handle cas changes to ensure we have not clashed on a write here!!
+                                    rateAvailDb.set(rateKey, rate, meta, function (error, srResult) {
+                                            if (error) callback(error);
+                                            else callback(null, srResult);
+                                        }
+                                    )
+                                }
+                            )
+                        }
+                        else {
+                            // handle LOS > 1
+                        }
+                        var key = createKey([OTAProviderID, ratePlanCode, LOS, occupancy])
+                    }
+                )
+            }
+
+            // Get the OTA message from the request body, then get the key which determines the message type
+            var OTAHotelMessage = req.body;
+            var OTAHotelMessageType = _.keys(OTAHotelMessage);
+            var OTAProviderID = OTAHotelMessage.OTA_HotelRatePlanNotifRQ.POS.Source.RequestorID.ID;
+
+            // Call the function for the right message type!
+            if (OTAHotelMessageType == 'OTA_HotelAvailNotifRQ') {
+                processOTAHotelAvailNotifRQ(OTAProviderID, OTAHotelMessage, function (error, result) {
+                    if (error) res.send(500);
+                    else {
+                        res.send(200);
+                    }
+                })
+            } else if (OTAHotelMessageType == 'OTA_HotelRatePlanNotifRQ') {
+                console.log('Calling OTA_HotelRatePlanNotifRQ message processor');
+                processOTAHotelRatePlanNotifRQ(OTAProviderID, OTAHotelMessage, function (error, result) {
+                    if (error) res.send(500);
+                    else {
+                        res.send(200);
+                    }
+                })
+            } else {
+                console.log('ERROR: Message type ' + OTAHotelMessageType + ' not currently supported!')
+                res.send(500);
             }
         }
-        //processOTAHotelMessage(OTAHotelMessageType, OTAHotelMessage, function (error, result) {
-        //    if (error) console.log(error)   // TODO - Make this error mean something!!
-        //    else console.log('Success:' + result);
-        //});
-
-
-        /* Old code from other variants... kept for reference for now
-         savePullRatePlan(rateplan, function (error, srpResult) {
-         if (error) res.send(500);
-         else res.send(200);
-         })
-         */
-    });
+    )
+    ;
 
     var savePullRatePlan = function (rateplan, callback) {
         var brandCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.BasicPropertyInfo.BrandCode;
