@@ -123,12 +123,71 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
      * Saving rateplan stuff
      */
     app.post(productUrl + 'rates', function (req, res) {
-        var rateplan = req.body;
 
-        savePullRatePlan(rateplan, function (error, srpResult) {
-            if (error) res.send(500);
-            else res.send(200);
-        })
+        // Function to call the right function for each message type!!
+        var processOTAHotelMessage = function (OTAHotelMessageType, OTAHotelMessage, callback) {
+            console.log(OTAHotelMessageType);
+            //if (typeof OTAHotelActions[OTAHotelMessageType] !== 'function') {
+            //    callback('Invalid message type.');
+            //}
+            //console.log('Processing ' + productUrl + 'rates : ' + OTAHotelMessageType);
+
+
+
+            //OTAHotelActions[OTAHotelMessageType](OTAHotelMessage, function (error, processedOTAHotelMessage) {
+            //    if (error) callback(error)
+            //    else {
+            //        console.log('Callback received from OTAHotelMessage Processor for ' + OTAHotelMessageType);
+            //        callback(null, processedOTAHotelMessage);
+            //    }
+            //});
+        }
+
+        // Process OTA_HotelAvailNotifRQ message
+        var processOTAHotelAvailNotifRQ = function (OTAHotelMessage, callback) {
+            console.log('processOTAHotelAvailNotifRQ: Processing ' + OTAHotelMessage);
+            callback(null, OTAHotelMessage);
+        };
+
+        // Process processOTAHotelRatePlanNotifRQ message
+        var processOTAHotelRatePlanNotifRQ = function (OTAHotelMessage, callback) {
+            console.log('processOTAHotelRatePlanNotifRQ: Processing ' + OTAHotelMessage);
+            //callback(null, true);
+        };
+
+
+        // Get the OTA message from the request body, then get the key which determines the message type
+        var OTAHotelMessage = req.body;
+        var OTAHotelMessageType = _.keys(OTAHotelMessage);
+        console.log('Determined message type is ' + OTAHotelMessageType);
+
+        // Call the function for the right message type!
+        if (OTAHotelMessageType == 'OTA_HotelAvailNotifRQ') {
+            console.log('Calling OTA_HotelAvailNotifRQ message processor');
+            processOTAHotelAvailNotifRQ(OTAHotelMessage, function (error, result) {
+                if (error) res.send(500);
+                else {
+                    console.log('Callback received from OTAHotelMessage Processor for ' + OTAHotelMessageType);
+                    res.send(result);
+                }
+            })
+        } else {
+            if (OTAHotelMessageType == 'OTA_HotelRatePlanNotifRQ') {
+
+            }
+        }
+        //processOTAHotelMessage(OTAHotelMessageType, OTAHotelMessage, function (error, result) {
+        //    if (error) console.log(error)   // TODO - Make this error mean something!!
+        //    else console.log('Success:' + result);
+        //});
+
+
+        /* Old code from other variants... kept for reference for now
+         savePullRatePlan(rateplan, function (error, srpResult) {
+         if (error) res.send(500);
+         else res.send(200);
+         })
+         */
     });
 
     var savePullRatePlan = function (rateplan, callback) {

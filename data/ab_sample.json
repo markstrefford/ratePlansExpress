@@ -1,0 +1,193 @@
+{"@TimeStamp": "2014-04-10T13:49:46", "@Version": "0", "POS": {
+    "Source": {
+        "RequestorID": {
+            "@Type": "96",
+            "@MessagePassword": "LATEROOMSUK",
+            "@ID": "Liberate"
+        }
+    }
+}, "AvailStatusMessages": {
+    "@HotelCode": "23502",
+    "AvailStatusMessage": [
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-10",
+                "@End": "2014-04-17",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-20",
+                "@End": "2014-04-20",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-22",
+                "@End": "2014-04-24",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-28",
+                "@End": "2014-04-29",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-01",
+                "@End": "2014-05-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-11",
+                "@End": "2014-05-16",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-18",
+                "@End": "2014-07-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DUS{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-10",
+                "@End": "2014-05-09",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "JSU{hyphen}E10{hyphen}SU"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-11",
+                "@End": "2014-07-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "JSU{hyphen}E10{hyphen}SU"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-10",
+                "@End": "2014-05-09",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}DX"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-11",
+                "@End": "2014-07-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}DX"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-10",
+                "@End": "2014-04-17",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-20",
+                "@End": "2014-04-20",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-22",
+                "@End": "2014-04-24",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-04-28",
+                "@End": "2014-04-29",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-01",
+                "@End": "2014-05-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-11",
+                "@End": "2014-05-16",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        },
+        {
+            "@BookingLimitMessageType": "SetLimit",
+            "@BookingLimit": "10",
+            "StatusApplicationControl": {
+                "@Start": "2014-05-18",
+                "@End": "2014-07-08",
+                "@RatePlanCode": "LIBERATE-CG{hyphen}BAR~{hyphen}BB{hyphen}E10-1",
+                "@InvCode": "DBL{hyphen}E10{hyphen}ST"
+            }
+        }
+    ]
+}}
