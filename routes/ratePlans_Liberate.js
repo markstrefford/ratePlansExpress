@@ -17,6 +17,25 @@ var _ = require('underscore'),
     url = require('url'),
     elasticsearch = require('elasticsearch');
 
+
+var createKey = function () {
+    var separator = "::";
+    var key = arguments[0];
+    // Iterate through arguments, adding each argument and the separator to the key
+    _.rest(arguments).forEach(function (arg) {
+        key += separator + arg;
+    });
+    // Now add the last argument without the separator
+    console.log("Generated key: " + key);
+    return key;
+}
+
+// Get query string
+var parseUrlParams = function (req, res, next) {
+    req.urlParams = url.parse(req.url, true);
+    next();
+}
+
 module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
 
     var product = "hotel",
@@ -29,11 +48,6 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
 
     // TODO - Make these a generic function that is added by require();
 
-    // Get query string
-    var parseUrlParams = function (req, res, next) {
-        req.urlParams = url.parse(req.url, true);
-        next();
-    }
 
     // Parse query string for the rates call
     var parseRatesParams = function (queryString) {
@@ -163,17 +177,6 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                 callback(null, OTARatePlanMessage);
             };
 
-            var createKey = function () {
-                var separator = "::";
-                var key = arguments[0];
-                // Iterate through arguments, adding each argument and the separator to the key
-                _.rest(arguments).forEach(function (arg) {
-                    key += separator + arg;
-                });
-                // Now add the last argument without the separator
-                console.log("Generated key=" + key);
-                return key;
-            }
 
             // Save Liberate Rate Plan Rates
             var saveRatePlanRates = function (OTAProviderID, ratePlanRate, callback) {
@@ -196,6 +199,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                             range.by('day', function (d) {
                                     var rateKey = createKey(OTAProviderID, ratePlanCode, invCode, occupancy, moment(d).format('YYYY-MM-DD'));
                                     console.log("Writing rate " + rateKey);
+                                    rate.invCode = invCode;  // Add in invCode (room type)
                                     // TODO - Handle cas changes to ensure we have not clashed on a write here!!
                                     rateAvailDb.set(rateKey, rate, meta, function (error, srResult) {
                                             if (error) callback(error);
