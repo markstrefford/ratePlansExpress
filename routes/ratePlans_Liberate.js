@@ -2,12 +2,8 @@
  *
  * Created by markstrefford on 02/04/2014.
  *
- * Liberate AIF / Push provider processing for OTA2004B
+ * Liberate AIF .out file handler
  *
- * Restrictions:
- *
- * 1) Currently assumes that messages arrive in the order rateplan, restrictions, rateplan rates, availability
- * 2) Assumes LOS is appended to the rateplan code in the message
  *
  */
 
@@ -200,6 +196,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
                                     var rateKey = createKey(OTAProviderID, ratePlanCode, invCode, occupancy, moment(d).format('YYYY-MM-DD'));
                                     console.log("Writing rate " + rateKey);
                                     rate.invCode = invCode;  // Add in invCode (room type)
+                                    rate.hotelCode =
                                     // TODO - Handle cas changes to ensure we have not clashed on a write here!!
                                     rateAvailDb.set(rateKey, rate, meta, function (error, srResult) {
                                             if (error) callback(error);
