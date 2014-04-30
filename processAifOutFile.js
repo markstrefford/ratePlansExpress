@@ -19,7 +19,7 @@ var express = require('express'),
 // Dev / prod config options
 var config = {
     dbHost: 'localhost:8091',
-    outFile: '5-sample.out'
+    outFile: '5.out'
 };
 
 
@@ -46,23 +46,27 @@ var writeToDb = function (key, roomRef, roomRate, callback) {
     rateAvailDb.get(key, function (error, result) {
         //console.log(error.code);
         if (error) {
-            console.log("1) Key " + key + " doesn't exist, creating...");
-            cas = {};  rr={};
-            rr[roomRef]=roomRate;         // TODO - try to by DRY here!
+            //console.log("1) Key " + key + " doesn't exist, creating...");
+            cas = {};
+            rr = {};
+            rr[roomRef] = roomRate;         // TODO - try to by DRY here!
         } else {
-            console.log("2) Already exists: " + key + " : " + JSON.stringify(result));
+            //console.log("2) Already exists: " + key + " : " + JSON.stringify(result));
             rr = result.value;
             cas = result.cas;
-            rr[roomRef]=roomRate;         // TODO - try to by DRY here!
+            rr[roomRef] = roomRate;         // TODO - try to by DRY here!
         }
-        console.log("3) Writing : " + key + " : " + JSON.stringify(rr));
+        //console.log("3) Writing : " + key + " : " + JSON.stringify(rr));
 
         // Now write to the DB
         // TODO - Work through CAS checking...
         rateAvailDb.set(key, rr, cas, function (error, result) {
-            if (error) callback(error);
+            if (error) {
+                //console.log(error);
+                callback(error);
+            }
             else {
-                console.log("4) " + key + " written OK");
+                //console.log("4) " + key + " written OK");
                 callback(result);
             }
         });
@@ -86,8 +90,11 @@ csv
         var numChildren = 0; // TODO - Check what the data looks like here!
         // TODO - Validate key and data is what we actually need here!
         // TODO - Validate if we can reduce the JSON document size easily too
-        var key = createKey(data.hotel, data.checkIn, data.checkOut, numAdults, numChildren); //, data.roomType, data.board, data.contractName);
-        var roomRef = createKey(data.roomType, data.board, data.contractName);
+        //var key = createKey(data.hotel, data.checkIn, data.checkOut, numAdults, numChildren); //, data.roomType, data.board, data.contractName);
+        var key = createKey(data.hotel); //, data.checkIn, data.checkOut, numAdults, numChildren); //, data.roomType, data.board, data.contractName);
+        //var roomRef = createKey(data.roomType, data.board, data.contractName);
+        var roomRef = createKey(data.checkIn, data.checkOut, numAdults, numChildren, data.roomType, data.board, data.contractName);
+        console.log(roomRef);
         // TODO - Get a document with this key first (if it exists)
         var roomRate = {
             rc: {
@@ -110,13 +117,13 @@ csv
             cn: data.cancellationPolicy,
         };
         writeToDb(key, roomRef, roomRate, function (error, result) {
-            if (error) console.log(error)
+            if (error) callback(error)
             else {
-                console.log("5) Document " + key + " callback with OK");
+                //console.log("5) Document " + key + " callback with OK");
                 callback(result);
             }
         });
-
+        // TODO - Need to drop out of this loop!!
     })
     .on("end", function () {
         console.log("done");
