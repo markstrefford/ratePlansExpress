@@ -39,6 +39,8 @@ var createKey = function () {
     return key;
 }
 
+// Approach to cas based on https://github.com/couchbaselabs/node-couch-qa/blob/master/lib/question_list.js
+// look at http://stackoverflow.com/questions/19911795/node-delay-retry-requests
 var writeToDb = function (key, roomRef, roomRate, callback) {
     var rr,
         cas
@@ -47,30 +49,40 @@ var writeToDb = function (key, roomRef, roomRate, callback) {
         //console.log(error.code);
         if (error) {
             //console.log("1) Key " + key + " doesn't exist, creating...");
-            cas = {};
             rr = {};
             rr[roomRef] = roomRate;         // TODO - try to by DRY here!
+            rateAvailDb.set(key, rr, function (error, result) {
+                if (error) {
+                    //console.log(error);
+                    callback(error);
+                }
+                else {
+                    //console.log("4) " + key + " written OK");
+                    callback(result);
+                }
+            })
         } else {
             //console.log("2) Already exists: " + key + " : " + JSON.stringify(result));
             rr = result.value;
             cas = result.cas;
             rr[roomRef] = roomRate;         // TODO - try to by DRY here!
-        }
-        //console.log("3) Writing : " + key + " : " + JSON.stringify(rr));
 
-        // Now write to the DB
-        // TODO - Work through CAS checking...
-        rateAvailDb.set(key, rr, cas, function (error, result) {
-            if (error) {
-                //console.log(error);
-                callback(error);
-            }
-            else {
-                //console.log("4) " + key + " written OK");
-                callback(result);
-            }
-        });
-    });
+            //console.log("3) Writing : " + key + " : " + JSON.stringify(rr));
+
+            // Now write to the DB
+            // TODO - Work through CAS checking...
+            rateAvailDb.set(key, rr, { cas: cas }, function (error, result) {
+                if (error) {
+                    console.log(error);
+                    callback(error);
+                }
+                else {
+                    console.log(key + " written with cas " + JSON.stringify(cas));
+                    callback(result);
+                }
+            });
+        }
+    })
 }
 
 // TODO - Fix why fast-csv doesn't handle delimeters properly!!
@@ -117,7 +129,7 @@ csv
             cn: data.cancellationPolicy,
         };
         writeToDb(key, roomRef, roomRate, function (error, result) {
-            if (error) callback(error)
+            if (error) console.log(error)
             else {
                 //console.log("5) Document " + key + " callback with OK");
                 callback(result);
