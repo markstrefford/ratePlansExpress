@@ -40,7 +40,7 @@ var createKey = function () {
 }
 
 // Approach to cas based on https://github.com/couchbaselabs/node-couch-qa/blob/master/lib/question_list.js
-// look at http://stackoverflow.com/questions/19911795/node-delay-retry-requests
+// look at http://stackoverflow.com/questions/19911795/node-delay-retry-requests or http://stackoverflow.com/questions/18581483/how-to-do-repeated-requests-until-one-succeeds-without-blocking-in-node
 var writeToDb = function (key, roomRef, roomRate, callback) {
     var rr,
         cas
