@@ -1,0 +1,184 @@
+{
+    "TPL::RO::NRF-TODOS ST": {
+        "cn": "(20140623,1800,116.100)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "464.400"
+        },
+        "rc": {
+            "cn": "NRF-TODOS ST",
+            "cl": "NRF",
+            "rr": "TPL::RO::NRF-TODOS ST"
+        }
+    },
+    "QUA::BB::CG-TODOS ST": {
+        "cn": "(20140612,2359,2896.000)(20140623,1800,181.000)(20140620,2359,181.000)",
+        "rc": {
+            "cn": "CG-TODOS ST",
+            "cl": "NOR",
+            "rr": "QUA::BB::CG-TODOS ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "724.000"
+        }
+    },
+    "TPL::BB::NRF-TODOS ST": {
+        "cn": "(20140623,1800,140.100)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "560.400"
+        },
+        "rc": {
+            "cn": "NRF-TODOS ST",
+            "cl": "NRF",
+            "rr": "TPL::BB::NRF-TODOS ST"
+        }
+    },
+    "QUA::RO::NRF- 45 ST": {
+        "cn": "(20140623,1800,133.500)",
+        "rc": {
+            "cn": "NRF- 45 ST",
+            "cl": "NRF",
+            "rr": "QUA::RO::NRF- 45 ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "534.000"
+        }
+    },
+    "TPL::BB::OFE-LAST MINUTE": {
+        "cn": "(20140612,2359,2064.000)(20140623,1800,129.000)(20140620,2359,129.000)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "516.000"
+        },
+        "rc": {
+            "cn": "OFE-LAST MINUTE",
+            "cl": "NOR",
+            "rr": "TPL::BB::OFE-LAST MINUTE"
+        }
+    },
+    "QUA::BB::OFE-LAST MINUTE": {
+        "cn": "(20140612,2359,2512.000)(20140623,1800,157.000)(20140620,2359,157.000)",
+        "rc": {
+            "cn": "OFE-LAST MINUTE",
+            "cl": "NOR",
+            "rr": "QUA::BB::OFE-LAST MINUTE"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "628.000"
+        }
+    },
+    "QUA::RO::NRF-TODOS ST": {
+        "cn": "(20140623,1800,141.300)",
+        "rc": {
+            "cn": "NRF-TODOS ST",
+            "cl": "NRF",
+            "rr": "QUA::RO::NRF-TODOS ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "565.200"
+        }
+    },
+    "TPL::RO::NRF- 45 ST": {
+        "cn": "(20140623,1800,110.000)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "440.000"
+        },
+        "rc": {
+            "cn": "NRF- 45 ST",
+            "cl": "NRF",
+            "rr": "TPL::RO::NRF- 45 ST"
+        }
+    },
+    "QUA::BB::NRF- 45 ST": {
+        "cn": "(20140623,1800,157.500)",
+        "rc": {
+            "cn": "NRF- 45 ST",
+            "cl": "NRF",
+            "rr": "QUA::BB::NRF- 45 ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "630.000"
+        }
+    },
+    "TPL::BB::CG-TODOS ST": {
+        "cn": "(20140612,2359,2448.000)(20140623,1800,153.000)(20140620,2359,153.000)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "612.000"
+        },
+        "rc": {
+            "cn": "CG-TODOS ST",
+            "cl": "NOR",
+            "rr": "TPL::BB::CG-TODOS ST"
+        }
+    },
+    "TPL::RO::CG-TODOS ST": {
+        "cn": "(20140612,2359,2064.000)(20140623,1800,129.000)(20140620,2359,129.000)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "516.000"
+        },
+        "rc": {
+            "cn": "CG-TODOS ST",
+            "cl": "NOR",
+            "rr": "TPL::RO::CG-TODOS ST"
+        }
+    },
+    "QUA::RO::CG-TODOS ST": {
+        "cn": "(20140612,2359,2512.000)(20140623,1800,157.000)(20140620,2359,157.000)",
+        "rc": {
+            "cn": "CG-TODOS ST",
+            "cl": "NOR",
+            "rr": "QUA::RO::CG-TODOS ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "628.000"
+        }
+    },
+    "QUA::BB::NRF-TODOS ST": {
+        "cn": "(20140623,1800,165.300)",
+        "rc": {
+            "cn": "NRF-TODOS ST",
+            "cl": "NRF",
+            "rr": "QUA::BB::NRF-TODOS ST"
+        },
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "661.200"
+        }
+    },
+    "TPL::BB::NRF- 45 ST": {
+        "cn": "(20140623,1800,134.000)",
+        "pr": {
+            "a": "3",
+            "cu": "EUR",
+            "pr": "536.000"
+        },
+        "rc": {
+            "cn": "NRF- 45 ST",
+            "cl": "NRF",
+            "rr": "TPL::BB::NRF- 45 ST"
+        }
+    }
+}

@@ -20,7 +20,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
         brand = "eviivo",
         productUrl = config.apiUrl + "/" + product + "/" + brand + "/";
 
-    console.log(productUrl + "online");
+    console.log(productUrl + " online");
     /*
      * Get rateplans that fit my requirements
      */

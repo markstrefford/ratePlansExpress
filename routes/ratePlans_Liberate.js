@@ -39,7 +39,7 @@ module.exports = function (liberateDb, config, app) {
         brand = "liberate",
         productUrl = config.apiUrl + "/" + product + "/" + brand + "/";
 
-    console.log(productUrl + "online");
+    console.log(productUrl + " online");
 
 //      request = require('request');
 
@@ -63,24 +63,37 @@ module.exports = function (liberateDb, config, app) {
      * Get rateplans that fit my requirements
      */
     app.get(productUrl + 'rates', parseUrlParams, function (req, res) {
-            console.log(productUrl + "rates: " + JSON.stringify(req.urlParams.query));
-            var params = parseRatesParams(req.urlParams.query);
+        var params = parseRatesParams(req.urlParams.query);
+        var key = createKey(params.hotelCode, params.startDate, params.endDate, params.adults, params.children);
+        getLiberateRate(key, function (error, rateAvail) {
+            var response = [];
+            var rateAvailArray = _.toArray(rateAvail.value);   // Create an array from the output, makes it easier to process!
 
-            /*
-             params.hotelCode
-             params.startDate
-             params.endDate
-             params.adult
-             params.children
-             */
-
-
-        }
-    );
+            _.each(rateAvailArray, function (ra) {
+                var r = {
+                    "BookingInfo": {
+                        "RoomRef": ra.rc.rr,
+                        "Classification": ra.rc.cl,
+                        "ContractName": ra.rc.cn
+                    },
+                    "Base": {
+                        "CurrencyCode": ra.pr.cu,
+                        "AmountBeforeTax": ra.pr.pr
+                    },
+                    "Cancellation": _.initial(ra.cn.replace(/\(/g, "").split(")"))     // TODO - Process this better!
+                }
+                //console.log(r);
+                response.push(r);
+                if (response.length == rateAvailArray.length) {
+                    res.send(response);
+                }
+            })
+        })
+    })
 
 
     // Get rates and availability
-    var getPulledRate = function (rateAvailKey, callback) {
+    var getLiberateRate = function (rateAvailKey, callback) {
         liberateDb.get(rateAvailKey, callback)
     }
 
@@ -91,19 +104,20 @@ module.exports = function (liberateDb, config, app) {
     app.get(productUrl + 'rateplan', parseUrlParams, function (req, res) {
         var params = req.urlParams.query;
         var rateId = params.id;
-        console.log(rateId);
-        liberateDb.get(rateId, function (error, result) {
+        getLiberateRate(rateId, function (error, result) {
             if (error) {
                 console.log(error);
                 res.send(error);
             }
             else {
-                console.log(result.value);
                 res.send(result.value);
             }
         })
     })
-};
+
+
+}
+;
 
 
 

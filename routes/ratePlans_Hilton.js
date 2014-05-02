@@ -15,7 +15,7 @@ module.exports = function (ratePlanDb, rateAvailDb, esClient, config, app) {
         brand = "hilton",
         productUrl = config.apiUrl + "/" + product + "/" + brand + "/";
 
-    console.log(productUrl + "online");
+    console.log(productUrl + " online");
 
 //      request = require('request');
 
