@@ -19,7 +19,8 @@
         "dustjs-linkedin": "~2.0.3",
         "dustjs-helpers": "~1.1.1",
         "makara": "~0.3.0" ,
-        "couchbase": "*"
+        "couchbase": "*",
+        "async": "*"
     },
     "devDependencies": {
         "mocha": "~1.17.0",

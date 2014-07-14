@@ -1,0 +1,69 @@
+{"OTA_HotelAvailNotifRQ": {
+    "xmlns": "http://www.opentravel.org/OTA/2003/05",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "TimeStamp": "2014-06-25T05:23:04",
+    "Version": "0",
+    "POS": {
+        "Source": {
+            "RequestorID": {
+                "Type": "96",
+                "MessagePassword": "LATEROOMSUK",
+                "ID": "Liberate"
+            }
+        }
+    },
+    "AvailStatusMessages": {
+        "HotelCode": "1",
+        "AvailStatusMessage": [
+            {
+                "StatusApplicationControl": {
+                    "Start": "2014-07-08",
+                    "End": "2014-08-07",
+                    "RatePlanCode": "1-LIBERATE-1",
+                    "InvCode": "Double Room"
+                },
+                "LengthsOfStay": {
+                    "ArrivalDateBased": "true",
+                    "LengthOfStay": {
+                        "Time": "2",
+                        "TimeUnit": "Day",
+                        "MinMaxMessageType": "SetMinLOS"
+                    }
+                }
+            },
+            {
+                "StatusApplicationControl": {
+                    "Start": "2014-07-08",
+                    "End": "2014-08-07",
+                    "RatePlanCode": "1-LIBERATE-2",
+                    "InvCode": "Double Room"
+                },
+                "LengthsOfStay": {
+                    "ArrivalDateBased": "true",
+                    "LengthOfStay": {
+                        "Time": "1",
+                        "TimeUnit": "Day",
+                        "MinMaxMessageType": "SetMinLOS"
+                    }
+                }
+            },
+            {
+                "StatusApplicationControl": {
+                    "Start": "2014-07-08",
+                    "End": "2014-08-07",
+                    "RatePlanCode": "1-LIBERATE-2",
+                    "InvCode": "King's Room"
+                },
+                "LengthsOfStay": {
+                    "ArrivalDateBased": "true",
+                    "LengthOfStay": {
+                        "Time": "3",
+                        "TimeUnit": "Day",
+                        "MinMaxMessageType": "SetMinLOS"
+                    }
+                }
+            }
+        ]
+    }
+}}

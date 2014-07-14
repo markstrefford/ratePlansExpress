@@ -1,0 +1,147 @@
+{"OTA_HotelRatePlanNotifRQ": {
+    "xmlns": "http://www.opentravel.org/OTA/2003/05",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "TimeStamp": "2014-06-25T01:49:15",
+    "Version": "0",
+    "POS": {
+        "Source": {
+            "RequestorID": {
+                "Type": "96",
+                "MessagePassword": "LATEROOMSUK",
+                "ID": "Liberate"
+            }
+        }
+    },
+    "RatePlans": {
+        "HotelCode": "1",
+        "RatePlan": [
+            {
+                "RatePlanCode": "1-LIBERATE-1",
+                "RatePlanCodeType": "RatePlanCode",
+                "RatePlanNotifType": "Overlay",
+                "RatePlanNotifScopeType": "RatePlanOnly",
+                "CurrencyCode": "EUR",
+                "BookingRules": {
+                    "BookingRule": {
+                        "CancelPenalties": {
+                            "CancelPenalty": {
+                                "Deadline": {
+                                    "AbsoluteDeadline": "18:00:59",
+                                    "OffsetTimeUnit": "Day",
+                                    "OffsetUnitMultiplier": "0",
+                                    "OffsetDropTime": "BeforeArrival"
+                                },
+                                "AmountPercent": {
+                                    "NmbrOfNights": "0",
+                                    "BasisType": "Nights",
+                                    "Percent": "50"
+                                },
+                                "PenaltyDescription": {
+                                    "Text": "Liberate Cancellation Policy 1."
+                                }
+                            }
+                        },
+                        "LengthsOfStay": {
+                            "LengthOfStay": [
+                                {
+                                    "MinMaxMessageType": "SetMinLOS",
+                                    "Time": "1",
+                                    "TimeUnit": "Day"
+                                },
+                                {
+                                    "MinMaxMessageType": "SetMaxLOS",
+                                    "Time": "10",
+                                    "TimeUnit": "Day"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "RatePlanLevelFee": {
+                    "Fee": [
+                        {
+                            "Percent": "17.50",
+                            "Type": "Inclusive",
+                            "ChargeUnit": "12",
+                            "Code": "19",
+                            "CurrencyCode": "EUR",
+                            "MandatoryIndicator": "true"
+                        },
+                        {
+                            "ChargeUnit": "21",
+                            "Type": "Exclusive",
+                            "Code": "16",
+                            "Amount": "5.00",
+                            "CurrencyCode": "EUR",
+                            "MandatoryIndicator": "true"
+                        }
+                    ]
+                }
+            },
+            {
+                "RatePlanCode": "1-LIBERATE-2",
+                "RatePlanCodeType": "RatePlanCode",
+                "RatePlanNotifType": "Overlay",
+                "RatePlanNotifScopeType": "RatePlanOnly",
+                "CurrencyCode": "EUR",
+                "BookingRules": {
+                    "BookingRule": {
+                        "CancelPenalties": {
+                            "CancelPenalty": {
+                                "Deadline": {
+                                    "OffsetTimeUnit": "Day",
+                                    "AbsoluteDeadline": "09:00:00",
+                                    "OffsetDropTime": "BeforeArrival",
+                                    "OffsetUnitMultiplier": "2"
+                                },
+                                "AmountPercent": {
+                                    "Percent": "100",
+                                    "NmbrOfNights": "1",
+                                    "BasisType": "Nights"
+                                },
+                                "PenaltyDescription": {
+                                    "Text": "Liberate Cancellation Policy 2."
+                                }
+                            }
+                        },
+                        "LengthsOfStay": {
+                            "LengthOfStay": [
+                                {
+                                    "MinMaxMessageType": "SetMinLOS",
+                                    "Time": "1",
+                                    "TimeUnit": "Day"
+                                },
+                                {
+                                    "MinMaxMessageType": "SetMaxLOS",
+                                    "Time": "10",
+                                    "TimeUnit": "Day"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "RatePlanLevelFee": {
+                    "Fee": [
+                        {
+                            "Percent": "17.50",
+                            "Type": "Inclusive",
+                            "ChargeUnit": "12",
+                            "Code": "19",
+                            "CurrencyCode": "EUR",
+                            "MandatoryIndicator": "true"
+                        },
+                        {
+                            "ChargeUnit": "21",
+                            "Type": "Exclusive",
+                            "Code": "16",
+                            "Amount": "5.00",
+                            "CurrencyCode": "EUR",
+                            "MandatoryIndicator": "true"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}}

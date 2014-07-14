@@ -3,6 +3,7 @@
  *
  */
 
+var _ = require('underscore');
 var createKey = function () {
     var separator = "::";
     var key = arguments[0];

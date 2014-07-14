@@ -48,7 +48,8 @@ app.configure('production', function () {
 // Couchbase config
 var ratePlansDb = new couchbase.Connection({host: config.dbHost, bucket: 'rateplans'}),
     rateAvailDb = new couchbase.Connection({host: config.dbHost, bucket: 'rates_and_availability'}),
-    liberateDb = new couchbase.Connection({host: config.dbHost, bucket: 'liberate'});
+    liberateDb = new couchbase.Connection({host: config.dbHost, bucket: 'liberate'}),
+    ota2004Db = new couchbase.Connection({host: config.dbHost, bucket: 'ota2004'});
 
 // Elastic Search config
 var esClient = new elasticsearch.Client();
@@ -62,7 +63,8 @@ var routes = require('./routes'),
     // TODO - Option to split each provider into seperate code base
     hotelLiberate = require('./routes/ratePlans_Liberate.js')(liberateDb, config, app),
     hotelHilton = require('./routes/ratePlans_Hilton.js')(ratePlansDb, rateAvailDb, esClient, config, app),
-    hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, config, app);
+    hotelEviivo = require('./routes/ratePlans_Eviivo.js')(ratePlansDb, rateAvailDb, esClient, config, app),
+    hotelOTA2004b = require('./routes/ota2004b.js')(ota2004Db, config, app);
 
 // Set up routes
 app.get('/', routes.index);
