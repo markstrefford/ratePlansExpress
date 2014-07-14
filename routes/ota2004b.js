@@ -64,30 +64,20 @@ module.exports = function (ota2004Db, config, app) {
 
             // Get document type
             var docType = _.keys(ota2004Doc)[0];
-            if (docType = 'OTA_HotelRatePlanNotifRQ') {
+            console.log(docType);
+            if (docType == 'OTA_HotelRatePlanNotifRQ') {
                 // Handle different OTA_HotelRatePlanNotifRQ messages
                 var hotelId = ota2004Doc.OTA_HotelRatePlanNotifRQ.RatePlans.HotelCode;
 
                 ota2004Doc.OTA_HotelRatePlanNotifRQ.RatePlans.RatePlan.map(function (ratePlanDetails) {
                         var results = [], errors = [];
-                        //console.log(ratePlanDetails);
                         var ratePlanCode = ratePlanDetails.RatePlanCode;
                         ratePlanDocKeys = _.keys(ratePlanDetails);
                         if (ratePlanDocKeys[1] == 'RatePlanCodeType') {
                             // Process creating a new rate plan
                             console.log('CreateRatePlan Doc');
-                            //var currencyCode = ratePlanDetails.CurrencyCode;
-                            /*ratePlanDetails.BookingRules.BookingRule.LengthsOfStay.LengthOfStay.map(function (los) {
-                             if (los.MinMaxMessageType == 'SetMinLOS') {
-                             console.log('MinLOS=' + los.Time + los.TimeUnit);
-                             } else {
-                             console.log('MaxLOS=' + los.Time + los.TimeUnit);
-                             }
-                             })*/
                             var key = createKey(hotelId, ratePlanCode);
                             saveRatePlan(key, ratePlanDetails, function (err, result) {
-                                //if (err) res.send('Error: SaveRatePlan: ' + err);
-                                //else res.send(result)
                                 if (err) {
                                     console.log("Err" + JSON.stringify(err));
                                     errors.push(err);
@@ -95,38 +85,28 @@ module.exports = function (ota2004Db, config, app) {
                                 else results.push(result)
                             });
                         } else {
-                            //console.log('RatePlan:' + ratePlanDetails.RatePlanCode);
+                            // Process Update Rates message
                             var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode;
-                            //console.log('InvCode:' + invCode)
                             ratePlanDetails.Rates.Rate.map(function (rate) {
-                                    //console.log(rate);
                                     var startDate = rate.Start;
                                     var endDate = rate.End;
                                     var adults = rate.BaseByGuestAmts.BaseByGuestAmt.NumberOfGuests;  //TODO - Assume AgeQualifyingCode is always '10' for Adults
                                     var children = 0;
-                                    if (_.contains(_.keys(rate), 'AdditionalGuestAmounts')) {
-                                        /*  // Additional guest amounts provided for this rate
-                                         if (rate.AdditionalGuestAmounts.AdditionalGuestAmount.AgeQualifyingCode == '8') {
-                                         children = rate.AdditionalGuestAmounts.AdditionalGuestAmount.MaxAdditionalGuests;
-                                         children = rate.AdditionalGuestAmounts.AdditionalGuestAmount.MaxAdditionalGuests;
-                                         console.log("Occ:" + adults + "-" + children);
-                                         } else {
-                                         // Assume if not children then adults!!
-                                         adults = (parseInt(adults) + rate.AdditionalGuestAmounts.AdditionalGuestAmount.MaxAdditionalGuests).toString();
-                                         }*/
+                                    /*if (_.contains(_.keys(rate), 'AdditionalGuestAmounts')) {
+
                                         adults = (parseInt(adults) + parseInt(rate.AdditionalGuestAmounts.AdditionalGuestAmount.MaxAdditionalGuests)).toString();
 
                                     }
-                                    ;
+                                    ;*/
                                     var range = moment().range(startDate, endDate);
                                     range.by('days', function (rateDate) {
-                                        // console.log("Date: " + moment(rateDate).format('YYYY-MM-DD'));
-                                        // Assume that we have LOS = 1 for now!
-                                        var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'), adults, children);
+
+                                        //var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'), adults, children);
+                                        var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
                                         var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode.replace(/ /g, '');
-                                        saveRates(key, ratePlanCode, invCode, rate, function (err, result) {
-                                            //if (err) res.send('Error: SaveRatePlan: ' + err);
-                                            //else res.send(result)
+
+                                        //saveRates(key, ratePlanCode, invCode, rate, 'rates', function (err, result) {
+                                        saveRates(key, ratePlanCode, invCode, adults, rate, 'rates', function (err, result) {
                                             if (err) {
                                                 console.log("Err: " + JSON.stringify(err));
                                                 errors.push(err);
@@ -146,33 +126,49 @@ module.exports = function (ota2004Db, config, app) {
 
                     }
                 )
-            }
+            } else if (docType = 'OTA_HotelAvailNotifRQ') {
+                // Assume the doc contains all the relevant bits!
+                var hotelId = ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages;
+                ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages.AvailStatusMessage.map(function (availData) {
+                    if (_.contains(_.keys(availData), 'BookingLimit')) {
+                        console.log('Contains BookingLimit' + JSON.stringify(availData));
+                        var rateData = {bookingLimit: availData.BookingLimit};
+                        var ratePlanCode = availData.StatusApplicationControl.RatePlanCode;
+                        var invCode = availData.StatusApplicationControl.InvCode;
+                        var startDate = availData.StatusApplicationControl.Start;
+                        var endDate = availData.StatusApplicationControl.End;
+                        saveRatePlanData(hotelId, startDate, endDate);
 
+                    }
+                })
+            }
             else {
                 // Process new / updated rates
-                console.log('Other type of message');
-
+                console.log('ERROR: Non OTA message provided!!');
             }
-
-
         }
     )
 
-    // Save Rateplan - assume just replace old one for now
-    var saveRatePlan = function (key, doc, callback) {
-        ota2004Db.set(key, doc, function (err, result) {
-            if (err) {
-                console.log('saveRatePlan: Error writing rateplan ' + key + ' with ' + err);
-                callback(err);
-            } else {
-                console.log('saveRatePlan: Completed writing rateplan ' + key);
+
+    var saveRatePlanData = function (hotelId, startDate, endDate, adults, children, ratePlanCode, invCode, rateData, dataType, callback) {
+        var range = moment().range(startDate, endDate);
+        range.by('days', function (rateDate) {
+            var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'), adults, children);
+            var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode.replace(/ /g, '');
+            saveRates(key, ratePlanCode, invCode, adults, rateData, dataType, function (err, result) {
+                if (err) {
+                    console.log("Err: " + JSON.stringify(err));
+                    callback(err);
+                }
                 callback(null, result)
-            }
+            });
         })
-    };
+    }
+
 
     // Save rates.  Multiple rates per doc, so need to be *careful* here!!!
-    var saveRates = function (key, ratePlanCode, roomRef, roomRate, callback) {
+    //var saveRates = function (key, ratePlanCode, invCode, roomRate, callback) {
+    var saveRates = function (key, ratePlanCode, invCode, adults, rateData, dataType, callback) {
         var rr,
             cas,
             rateKey
@@ -180,19 +176,20 @@ module.exports = function (ota2004Db, config, app) {
         ota2004Db.get(key, function (err, result) {
             //console.log(error.code);
             if (err) {
-                console.log("1) Key " + key + " doesn't exist, creating..." + ratePlanCode + ":" + roomRef);
+                console.log("1) Key " + key + " doesn't exist, creating..." + ratePlanCode + ":" + invCode);
                 rr = {};
                 rateKey = '_' + ratePlanCode;
-                rr.rates = {};
-                rr.rates[rateKey] = {};
-                rr.rates[rateKey][roomRef] = roomRate;         // TODO - try to by DRY here!
-                console.log("1) Writing rr." + rateKey + "." + JSON.stringify(roomRate));
+                rr[dataType] = {};
+                rr[dataType][rateKey] = {};
+                rr[dataType][rateKey][invCode] = {};
+                rr[dataType][rateKey][invCode][adults] = rateData;  // TODO - try to by DRY here!
+                console.log("1) Writing rr." + rateKey + "." + JSON.stringify(rateData));
                 ota2004Db.add(key, rr, function (err, result) {
                     if (err) {
                         //console.log(error);
                         if (err.code == 12) {
                             console.log("1) CAS Error, retrying key: " + key);
-                            saveRates(key, ratePlanCode, roomRef, roomRate, callback)
+                            saveRates(key, ratePlanCode, invCode, rateData, dataType, callback);
                         } else {
                             console.log("1) Error setting " + key + ", error " + JSON.stringify(err));
                             callback(err);
@@ -204,23 +201,34 @@ module.exports = function (ota2004Db, config, app) {
                     }
                 })
             } else {
-                console.log("2) Already exists: " + key);
                 rr = result.value;
                 cas = result.cas;
+                console.log("2) Already exists: " + key + ":" + JSON.stringify(rr));
                 rateKey = '_' + ratePlanCode;
                 if (!_.contains(_.keys(rr), 'rates')) {
                     console.log('2) Creating rr.rates');
-                    rr.rates = {};
+                    rr[dataType] = {};
                 }
                 ;
-                if (!_.contains(_.keys(rr.rates), rateKey)) {
-                    console.log('2) Creating rr.rates.' + rateKey);
-                    rr.rates[rateKey] = {};
-                }
-                ;
-                rr.rates[rateKey][roomRef] = roomRate;         // TODO - try to by DRY here!
+                console.log("2)" + JSON.stringify(rr));
 
-                console.log("2) Writing : " + key + " : " + JSON.stringify(rr) + JSON.stringify(roomRate));
+                if (!_.contains(_.keys(rr[dataType]), rateKey)) {
+                    console.log('2) Creating rr.rates.' + rateKey);
+                    rr[dataType][rateKey] = {};
+                }
+                ;
+                console.log("2)" + rr);
+                if (!_.contains(_.keys(rr[dataType][rateKey]), invCode)) {
+                    console.log('2) Creating rr.rates.rateKey' + invCode);
+                    rr[dataType][rateKey][invCode] = {};
+                }
+                ;
+                console.log("2)" + JSON.stringify(rr));
+
+                rr[dataType][rateKey][invCode][adults] = rateData;         // TODO - try to by DRY here!
+
+
+                console.log("2) Writing : " + key + " : " + JSON.stringify(rr) + JSON.stringify(rateData));
 
                 // Now write to the DB
                 // TODO - Work through CAS checking...
@@ -229,7 +237,7 @@ module.exports = function (ota2004Db, config, app) {
                         console.log(key + ": " + JSON.stringify(err) + " / " + err.code);
                         if (err.code == 12) {
                             console.log("2) CAS Error, retrying key: " + key);
-                            saveRates(key, ratePlanCode, roomRef, roomRate, callback)
+                            saveRates(key, ratePlanCode, invCode, rateData, dataType, callback);
                         } else {
                             console.log("2) Error setting " + key + ", error " + JSON.stringify(err));
                             callback(err);
@@ -245,52 +253,18 @@ module.exports = function (ota2004Db, config, app) {
     }
 
 
-    /*  var savePullRatePlan = function (rateplan, callback) {
-     var brandCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.BasicPropertyInfo.BrandCode;
-     var hotelCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.BasicPropertyInfo.HotelCode;
-     var ratePlanCode = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.RatePlans.RatePlan.RatePlanCode;
-     var key = brandCode + "::" + hotelCode + "::" + ratePlanCode;
-
-     console.log("savePullRatePlan: " + key);
-     ratePlanDb.set(key, rateplan, function (error, srpResult) {
-     if (error) callback(error);
-     else {
-     console.log("Calling saveRatesAndAvailability " + key);
-     saveRatesAndAvailability(brandCode, hotelCode, key, rateplan, function (error, sraResult) {
-     if (error) callback(error)
-     else callback(null, sraResult);
-     })
-     }
-     callback(null, srpResult);
-     })
-     }*/
-
-// saveRatesAndAvailability for push providers
-    /*    var saveRatesAndAvailability = function (brandCode, hotelCode, ratePlanKey, rateplan, callback) {
-     var meta = {};                                        // TODO - Set expiry!!
-     var roomRate = rateplan.OTA_HotelAvailRS.RoomStays.RoomStay.RoomRates.RoomRate;
-     // Iterate through room rates and save individually
-     _.each(roomRate, function (rr) {
-     // TODO - Write a create key function
-     // TODO - Key probably needs occupancy as well!
-     var bookingCode = rr.BookingCode;
-     var roomTypeCode = rr.RoomTypeCode;
-     var effectiveDate = rr.Rates.Rate.EffectiveDate;
-     var expireDate = rr.Rates.Rate.ExpireDate;
-     var rateAvailKey = ratePlanKey + "::" + bookingCode + "::" + roomTypeCode + "::" + effectiveDate + "::" + expireDate;
-     // Add these for easier searching!
-     rr.brandCode = brandCode;
-     rr.hotelCode = hotelCode;
-     console.log("Writing rate " + rateAvailKey);
-     rateAvailDb.set(rateAvailKey, rr, meta, function (error, sraResult) {
-     if (error) callback(error);
-     else callback(null, sraResult);
-     }
-     )
-     })
-
-     }*/
-
+    // Save Rateplan - assume just replace old one for now
+    var saveRatePlan = function (key, doc, callback) {
+        ota2004Db.set(key, doc, function (err, result) {
+            if (err) {
+                console.log('saveRatePlan: Error writing rateplan ' + key + ' with ' + err);
+                callback(err);
+            } else {
+                console.log('saveRatePlan: Completed writing rateplan ' + key);
+                callback(null, result)
+            }
+        })
+    };
 
     /*
      * Get rateplans that fit my requirements
