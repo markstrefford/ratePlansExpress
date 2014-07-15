@@ -95,11 +95,11 @@ module.exports = function (ota2004Db, config, app) {
                                     var endDate = rate.End;
                                     var occupancy = {};
                                     occupancy.adults = rate.BaseByGuestAmts.BaseByGuestAmt.NumberOfGuests;  //TODO - Assume AgeQualifyingCode is always '10' for Adults
+                                    var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode //.replace(/ /g, '-');
 
                                     var range = moment().range(startDate, moment(endDate).subtract('days', 1));  // Remember the last day is the exit day, not the last entry day!!
                                     range.by('days', function (rateDate) {
                                         var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
-                                        var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode //.replace(/ /g, '-');
                                         saveRates(key, ratePlanCode, invCode, occupancy, rate, 'rates', function (err, result) {
                                             if (err) {
                                                 console.log("Err: " + JSON.stringify(err));
@@ -121,8 +121,10 @@ module.exports = function (ota2004Db, config, app) {
                     }
                 )
             } else if (docType = 'OTA_HotelAvailNotifRQ') {
+                var results = [], errors = [];
+
                 // Assume the doc contains all the relevant bits!
-                var hotelId = ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages;
+                var hotelId = ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages.HotelCode;
                 ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages.AvailStatusMessage.map(function (availData) {
                     if (_.contains(_.keys(availData), 'BookingLimit')) {
                         console.log('Contains BookingLimit' + JSON.stringify(availData));
@@ -131,10 +133,24 @@ module.exports = function (ota2004Db, config, app) {
                         var invCode = availData.StatusApplicationControl.InvCode;
                         var startDate = availData.StatusApplicationControl.Start;
                         var endDate = availData.StatusApplicationControl.End;
-                        saveRatePlanData(hotelId, startDate, endDate);
+                        var occupancy = {'adults' : 'all'};     // This is a fudge for now!!
+
+                        var range = moment().range(startDate, moment(endDate).subtract('days', 1));  // Remember the last day is the exit day, not the last entry day!!
+                        range.by('days', function (rateDate) {
+                            var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
+                            saveRates(key, ratePlanCode, invCode, occupancy, rateData, 'bookingLimit', function (err, result) {
+                                if (err) {
+                                    console.log("Err: " + JSON.stringify(err));
+                                    errors.push(err);
+                                }
+                                else results.push(result)
+                            });
+                        })
 
                     }
+
                 })
+                res.send('OK');
             }
             else {
                 // Process new / updated rates
