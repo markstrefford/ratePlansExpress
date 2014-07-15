@@ -1,0 +1,87 @@
+{"rooms": [
+        {
+            "id": 4509292,
+            "price": 77,
+            "cancellation_type": 1,
+            "rackrate": 123,
+            "min_stay": 1,
+            "sleeps": {
+                "adults": 2
+            },
+            "remaining": 5,
+            "type": "Standard Double Room",
+            "advanced_purchase": true,
+            "breakfast_included": true,
+            "ratecode": "Default",
+            "roomcode": "DBL{hyphen}E10{hyphen}SU",
+            "PriceBreakdown": {
+                "TaxPercentage": 10,
+                "ServiceChargePercentage": 5,
+                "PriceInUserCurrency": {
+                    "BasePrice": 55.00,
+                    "Tax": 10.00,
+                    "ServiceCharge": 5.00,
+                    "Total": 77.00,
+                    "Currency": "GBP"
+                }
+            },
+            "cancellation_policy": "Your reservation for the Blue Rainbow Apartment Hotel Manchester Central in MANCHESTER is an advance purchase rate and a credit card is required to charge full pre-payment at the time of booking. This is non refundable and non transferable."
+        },
+        {
+            "id": 4397392,
+            "price": 90,
+            "cancellation_type": 1,
+            "rackrate": 133,
+            "min_stay": 1,
+            "sleeps": {
+                "adults": 2
+            },
+            "remaining": 5,
+            "type": "Standard Double Room",
+            "advanced_purchase": true,
+            "breakfast_included": true,
+            "ratecode": "Default",
+            "roomcode": "DBL{hyphen}E10{hyphen}EX",
+            "PriceBreakdown": {
+                "TaxPercentage": 7,
+                "ServiceChargePercentage": 5,
+                "PriceInUserCurrency": {
+                    "BasePrice": 78.00,
+                    "Tax": 10.00,
+                    "ServiceCharge": 5.00,
+                    "Total": 92.00,
+                    "Currency": "GBP"
+                }
+            },
+            "cancellation_policy": "default policy."
+        },
+        {
+            "id": 217504,
+            "price": 112,
+            "cancellation_type": 1,
+            "rackrate": 157,
+            "min_stay": 1,
+            "sleeps": {
+                "adults": 2
+            },
+            "remaining": 5,
+            "type": "Superior Double or Twin Room",
+            "advanced_purchase": true,
+            "breakfast_included": true,
+            "ratecode": "Default",
+            "roomcode": "DBL{hyphen}E10{hyphen}SU",
+            "PriceBreakdown": {
+                "TaxPercentage": 10,
+                "ServiceChargePercentage": 5,
+                "PriceInUserCurrency": {
+                    "BasePrice": 98.00,
+                    "Tax": 10.00,
+                    "ServiceCharge": 5.00,
+                    "Total": 112.00,
+                    "Currency": "GBP"
+                }
+            },
+            "cancellation_policy": "default policy."
+        }
+    ]
+}

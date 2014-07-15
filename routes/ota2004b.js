@@ -23,7 +23,7 @@ var createKey = function () {
     _.rest(arguments).forEach(function (arg) {
         key += separator + arg;
     });
-    console.log("Generated key: " + key);
+    //console.log("Generated key: " + key);
     return key;
 }
 
@@ -44,20 +44,6 @@ module.exports = function (ota2004Db, config, app) {
         req.urlParams = url.parse(req.url, true);
         next();
     }
-
-    // Parse query string for the rates call
-    var parseRatesParams = function (queryString) {
-        // TODO - Handle errors here, perhaps making this a callback!!
-        // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
-        return {
-            "hotelCode": queryString.hid,
-            "startDate": queryString.sd,
-            "endDate": queryString.ed,
-            "adults": queryString.ad,
-            "children": queryString.ch
-        }
-    }
-
 
     /*
      * Saving rateplan stuff
@@ -127,20 +113,20 @@ module.exports = function (ota2004Db, config, app) {
                 var hotelId = ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages.HotelCode;
                 ota2004Doc.OTA_HotelAvailNotifRQ.AvailStatusMessages.AvailStatusMessage.map(function (availData) {
                     if (_.contains(_.keys(availData), 'BookingLimit')) {
-                        console.log('Contains BookingLimit' + JSON.stringify(availData));
+                        //console.log('Contains BookingLimit' + JSON.stringify(availData));
                         var rateData = {bookingLimit: availData.BookingLimit};
                         var ratePlanCode = availData.StatusApplicationControl.RatePlanCode;
                         var invCode = availData.StatusApplicationControl.InvCode;
                         var startDate = availData.StatusApplicationControl.Start;
                         var endDate = availData.StatusApplicationControl.End;
-                        var occupancy = {'adults' : 'all'};     // This is a fudge for now!!
+                        var occupancy = {'adults': 'all'};     // This is a fudge for now!!
 
                         var range = moment().range(startDate, moment(endDate).subtract('days', 1));  // Remember the last day is the exit day, not the last entry day!!
                         range.by('days', function (rateDate) {
                             var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
                             saveRates(key, ratePlanCode, invCode, occupancy, rateData, 'bookingLimit', function (err, result) {
                                 if (err) {
-                                    console.log("Err: " + JSON.stringify(err));
+                                    //console.log("Err: " + JSON.stringify(err));
                                     errors.push(err);
                                 }
                                 else results.push(result)
@@ -167,7 +153,7 @@ module.exports = function (ota2004Db, config, app) {
             var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode.replace(/ /g, '');
             saveRates(key, ratePlanCode, invCode, rateData, dataType, function (err, result) {
                 if (err) {
-                    console.log("Err: " + JSON.stringify(err));
+                    //console.log("Err: " + JSON.stringify(err));
                     callback(err);
                 }
                 callback(null, result)
@@ -185,7 +171,7 @@ module.exports = function (ota2004Db, config, app) {
         ota2004Db.get(key, function (err, result) {
             //console.log(error.code);
             if (err) {
-                console.log("1) Key " + key + " doesn't exist, creating..." + ratePlanCode + ":" + invCode);
+                //console.log("1) Key " + key + " doesn't exist, creating..." + ratePlanCode + ":" + invCode);
                 var rr = new JSONR('{}', {from_file: false, pretty_output: true});
                 rr.set(createKey(dataType, ratePlanCode, invCode, occupancy.adults), rateData);         // From JSON toolkit!!
                 ota2004Db.add(key, rr.data, function (err, result) {
@@ -206,7 +192,7 @@ module.exports = function (ota2004Db, config, app) {
             } else {
                 var rr = new JSONR(result.value, {from_file: false, pretty_output: true});
                 cas = result.cas;
-                console.log("2) Already exists: " + key );          // + ":" + JSON.stringify(rr.data));
+                //console.log("2) Already exists: " + key );          // + ":" + JSON.stringify(rr.data));
                 rr.set(createKey(dataType, ratePlanCode, invCode, occupancy.adults), rateData);         // From JSON toolkit!!
 
                 //console.log("2) Adding to " + key + " : " + JSON.stringify(rateData));
@@ -224,7 +210,7 @@ module.exports = function (ota2004Db, config, app) {
                         }
                     }
                     else {
-                        console.log("2)" + key + " written with cas " + JSON.stringify(cas));
+                        //console.log("2)" + key + " written with cas " + JSON.stringify(cas));
                         callback(null, result);
                     }
                 });
@@ -246,70 +232,40 @@ module.exports = function (ota2004Db, config, app) {
         })
     };
 
+
+    // Parse query string for the rates call
+    var parseRatesParams = function (queryString) {
+        // TODO - Handle errors here, perhaps making this a callback!!
+        // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
+        return {
+            "startDate": queryString.d,
+            "nights": queryString.n,
+            "occupancy": queryString.o,
+            "currency": queryString.cur
+        }
+    }
+
     /*
      * Get rateplans that fit my requirements
+     *
+     * /hotel/{id}/rates/?d={date}&n={nights}&o={occupancy}&cur={currency}
+     *
      */
-    app.get(productUrl + 'rates', parseUrlParams, function (req, res) {
-            console.log(productUrl + "rates: " + JSON.stringify(req.urlParams.query));
-            var params = parseRatesParams(req.urlParams.query);
+    app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
+            var requestParams = parseRatesParams(req.urlParams.query);
+            requestParams.hotelId = req.params.hotelId;
+            // Calculate keys for retrieving rate and availability
+            var rateDocKeys = [];
+            var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
+            var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
+            var range = moment().range(startDate, moment(endDate));
+            range.by('days', function (rateDate) {
+                // Get the keys!
+                rateDocKeys.push(createKey(requestParams.hotelId, startDate, moment(endDate).add('days', 1).format('YYYY-MM-DD')));
+            });
 
-            esClient.search({host: 'localhost:9200',
-                    index: 'rates_and_availability',
-                    body: {
-                        "query": {
-                            "bool": {
-                                "must": [
-                                    {"query_string": {"default_field": "couchbaseDocument.doc.hotelCode", "query": params.hotelCode}},
-                                    {"range": {"couchbaseDocument.doc.EffectiveDate": {"gte": params.startDate}}},
-                                    {"range": {"couchbaseDocument.doc.ExpireDate": {"lte": params.endDate}}}
-                                ], "must_not": [], "should": []
-                            }
-                        },
-                        "from": 0, "size": 50, "sort": [], "facets": {
-                        }
-                    }
-                }
-            ).then(function (body) {
-                    var numRateAvail = body.hits.total;
-                    if (numRateAvail = 0) {
-                        console.log("*** CALL CONNECTIVITY - NO RATE AVAILABLE!! ***");
-                    }
-                    else {
-                        var rateAvailRes = body.hits.hits;
-                        var response = [];
-                        console.log(productUrl + "search : " + numRateAvail + " possible rates available");
-                        // This is from http://book.mixu.net/node/ch7.html (#7.2.2)
-                        rateAvailRes.forEach(function (rateAvail) {
-                            console.log("rateAvail:" + JSON.stringify(rateAvail));
-                            getPulledRateAvail(rateAvail._id, function (error, raRes) {
-                                // TODO - Handle errors!
-                                console.log("raRes:" + raRes);
-                                var r = {
-                                    "BookingInfo": {
-                                        "RoomTypeCode": raRes.RoomTypeCode,
-                                        "RatePlanCode": raRes.RatePlanCode,
-                                        "BookingCode": raRes.BookingCode
-                                    },
-                                    "Base": raRes.Rates.Rate.Base,
-                                    "Taxes": raRes.Rates.Rate.Total.Taxes,
-                                    "Features": raRes.Features
-                                }
-                                //console.log(r);
-                                response.push(r);
-                                if (response.length == rateAvailRes.length) {
-                                    console.log("Response: " + response);
-                                    res.send(response);
-                                }
-                            })
-                        })
-                    }
-                    ;
 
-                }, function (error) {
-                    console.trace(error.message);
-                    res.send(404);
-                });
-            ;
+            res.send(rateDocKeys);
         }
     );
 

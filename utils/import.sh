@@ -1,0 +1,1 @@
+time ls | while read f ; do curl -H "Accept: application/json" -H "Content-type: application/json" localhost:8001/hotel/ota2004/rates -X POST -d@$f; done
