@@ -11,10 +11,13 @@ var _ = require('underscore'),
     moment = require('moment'),
     range = require('moment-range'),
     url = require('url'),
-    async = require('async');
+    async = require('async'),
+    json = require("json-toolkit"),
+    JSONR = json.Resource;
+;
 
 var createKey = function () {
-    var separator = "::";
+    var separator = ":";       // Needs to use ':' so it also works with JSON toolkit!!!
     var key = arguments[0];
     // Iterate through arguments, adding each argument and the separator to the key
     _.rest(arguments).forEach(function (arg) {
@@ -90,23 +93,14 @@ module.exports = function (ota2004Db, config, app) {
                             ratePlanDetails.Rates.Rate.map(function (rate) {
                                     var startDate = rate.Start;
                                     var endDate = rate.End;
-                                    var adults = rate.BaseByGuestAmts.BaseByGuestAmt.NumberOfGuests;  //TODO - Assume AgeQualifyingCode is always '10' for Adults
-                                    var children = 0;
-                                    /*if (_.contains(_.keys(rate), 'AdditionalGuestAmounts')) {
+                                    var occupancy = {};
+                                    occupancy.adults = rate.BaseByGuestAmts.BaseByGuestAmt.NumberOfGuests;  //TODO - Assume AgeQualifyingCode is always '10' for Adults
 
-                                        adults = (parseInt(adults) + parseInt(rate.AdditionalGuestAmounts.AdditionalGuestAmount.MaxAdditionalGuests)).toString();
-
-                                    }
-                                    ;*/
-                                    var range = moment().range(startDate, endDate);
+                                    var range = moment().range(startDate, moment(endDate).subtract('days', 1));  // Remember the last day is the exit day, not the last entry day!!
                                     range.by('days', function (rateDate) {
-
-                                        //var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'), adults, children);
                                         var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
-                                        var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode.replace(/ /g, '');
-
-                                        //saveRates(key, ratePlanCode, invCode, rate, 'rates', function (err, result) {
-                                        saveRates(key, ratePlanCode, invCode, adults, rate, 'rates', function (err, result) {
+                                        var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode //.replace(/ /g, '-');
+                                        saveRates(key, ratePlanCode, invCode, occupancy, rate, 'rates', function (err, result) {
                                             if (err) {
                                                 console.log("Err: " + JSON.stringify(err));
                                                 errors.push(err);
@@ -150,12 +144,12 @@ module.exports = function (ota2004Db, config, app) {
     )
 
 
-    var saveRatePlanData = function (hotelId, startDate, endDate, adults, children, ratePlanCode, invCode, rateData, dataType, callback) {
+    var saveRatePlanData = function (hotelId, startDate, endDate, ratePlanCode, invCode, occupancy, rateData, dataType, callback) {
         var range = moment().range(startDate, endDate);
         range.by('days', function (rateDate) {
-            var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'), adults, children);
+            var key = createKey(hotelId, moment(rateDate).format('YYYY-MM-DD'), rateDate.add('days', 1).format('YYYY-MM-DD'));
             var invCode = ratePlanDetails.SellableProducts.SellableProduct.InvCode.replace(/ /g, '');
-            saveRates(key, ratePlanCode, invCode, adults, rateData, dataType, function (err, result) {
+            saveRates(key, ratePlanCode, invCode, rateData, dataType, function (err, result) {
                 if (err) {
                     console.log("Err: " + JSON.stringify(err));
                     callback(err);
@@ -165,10 +159,9 @@ module.exports = function (ota2004Db, config, app) {
         })
     }
 
-
     // Save rates.  Multiple rates per doc, so need to be *careful* here!!!
     //var saveRates = function (key, ratePlanCode, invCode, roomRate, callback) {
-    var saveRates = function (key, ratePlanCode, invCode, adults, rateData, dataType, callback) {
+    var saveRates = function (key, ratePlanCode, invCode, occupancy, rateData, dataType, callback) {
         var rr,
             cas,
             rateKey
@@ -177,19 +170,13 @@ module.exports = function (ota2004Db, config, app) {
             //console.log(error.code);
             if (err) {
                 console.log("1) Key " + key + " doesn't exist, creating..." + ratePlanCode + ":" + invCode);
-                rr = {};
-                rateKey = '_' + ratePlanCode;
-                rr[dataType] = {};
-                rr[dataType][rateKey] = {};
-                rr[dataType][rateKey][invCode] = {};
-                rr[dataType][rateKey][invCode][adults] = rateData;  // TODO - try to by DRY here!
-                console.log("1) Writing rr." + rateKey + "." + JSON.stringify(rateData));
-                ota2004Db.add(key, rr, function (err, result) {
+                var rr = new JSONR('{}', {from_file: false, pretty_output: true});
+                rr.set(createKey(dataType, ratePlanCode, invCode, occupancy.adults), rateData);         // From JSON toolkit!!
+                ota2004Db.add(key, rr.data, function (err, result) {
                     if (err) {
-                        //console.log(error);
                         if (err.code == 12) {
                             console.log("1) CAS Error, retrying key: " + key);
-                            saveRates(key, ratePlanCode, invCode, rateData, dataType, callback);
+                            saveRates(key, ratePlanCode, invCode, occupancy, rateData, dataType, callback);
                         } else {
                             console.log("1) Error setting " + key + ", error " + JSON.stringify(err));
                             callback(err);
@@ -201,43 +188,20 @@ module.exports = function (ota2004Db, config, app) {
                     }
                 })
             } else {
-                rr = result.value;
+                var rr = new JSONR(result.value, {from_file: false, pretty_output: true});
                 cas = result.cas;
-                console.log("2) Already exists: " + key + ":" + JSON.stringify(rr));
-                rateKey = '_' + ratePlanCode;
-                if (!_.contains(_.keys(rr), 'rates')) {
-                    console.log('2) Creating rr.rates');
-                    rr[dataType] = {};
-                }
-                ;
-                console.log("2)" + JSON.stringify(rr));
+                console.log("2) Already exists: " + key );          // + ":" + JSON.stringify(rr.data));
+                rr.set(createKey(dataType, ratePlanCode, invCode, occupancy.adults), rateData);         // From JSON toolkit!!
 
-                if (!_.contains(_.keys(rr[dataType]), rateKey)) {
-                    console.log('2) Creating rr.rates.' + rateKey);
-                    rr[dataType][rateKey] = {};
-                }
-                ;
-                console.log("2)" + rr);
-                if (!_.contains(_.keys(rr[dataType][rateKey]), invCode)) {
-                    console.log('2) Creating rr.rates.rateKey' + invCode);
-                    rr[dataType][rateKey][invCode] = {};
-                }
-                ;
-                console.log("2)" + JSON.stringify(rr));
-
-                rr[dataType][rateKey][invCode][adults] = rateData;         // TODO - try to by DRY here!
-
-
-                console.log("2) Writing : " + key + " : " + JSON.stringify(rr) + JSON.stringify(rateData));
+                //console.log("2) Adding to " + key + " : " + JSON.stringify(rateData));
 
                 // Now write to the DB
                 // TODO - Work through CAS checking...
-                ota2004Db.set(key, rr, { cas: cas }, function (err, result) {
+                ota2004Db.set(key, rr.data, { cas: cas }, function (err, result) {
                     if (err) {
-                        console.log(key + ": " + JSON.stringify(err) + " / " + err.code);
                         if (err.code == 12) {
                             console.log("2) CAS Error, retrying key: " + key);
-                            saveRates(key, ratePlanCode, invCode, rateData, dataType, callback);
+                            saveRates(key, ratePlanCode, invCode, occupancy, rateData, dataType, callback);
                         } else {
                             console.log("2) Error setting " + key + ", error " + JSON.stringify(err));
                             callback(err);

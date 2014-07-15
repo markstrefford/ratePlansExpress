@@ -1,0 +1,62 @@
+{
+    "100-LIBERATE-2": {
+        "Double Room": {
+            "Rates": [
+                {
+                    "InvCode": "Double Room",
+                    "BaseByGuestAmts": [
+                        {
+                            "NumberOfGuests": "1",
+                            "AgeQualifyingCode": "10",
+                            "AmountAfterTax": 35.0642870134042,
+                            "AmountAfterTaxSpecified": true,
+                            "CurrencyCode": "EUR"
+                        }
+                    ]
+                },
+                {
+                    "InvCode": "Double Room",
+                    "BaseByGuestAmts": [
+                        {
+                            "NumberOfGuests": "2",
+                            "AgeQualifyingCode": "10",
+                            "AmountAfterTax": 135.0642870134042,
+                            "AmountAfterTaxSpecified": true,
+                            "CurrencyCode": "EUR"
+                        }
+                    ]
+                }
+            ],
+            "Availability": 1
+        },
+        "King's Room": {
+            "Rates": [
+                {
+                    "InvCode": "King's Room",
+                    "BaseByGuestAmts": [
+                        {
+                            "NumberOfGuests": "1",
+                            "AgeQualifyingCode": "10",
+                            "AmountAfterTax": 35.0642870134042,
+                            "AmountAfterTaxSpecified": true,
+                            "CurrencyCode": "EUR"
+                        }
+                    ]
+                },
+                {
+                    "InvCode": "King's Room",
+                    "BaseByGuestAmts": [
+                        {
+                            "NumberOfGuests": "2",
+                            "AgeQualifyingCode": "10",
+                            "AmountAfterTax": 135.0642870134042,
+                            "AmountAfterTaxSpecified": true,
+                            "CurrencyCode": "EUR"
+                        }
+                    ]
+                }
+            ],
+            "Availability": 5
+        }
+    }
+}

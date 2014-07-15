@@ -1,0 +1,152 @@
+{
+    "100-LIBERATE-1": {
+        "BookingRules": {
+            "BookingRule": [
+                {
+                    "CancelPenalties": [
+                        {
+                            "Deadline": {
+                                "AbsoluteDeadline": "18:00:59",
+                                "OffsetTimeUnit": 3,
+                                "OffsetTimeUnitSpecified": true,
+                                "OffsetUnitMultiplier": "0",
+                                "OffsetDropTimeSpecified": true
+                            },
+                            "AmountPercent": {
+                                "NmbrOfNights": "0",
+                                "BasisType": 1,
+                                "BasisTypeSpecified": true,
+                                "Percent": 50,
+                                "PercentSpecified": true
+                            },
+                            "PenaltyDescription": [
+                                {
+                                    "Items": [
+                                        {
+                                            "Value": "Liberate Cancellation Policy 1."
+                                        }
+                                    ],
+                                    "ItemsElementName": [
+                                        2
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "LengthsOfStay": [
+                        {
+                            "Time": "1",
+                            "TimeUnit": 3,
+                            "TimeUnitSpecified": true,
+                            "MinMaxMessageTypeSpecified": true
+                        },
+                        {
+                            "Time": "10",
+                            "TimeUnit": 3,
+                            "TimeUnitSpecified": true,
+                            "MinMaxMessageType": 2,
+                            "MinMaxMessageTypeSpecified": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "RatePlanLevelFee": {
+            "Fee": [
+                {
+                    "TypeSpecified": true,
+                    "Code": "19",
+                    "Percent": 17.5,
+                    "PercentSpecified": true
+                },
+                {
+                    "Type": 1,
+                    "TypeSpecified": true,
+                    "Code": "16"
+                }
+            ]
+        },
+        "CurrencyCode": "EUR",
+        "RatePlanCode": "100-LIBERATE-1",
+        "RatePlanCodeType": 1,
+        "RatePlanCodeTypeSpecified": true,
+        "RatePlanNotifType": 2,
+        "RatePlanNotifTypeSpecified": true,
+        "RatePlanNotifScopeTypeSpecified": true
+    },
+    "100-LIBERATE-2": {
+        "BookingRules": {
+            "BookingRule": [
+                {
+                    "CancelPenalties": [
+                        {
+                            "Deadline": {
+                                "AbsoluteDeadline": "09:00:00",
+                                "OffsetTimeUnit": 3,
+                                "OffsetTimeUnitSpecified": true,
+                                "OffsetUnitMultiplier": "2",
+                                "OffsetDropTimeSpecified": true
+                            },
+                            "AmountPercent": {
+                                "NmbrOfNights": "1",
+                                "BasisType": 1,
+                                "BasisTypeSpecified": true,
+                                "Percent": 100,
+                                "PercentSpecified": true
+                            },
+                            "PenaltyDescription": [
+                                {
+                                    "Items": [
+                                        {
+                                            "Value": "Liberate Cancellation Policy 2."
+                                        }
+                                    ],
+                                    "ItemsElementName": [
+                                        2
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "LengthsOfStay": [
+                        {
+                            "Time": "1",
+                            "TimeUnit": 3,
+                            "TimeUnitSpecified": true,
+                            "MinMaxMessageTypeSpecified": true
+                        },
+                        {
+                            "Time": "10",
+                            "TimeUnit": 3,
+                            "TimeUnitSpecified": true,
+                            "MinMaxMessageType": 2,
+                            "MinMaxMessageTypeSpecified": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "RatePlanLevelFee": {
+            "Fee": [
+                {
+                    "TypeSpecified": true,
+                    "Code": "19",
+                    "Percent": 17.5,
+                    "PercentSpecified": true
+                },
+                {
+                    "Type": 1,
+                    "TypeSpecified": true,
+                    "Code": "16"
+                }
+            ]
+        },
+        "CurrencyCode": "EUR",
+        "RatePlanCode": "100-LIBERATE-2",
+        "RatePlanCodeType": 1,
+        "RatePlanCodeTypeSpecified": true,
+        "RatePlanNotifType": 2,
+        "RatePlanNotifTypeSpecified": true,
+        "RatePlanNotifScopeTypeSpecified": true
+    }
+}
