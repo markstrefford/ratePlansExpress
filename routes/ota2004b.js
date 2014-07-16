@@ -253,96 +253,97 @@ module.exports = function (ota2004Db, config, app) {
      *
      */
     app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
-        var requestParams = parseRatesParams(req.urlParams.query);
-        requestParams.hotelId = req.params.hotelId;
-        // Calculate keys for retrieving rate and availability
-        var rateDocKeys = [];
-        var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
-        var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
-        var range = moment().range(startDate, moment(endDate));
-        range.by('days', function (rateDate) {
-            // Get the keys!
-            rateDocKeys.push(createKey(requestParams.hotelId, rateDate.format('YYYY-MM-DD'), moment(rateDate).add('days', 1).format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
-        });
-        var ratesResponse = {};
-        // Now get docs from Couchbase
-        console.log(rateDocKeys);
-        ota2004Db.getMulti(rateDocKeys, {}, function (err, results) {
+            var requestParams = parseRatesParams(req.urlParams.query);
+            requestParams.hotelId = req.params.hotelId;
+            // Calculate keys for retrieving rate and availability
+            var rateDocKeys = [];
+            var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
+            var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
+            var range = moment().range(startDate, moment(endDate));
+            range.by('days', function (rateDate) {
+                // Get the keys!
+                rateDocKeys.push(createKey(requestParams.hotelId, rateDate.format('YYYY-MM-DD'), moment(rateDate).add('days', 1).format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
+            });
+            var ratesResponse = new JSONR('{}', {});
+            // Now get docs from Couchbase
+            console.log(rateDocKeys);
+            ota2004Db.getMulti(rateDocKeys, {}, function (err, results) {
                 if (err) console.log(err)       // TODO - No callback????!!!?!?!?
                 else {
-
                     for (rates in results) {
-                        if ( _.keys(results[rates].value, 'rates') ) {
+                        var processingDate = rates.split(':')[1];        // Get the date that this message relates to from the key
+                        console.log('Processing ' + processingDate);
+                        if (_.keys(results[rates].value, 'rates')) {
                             // We have rates so let's progress
                             var rateDetails = results[rates].value.rates;
-                            console.log("rateDetails: " + JSON.stringify(rateDetails));
                             var ratePlans = _.keys(rateDetails);
-                            console.log("Found rateplans " + ratePlans);
                             ratePlans.map(function (ratePlan) {
-                                console.log("Checking rateplan " + ratePlan + " for invCodes");
                                 var invCodes = _.keys(rateDetails[ratePlan]);                              // Mapping a rate plan gives us a list of invCodes
-                                console.log("Found invCodes " + invCodes);
                                 invCodes.map(function (invCode) {
                                     var occupancies = _.keys(rateDetails[ratePlan][invCode]);
                                     // Within invCodes we have the occupancy for this room
-                                    console.log(occupancies + ' : ' + requestParams.occupancy.toString());
                                     if (_.contains(occupancies, requestParams.occupancy.toString())) {
                                         // We have a valid rate!!!
-                                        console.log("Valid rate!! " + occupancies + ":" + requestParams.occupancy.toString());
-                                        //ratesResponse[]
+                                        var rateToProcess = rateDetails[ratePlan][invCode][requestParams.occupancy];
+                                        console.log(rateToProcess);
+                                        var pricePerNightDetails = {
+                                            price: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.AmountAfterTax,
+                                            currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
+                                            // TODO - handle additional guests
                                     }
-                                })
+                                    ratesResponse.set(createKey('rates', ratePlan, invCode, processingDate), pricePerNightDetails);
+                                }
                             })
-
                         }
-
-
+                    )
 
                     }
-                    ;
-                    res.send(rateDocKeys);
                 }
+                ;
+                res.send(ratesResponse.data);
             }
-        )
-    })
+        }
+    )
+}
+)
 
-    ;
+;
 
 
 // Get rates and availability
-    var getPulledRateAvail = function (rateAvailKey, callback) {
-        rateAvailDb.get(rateAvailKey, function (error, result) {
-            if (error) callback(error);
-            else {
-                //console.log("getPulledRateAvail: " + JSON.stringify(result.value));
-                callback(null, result.value);
-            }
-        })
-    }
+var getPulledRateAvail = function (rateAvailKey, callback) {
+    rateAvailDb.get(rateAvailKey, function (error, result) {
+        if (error) callback(error);
+        else {
+            //console.log("getPulledRateAvail: " + JSON.stringify(result.value));
+            callback(null, result.value);
+        }
+    })
+}
 
-    /*
-     * Reading rateplan stuff
-     */
-    app.get(productUrl + 'rateplan/:rateplanId', function (req, res) {
-        var rateplan_id = req.params.rateplanId;
-        getPulledRatePlan(rateplan_id, function (error, rateplan) {
-            console.log(rateplan);
-            if (error) res.send(500);
-            else res.send(rateplan);
-        })
-    });
+/*
+ * Reading rateplan stuff
+ */
+app.get(productUrl + 'rateplan/:rateplanId', function (req, res) {
+    var rateplan_id = req.params.rateplanId;
+    getPulledRatePlan(rateplan_id, function (error, rateplan) {
+        console.log(rateplan);
+        if (error) res.send(500);
+        else res.send(rateplan);
+    })
+});
 
 // Specific request to get pulled rateplan
 // TODO - May change this back to a generic function for push and pull!!
-    var getPulledRatePlan = function (rateplan_id, callback) {
-        ratePlanDb.get(rateplan_id, function (error, result) {
-            if (error) callback(error);
-            else {
-                //console.log(JSON.stringify(result.value));
-                callback(null, result.value);
-            }
-        })
-    }
+var getPulledRatePlan = function (rateplan_id, callback) {
+    ratePlanDb.get(rateplan_id, function (error, result) {
+        if (error) callback(error);
+        else {
+            //console.log(JSON.stringify(result.value));
+            callback(null, result.value);
+        }
+    })
+}
 
 }
 
