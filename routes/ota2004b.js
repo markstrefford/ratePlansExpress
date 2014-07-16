@@ -17,7 +17,7 @@ var _ = require('underscore'),
 ;
 
 var createKey = function () {
-    var separator = ":";       // Needs to use ':' so it also works with JSON toolkit!!!
+    var separator = "::";       // Needs to use ':' so it also works with JSON toolkit!!!
     var key = arguments[0];
     // Iterate through arguments, adding each argument and the separator to the key
     _.rest(arguments).forEach(function (arg) {
@@ -26,6 +26,19 @@ var createKey = function () {
     //console.log("Generated key: " + key);
     return key;
 }
+
+var createJSONKey = function () {
+    var separator = "::";       // Needs to use ':' so it also works with JSON toolkit!!!
+    var key = arguments[0];
+    // Iterate through arguments, adding each argument and the separator to the key
+    _.rest(arguments).forEach(function (arg) {
+        key += separator + arg;
+    });
+    //console.log("Generated key: " + key);
+    return key;
+}
+
+
 
 module.exports = function (ota2004Db, config, app) {
 
@@ -45,8 +58,79 @@ module.exports = function (ota2004Db, config, app) {
         next();
     }
 
+
+
+
+    /*
+     * Get rateplans that fit my requirements
+     *
+     * /hotel/{id}/rates/?d={date}&n={nights}&o={occupancy}&cur={currency}
+     *
+     * NOTE: Code designed to work with PoC document format based on approach in C# (see BJSS for info!)
+     *
+     */
+    app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
+            var requestParams = parseRatesParams(req.urlParams.query);
+            requestParams.hotelId = req.params.hotelId;
+            // Calculate keys for retrieving rate and availability
+            var rateDocKeys = [];
+            var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
+            var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
+            var range = moment().range(startDate, moment(endDate));
+            range.by('days', function (rateDate) {
+                // Get the keys! Doc format = hotel:date
+                rateDocKeys.push(createKey(requestParams.hotelId, rateDate.format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
+            });
+            var ratesResponse = new JSONR('{}', {});
+            // Now get docs from Couchbase
+            console.log(rateDocKeys);
+            ota2004Db.getMulti(rateDocKeys, {format: 'json'}, function (err, results) {
+                    console.log(results);
+                    if (err) console.log(err)       // TODO - No callback????!!!?!?!?
+                    else {
+                        for (ratePlans in results) {
+                            var processingDate = rates.split(':')[1];        // Get the date that this message relates to from the key
+                            if (_.keys(results[rates].value, 'rates')) {
+                                // We have rates so let's progress
+                                var rateDetails = results[rates].value.rates;
+                                var ratePlans = _.keys(rateDetails);
+                                ratePlans.map(function (ratePlan) {
+                                        var invCodes = _.keys(rateDetails[ratePlan]);                              // Mapping a rate plan gives us a list of invCodes
+                                        invCodes.map(function (invCode) {
+                                            var occupancies = _.keys(rateDetails[ratePlan][invCode]);
+                                            // Within invCodes we have the occupancy for this room
+                                            if (_.contains(occupancies, requestParams.occupancy.toString())) {
+                                                // We have a valid rate!!!
+                                                var rateToProcess = rateDetails[ratePlan][invCode][requestParams.occupancy];
+                                                console.log(rateToProcess);
+                                                var pricePerNightDetails = {
+                                                    price: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.AmountAfterTax,
+                                                    currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
+                                                    // TODO - handle additional guests
+                                                }
+                                                ratesResponse.set(createKey('rates', ratePlan, invCode, processingDate), pricePerNightDetails);
+                                            }
+                                        })
+                                    }
+                                )
+
+                            }
+                        }
+                        ;
+                        res.send(ratesResponse.data);
+                    }
+                }
+            )
+        }
+    )
+
+    ;
+
+
     /*
      * Saving rateplan stuff
+     *
+     * TODO - This saves in a different doc structure than the above code accepts.  Above code is designed to work initially with the document format created by C# in the PoC
      */
     app.post(productUrl + 'rates', function (req, res) {
             var ota2004Doc = req.body;
