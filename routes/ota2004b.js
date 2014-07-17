@@ -80,31 +80,41 @@ module.exports = function (ota2004Db, config, app) {
             });
             var ratesResponse = new JSONR('{}', {});
             // Now get docs from Couchbase
-            console.log(rateDocKeys);
+            //console.log(rateDocKeys);
             ota2004Db.getMulti(rateDocKeys, {format: 'json'}, function (err, results) {
-                    console.log("Results:" + JSON.stringify(results));
+                    //console.log("Results:" + JSON.stringify(results));
                     if (err) console.log(err)       // TODO - No callback????!!!?!?!?
                     else {
                         for (rateDocKey in results) {
-                            console.log("rateDocKey" + rateDocKey);
-
-                            var processingDate = rateDocKey.split(':')[1];        // Get the date that this message relates to from the key
+                            var processingDate = rateDocKey.split('::')[1];        // Get the date that this message relates to from the key
+                            console.log('Processing rates for ' + processingDate)
                             var ratePlans = results[rateDocKey].value;
-                            console.log("RatePlans:" + JSON.stringify(ratePlans));
+                            //console.log("RatePlans:" + JSON.stringify(ratePlans));
                             for (ratePlanCode in ratePlans) {
-                                console.log('Processing ratePlanCode:' + ratePlanCode);
                                 var ratePlan = ratePlans[ratePlanCode];
                                 for (invCode in ratePlan) {
-                                    console.log('Processing invCode:' + invCode);
                                     ratesAndAvail = ratePlan[invCode];
                                     if (_.contains(_.keys(ratesAndAvail), 'Availability')) {
                                         if (ratesAndAvail.Availability > 0) {
                                             console.log('OK to check occupancy for %s:%s:%s, Availability=%s', rateDocKey, ratePlanCode, invCode, ratesAndAvail.Availability);
                                             if (_.contains(_.keys(ratesAndAvail), 'Rates')) {
-                                                for (rate in ratesAndAvail.rates) {
+                                                for (rate in ratesAndAvail.Rates) {
+                                                    // Assume we already have invCode previously so no need to get it from the rate
+                                                    // Get occupancies
+                                                    for (baseByGuestAmt in ratesAndAvail.Rates[rate].BaseByGuestAmts) {
+                                                        rateDetails = ratesAndAvail.Rates[rate].BaseByGuestAmts[baseByGuestAmt];
+                                                        var numberOfGuests = rateDetails.NumberOfGuests;
+                                                        console.log("Checking occupancy: room: %s, request: %s", numberOfGuests, requestParams.occupancy);
+                                                        if (numberOfGuests >= requestParams.occupancy) {
+                                                            console.log(invCode + " has sufficient occupancy");
+
+                                                            ratesResponse.set(createJSONKey(processingDate, ratePlanCode, invCode), rateDetails.AmountAfterTax);
+                                                        }
+
+
+                                                    }
 
                                                 }
-
                                             } else {
                                                 console.log('No availability for %s:%s:%s', rateDocKey, ratePlanCode, invCode);
 
@@ -119,31 +129,6 @@ module.exports = function (ota2004Db, config, app) {
 
                             console.log('*******************');
 
-
-                            /*if (_.keys(results[rates].value, 'rates')) {
-                             // We have rates so let's progress
-                             var ratePlans = _.keys(rateDetails);
-                             ratePlans.map(function (ratePlan) {
-                             var invCodes = _.keys(rateDetails[ratePlan]);                              // Mapping a rate plan gives us a list of invCodes
-                             invCodes.map(function (invCode) {
-                             var occupancies = _.keys(rateDetails[ratePlan][invCode]);
-                             // Within invCodes we have the occupancy for this room
-                             if (_.contains(occupancies, requestParams.occupancy.toString())) {
-                             // We have a valid rate!!!
-                             var rateToProcess = rateDetails[ratePlan][invCode][requestParams.occupancy];
-                             console.log(rateToProcess);
-                             var pricePerNightDetails = {
-                             price: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.AmountAfterTax,
-                             currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
-                             // TODO - handle additional guests
-                             }
-                             ratesResponse.set(createKey('rates', ratePlan, invCode, processingDate), pricePerNightDetails);
-                             }
-                             })
-                             }
-                             )
-
-                             }*/
                         }
                         ;
                         res.send(ratesResponse.data);
