@@ -176,25 +176,66 @@ var getOTA2004bRates = function (req, res, next) {
     });
 
     // Gets docs from Couchbase
-    var ratesResponse;
+    var ratesResponse = new JSONR('{}', {});
 
     ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-                console.log(results);
+                //console.log(results);
                 var resultsKeys = _.keys(results);
                 // Process documents by date
                 range.by('days', function (rateDate) {
+
+                    // Check that we got a rates & availability document for this hotel & day
                     var key = createKey(request.hotelId, rateDate.format('YYYY-MM-DD'));
                     if (!_.contains(resultsKeys, key)) {
-                        console.log('No availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+                        //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
                     } else {
                         // We have availability for this date
-                        console.log('Availability for hotel $s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+
+                        // Check availability
+
+                        // Get details of room types per rateplan per date
+                        _.keys(results[key].value).map(function (ratePlan) {
+                            var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
+
+
+                            // Now check rooms for availability
+                            _.keys(roomTypePerRatePlanPerDate).map(function (roomType) {
+                                //console.log('Availability %s found for %s', roomTypePerRatePlanPerDate[roomType].Availability, roomType);
+
+                                // Store the rates for this date / rateplan / room
+                                // We'll process occupancy later when we have everything together!
+                                ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), roomTypePerRatePlanPerDate[roomType].Rates);
+                            })
+
+                        });
+
+
                     }
 
                 })
 
+
+                /*roomRate = {
+                 "id": invCode,
+                 "price": totalPrice,
+                 "cancellation_type": 1,
+                 "rackrate": totalPrice,
+                 "min_stay": 1,
+                 "sleeps": {
+                 "adults": requestParams.occupancy
+                 },
+                 "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
+                 "type": invCode,
+                 "advanced_purchase": true,
+                 "breakfast_included": true,
+                 "ratecode": ratePlanCode,
+                 "roomcode": invCode,
+                 "PriceBreakdown": {},
+                 "cancellation_policy": {}
+
+                 };*/
 
                 /* for (rateDocKey in results) {
                  if (rateDocKey == requestParams.hotelId) {
