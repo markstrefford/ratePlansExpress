@@ -268,6 +268,7 @@ module.exports = function (ota2004Db, config, app) {
             // Now get docs from Couchbase
             console.log(rateDocKeys);
             ota2004Db.getMulti(rateDocKeys, {}, function (err, results) {
+                    console.log(results);
                 if (err) console.log(err)       // TODO - No callback????!!!?!?!?
                 else {
                     for (rates in results) {
