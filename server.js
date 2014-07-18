@@ -9,38 +9,18 @@ var restify = require('restify'),
     _ = require('underscore'),
     moment = require('moment'),
     range = require('moment-range'),
-    url = require('url'),
     json = require("json-toolkit"),
     JSONR = json.Resource;
 
 
-/*var config = {
- cbHost: 'localhost:8091',
- cbBucket: 'default'       // Default bucket due to the way cbrestore from AWS linux instance seems to work???
- }*/
-
+// Load config using nconf and config file
 nconf.argv().env();
 var config = require('./' + nconf.get('ENV_CONFIG'));
 console.log('Loaded config: ' + JSON.stringify(config));
-/*nconf.defaults({
-    'database': {
-        'host': 'localhost:8091',
-        'bucket': 'default'
-    }
-});
-if (nconf.get('NODE_ENV') == 'DEV') {
-    nconf.set('database:host', 'localhost:8091');
-    nconf.set('database:bucket', 'default');
-} else if (nconf.get('NODE_ENV') == 'AWS') {
-    nconf.set('database:host', '10.1.1.39:8091');
-    nconf.set('database:bucket', 'rates');
-    nconf.set('database:password', 'rates');
-}*/
 var ota2004Db = new couchbase.Connection(config.database);
 
 
 //var hotelOTA2004b = require('./routes/ota2004b.js')(ota2004Db, config, server);
-
 
 // Get Rates Functionality
 
@@ -69,7 +49,7 @@ var createKey = function () {
 }
 
 var createJSONKey = function () {
-    var separator = "::";       // Needs to use ':' so it also works with JSON toolkit!!!
+    var separator = ":";       // Needs to use ':' so it also works with JSON toolkit!!!
     var key = arguments[0];
     // Iterate through arguments, adding each argument and the separator to the key
     _.rest(arguments).forEach(function (arg) {
@@ -182,25 +162,41 @@ var processResponse = function (ratesResponse, requestParams) {
  */
 //app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
 var getOTA2004bRates = function (req, res, next) {
-    var requestParams = parseRatesParams(req.params);
+    var request = parseRatesParams(req.params);
     //console.log('getOTA2004bRates: reqParams:' + requestParams);
     //requestParams.hotelId = req.params.hotelId;
     // Calculate keys for retrieving rate and availability
     var rateDocKeys = [];
-    var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
-    var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
+    var startDate = moment(request.startDate).format('YYYY-MM-DD');
+    var endDate = moment(startDate).add('days', request.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
     var range = moment().range(startDate, moment(endDate));
     range.by('days', function (rateDate) {
         // Get the keys! Doc format = hotel:date
-        rateDocKeys.push(createKey(requestParams.hotelId, rateDate.format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
+        rateDocKeys.push(createKey(request.hotelId, rateDate.format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
     });
-    var ratesResponse; // = new JSONR('{}', {});
-    // Now get docs from Couchbase
-    //console.log(rateDocKeys);
-    ota2004Db.getMulti(_.flatten([requestParams.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
+
+    // Gets docs from Couchbase
+    var ratesResponse;
+
+    ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-                for (rateDocKey in results) {
+                console.log(results);
+                var resultsKeys = _.keys(results);
+                // Process documents by date
+                range.by('days', function (rateDate) {
+                    var key = createKey(request.hotelId, rateDate.format('YYYY-MM-DD'));
+                    if (!_.contains(resultsKeys, key)) {
+                        console.log('No availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+                    } else {
+                        // We have availability for this date
+                        console.log('Availability for hotel $s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+                    }
+
+                })
+
+
+                /* for (rateDocKey in results) {
                  if (rateDocKey == requestParams.hotelId) {
                  //console.log('Ignoring rateplan doc ' + rateDocKey + ' for now due to JSON issues!!')
                  } else {
@@ -213,9 +209,9 @@ var getOTA2004bRates = function (req, res, next) {
                  }
                  ;
                  var response = processResponse(ratesResponse, requestParams);
-                 res.send(response);
-                 //next();
-                //res.send('OK');
+                 res.send(response);*/
+                //next();
+                res.send('OK');
             }
         }
     )
