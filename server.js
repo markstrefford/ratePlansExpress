@@ -95,7 +95,7 @@ var processRatePlansByDate = function (request, range, results) {
 }
 
 
-var processResponse = function (ratesResponse, requestParams) {
+var processResponse = function (ratesResponse, request) {
     var response = [];   // Start to create response back to the customer
 
     for (invCode in ratesResponse.data) {
@@ -112,7 +112,7 @@ var processResponse = function (ratesResponse, requestParams) {
                 return (count, totalPrice)
             })
             //console.log(count, totalPrice);
-            if (count == requestParams.nights) {
+            if (count == request.nights) {
                 roomRate = {
                     "id": invCode,
                     "price": totalPrice,
@@ -120,7 +120,7 @@ var processResponse = function (ratesResponse, requestParams) {
                     "rackrate": totalPrice,
                     "min_stay": 1,
                     "sleeps": {
-                        "adults": requestParams.occupancy
+                        "adults": request.occupancy
                     },
                     "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
                     "type": invCode,
