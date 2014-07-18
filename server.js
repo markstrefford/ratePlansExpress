@@ -15,21 +15,28 @@ var restify = require('restify'),
 
 
 /*var config = {
-    cbHost: 'localhost:8091',
-    cbBucket: 'default'       // Default bucket due to the way cbrestore from AWS linux instance seems to work???
-}*/
+ cbHost: 'localhost:8091',
+ cbBucket: 'default'       // Default bucket due to the way cbrestore from AWS linux instance seems to work???
+ }*/
 
 nconf.argv().env();
-var nodeEnv = nconf.get('NODE_ENV');
-if ( nodeEnv == 'Development' || nodeEnv == '') {
+var config = require('./' + nconf.get('ENV_CONFIG'));
+console.log('Loaded config: ' + JSON.stringify(config));
+/*nconf.defaults({
+    'database': {
+        'host': 'localhost:8091',
+        'bucket': 'default'
+    }
+});
+if (nconf.get('NODE_ENV') == 'DEV') {
     nconf.set('database:host', 'localhost:8091');
     nconf.set('database:bucket', 'default');
-} else if ( nodeEnv == 'AWS') {
+} else if (nconf.get('NODE_ENV') == 'AWS') {
     nconf.set('database:host', '10.1.1.39:8091');
     nconf.set('database:bucket', 'rates');
     nconf.set('database:password', 'rates');
-}
-var ota2004Db = new couchbase.Connection(nconf.get('database'));
+}*/
+var ota2004Db = new couchbase.Connection(config.database);
 
 
 //var hotelOTA2004b = require('./routes/ota2004b.js')(ota2004Db, config, server);
@@ -42,7 +49,7 @@ var parseRatesParams = function (params) {
     // TODO - Handle errors here, perhaps making this a callback!!
     // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
     return {
-        "hotelId" : params.hotelId,
+        "hotelId": params.hotelId,
         "startDate": params.d,
         "nights": params.n,
         "occupancy": params.o,
@@ -194,20 +201,20 @@ var getOTA2004bRates = function (req, res, next) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
                 /*for (rateDocKey in results) {
-                    if (rateDocKey == requestParams.hotelId) {
-                        //console.log('Ignoring rateplan doc ' + rateDocKey + ' for now due to JSON issues!!')
-                    } else {
-                        var processingDate = rateDocKey.split('::')[1];        // Get the date that this message relates to from the key
-                        //console.log('Processing rates for ' + processingDate)
-                        var ratePlans = results[rateDocKey].value;
+                 if (rateDocKey == requestParams.hotelId) {
+                 //console.log('Ignoring rateplan doc ' + rateDocKey + ' for now due to JSON issues!!')
+                 } else {
+                 var processingDate = rateDocKey.split('::')[1];        // Get the date that this message relates to from the key
+                 //console.log('Processing rates for ' + processingDate)
+                 var ratePlans = results[rateDocKey].value;
 
-                        ratesResponse = processRatePlans(ratePlans, processingDate, requestParams);
-                    }
-                }
-                ;
-                var response = processResponse(ratesResponse, requestParams);
-                res.send(response);
-                next();*/
+                 ratesResponse = processRatePlans(ratePlans, processingDate, requestParams);
+                 }
+                 }
+                 ;
+                 var response = processResponse(ratesResponse, requestParams);
+                 res.send(response);
+                 next();*/
                 res.send('OK');
             }
         }
@@ -217,15 +224,16 @@ var getOTA2004bRates = function (req, res, next) {
 }
 
 
-var showReq = function(req, res, next) {
-    console.log(req.params);
+var showReq = function (req, res, next) {
+    //console.log(req.params);
+    res.send('OK');
 }
 var server = restify.createServer({
     name: 'OTA2004B RatePlans API'
 });
 server.use(restify.queryParser());
-server.get('/hotel/:hotelId/rates', getOTA2004bRates);
-//server.get('/hotel/:hotelId/rates', showReq);
+//server.get('/hotel/:hotelId/rates', getOTA2004bRates);
+server.get('/hotel/:hotelId/rates', showReq);
 //server.head('/hello/:name', respond);
 
 server.listen(8080, function () {

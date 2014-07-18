@@ -1,0 +1,6 @@
+{ "database": {
+    "host": "10.1.1.39:8091",
+    "bucket": "rates",
+    "password": "rates"
+}
+}
