@@ -232,8 +232,8 @@ var server = restify.createServer({
     name: 'OTA2004B RatePlans API'
 });
 server.use(restify.queryParser());
-//server.get('/hotel/:hotelId/rates', getOTA2004bRates);
-server.get('/hotel/:hotelId/rates', showReq);
+server.get('/hotel/:hotelId/rates', getOTA2004bRates);
+//server.get('/hotel/:hotelId/rates', showReq);
 //server.head('/hello/:name', respond);
 
 server.listen(8080, function () {
