@@ -529,6 +529,7 @@ module.exports = function (ota2004Db, config, app) {
             console.log(rateDocKeys);
             ota2004Db.getMulti(rateDocKeys, {}, function (err, results) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     console.log(results);
                 if (err) console.log(err)       // TODO - No callback????!!!?!?!?
                 else {
@@ -553,6 +554,8 @@ module.exports = function (ota2004Db, config, app) {
                                             currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
                                             // TODO - handle additional guests
 =======
+=======
+>>>>>>> node-version-of-poc
                     if (err) console.log(err)       // TODO - No callback????!!!?!?!?
                     else {
                         for (rates in results) {
@@ -579,6 +582,9 @@ module.exports = function (ota2004Db, config, app) {
                                                 ratesResponse.set(createKey('rates', ratePlan, invCode, processingDate), pricePerNightDetails);
                                             }
                                         })
+<<<<<<< HEAD
+>>>>>>> node-version-of-poc
+=======
 >>>>>>> node-version-of-poc
                                     }
                                 )
