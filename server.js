@@ -65,11 +65,13 @@ var processRatePlansByDate = function (request, range, results) {
     var resultsKeys = _.keys(results);
     // Process documents by date
     range.by('days', function (rateDate) {
+        var formattedRateDate = rateDate.format('YYYY-MM-DD');
 
         // Check that we got a rates & availability document for this hotel & day
-        var key = createKey(request.hotelId, rateDate.format('YYYY-MM-DD'));
+        var key = createKey(request.hotelId, formattedRateDate);
         if (!_.contains(resultsKeys, key)) {
             //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+            return null;        // We have a date with no rates or availability
         } else {
             // We have availability for this date
 
@@ -78,12 +80,18 @@ var processRatePlansByDate = function (request, range, results) {
                 //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
 
                 // Now check rooms for availability
-                //_.keys(roomTypePerRatePlanPerDate).map(function (roomType) {
                 _.keys(results[key].value[ratePlan]).map(function (roomType) {
 
                     // Store the rates for this date / rateplan / room
                     // We'll process occupancy later when we have everything together!
-                    ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
+                    //ratesResponse.set(createJSONKey(formattedRateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
+                    //console.log(JSON.stringify(results[key].value[ratePlan][roomType].Rates));
+                    _.keys(results[key].value[ratePlan][roomType].Rates).map(function (rate) {
+                        //console.log(results[key].value[ratePlan][roomType].Rates[rate]);
+                        if (results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy) {
+                            ratesResponse.set(createJSONKey(ratePlan, roomType, rate, formattedRateDate), results[key].value[ratePlan][roomType].Rates[rate]);
+                        };
+                    })
                 })
 
             });
@@ -170,6 +178,37 @@ var getOTA2004bRates = function (req, res, next) {
             else {
                 var aggregatedRates = processRatePlansByDate(request, range, results);
 
+                /*if ( aggregatedRates != null ) {
+                    console.log('Aggregating...');
+
+                    // Process by date
+                    _.keys(aggregatedRates).map(function(aggregatedRatesDate) {
+                        console.log(aggregatedRatesDate);
+
+                        // now by RatePlanCode
+                        _.keys(aggregatedRates[aggregatedRatesDate]).map(function(ratePlanCode) {
+
+                            // now by room type
+                            _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode]).map(function(roomType) {
+
+                                // Now by invCode
+                                _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType]).map(function(invCode) {
+                                    console.log('InvCode:' + JSON.stringify(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode]));
+
+                                    // Now get occupancy
+                                    if (aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy);
+
+
+
+                                })
+
+                            })
+
+                        })
+
+                    })
+                }*/
+
 
                 /*roomRate = {
                  "id": invCode,
@@ -206,7 +245,7 @@ var getOTA2004bRates = function (req, res, next) {
                  var response = processResponse(ratesResponse, requestParams);
                  res.send(response);*/
                 //next();
-                res.send('OK');
+                res.send(aggregatedRates);
             }
         }
     )
