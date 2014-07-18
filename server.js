@@ -200,7 +200,7 @@ var getOTA2004bRates = function (req, res, next) {
     ota2004Db.getMulti(_.flatten([requestParams.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-                /*for (rateDocKey in results) {
+                for (rateDocKey in results) {
                  if (rateDocKey == requestParams.hotelId) {
                  //console.log('Ignoring rateplan doc ' + rateDocKey + ' for now due to JSON issues!!')
                  } else {
@@ -214,7 +214,7 @@ var getOTA2004bRates = function (req, res, next) {
                  ;
                  var response = processResponse(ratesResponse, requestParams);
                  res.send(response);
-                 next();*/
+                 next();
                 res.send('OK');
             }
         }
