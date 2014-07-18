@@ -16,6 +16,19 @@ var _ = require('underscore'),
     JSONR = json.Resource;
 ;
 
+
+// Parse query string for the rates call
+var parseRatesParams = function (queryString) {
+    // TODO - Handle errors here, perhaps making this a callback!!
+    // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
+    return {
+        "startDate": queryString.d,
+        "nights": queryString.n,
+        "occupancy": queryString.o,
+        "currency": queryString.cur
+    }
+}
+
 var createKey = function () {
     var separator = "::";       // Needs to use ':' so it also works with JSON toolkit!!!
     var key = arguments[0];
@@ -93,8 +106,8 @@ module.exports = function (ota2004Db, config, app) {
                                 //console.log('rate');
                                 ratesResponse.data.push(processBaseByGuestAmt(invCode, ratePlanCode, processingDate, ratesAndAvail.Rates[rate], requestParams));
                             }
-                        /*} else {
-                            //console.log('No availability for %s:%s:%s', rateDocKey, ratePlanCode, invCode);*/
+                            /*} else {
+                             //console.log('No availability for %s:%s:%s', rateDocKey, ratePlanCode, invCode);*/
                         }
                     }
 
@@ -194,103 +207,10 @@ module.exports = function (ota2004Db, config, app) {
 
                                 ratesResponse = processRatePlans(ratePlans, processingDate, requestParams);
 
-                                //console.log("RatePlans:" + JSON.stringify(ratePlans));
-                                /*for (ratePlanCode in ratePlans) {
-                                 var ratePlan = ratePlans[ratePlanCode];
-                                 for (invCode in ratePlan) {
-                                 ratesAndAvail = ratePlan[invCode];
-                                 if (_.contains(_.keys(ratesAndAvail), 'Availability')) {
-                                 if (ratesAndAvail.Availability > 0) {
-                                 //console.log('OK to check occupancy for %s:%s:%s, Availability=%s', rateDocKey, ratePlanCode, invCode, ratesAndAvail.Availability);
-                                 if (_.contains(_.keys(ratesAndAvail), 'Rates')) {
-                                 for (rate in ratesAndAvail.Rates) {
-                                 // Assume we already have invCode previously so no need to get it from the rate
-                                 // Get occupancies
-                                 for (baseByGuestAmt in ratesAndAvail.Rates[rate].BaseByGuestAmts) {
-                                 rateDetails = ratesAndAvail.Rates[rate].BaseByGuestAmts[baseByGuestAmt];
-                                 var numberOfGuests = rateDetails.NumberOfGuests;
-                                 //console.log("Checking occupancy: room: %s, request: %s", numberOfGuests, requestParams.occupancy);
-                                 if (numberOfGuests >= requestParams.occupancy) {
-                                 //console.log(invCode + " has sufficient occupancy");
 
-                                 ratesResponse.set(createJSONKey(invCode, ratePlanCode, processingDate), rateDetails.AmountAfterTax);
-                                 // TODO - Need to add in stuff like booking limit, etc.
-                                 }
-
-
-                                 }
-
-                                 }
-                                 } else {
-                                 //console.log('No availability for %s:%s:%s', rateDocKey, ratePlanCode, invCode);
-
-                                 }
-                                 }
-
-                                 }
-                                 }
-
-                                 }*/
                             }
                         }
                         ;
-
-
-                        /*      // Process the results set and return valid JSON response
-                         var response = [];   // Start to create response back to the customer
-
-                         // Get rateplans
-                         //ota2004Db.getMulti([requestParams.hotelId], {format: 'json'}, function (err, ratePlanDoc) {      // TODO - Fix json format for get rather than getMulti
-                         //   if (err) console.log('Error retrieving ratePlan for hotelId ' + hotelId + ':' + JSON.stringify(err));
-                         //   else {
-                         //       console.log(ratePlanDoc);
-                         //console.log('Generating JSON response...')
-
-                         for (invCode in ratesResponse.data) {
-                         //console.log(invCode);
-                         var rateResponse = ratesResponse.data[invCode];
-                         // TODO - Get rateplan docs somewhere...
-                         for (ratePlanCode in rateResponse) {
-                         //console.log(ratePlanCode);
-                         var processedRate = rateResponse[ratePlanCode];
-                         var count = 0, totalPrice = 0;
-                         _.map(processedRate, function (pricePerDay) {
-                         count += 1;
-                         totalPrice += pricePerDay;
-                         return (count, totalPrice)
-                         })
-                         //console.log(count, totalPrice);
-                         if (count == requestParams.nights) {
-                         roomRate = {
-                         "id": invCode,
-                         "price": totalPrice,
-                         "cancellation_type": 1,
-                         "rackrate": totalPrice,
-                         "min_stay": 1,
-                         "sleeps": {
-                         "adults": requestParams.occupancy
-                         },
-                         "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
-                         "type": invCode,
-                         "advanced_purchase": true,
-                         "breakfast_included": true,
-                         "ratecode": ratePlanCode,
-                         "roomcode": invCode,
-                         "PriceBreakdown": {},
-                         "cancellation_policy": {}
-
-                         };
-                         //console.log(roomRate);
-                         response.push(roomRate);
-                         }
-                         }
-                         }
-                         res.send(response);
-                         // res.send(ratesResponse.data);
-                         //}
-                         //});
-                         */
-
                         var response = processResponse(ratesResponse, requestParams);
                         res.send('OK');
 
@@ -492,114 +412,6 @@ module.exports = function (ota2004Db, config, app) {
             }
         })
     };
-
-
-// Parse query string for the rates call
-    var parseRatesParams = function (queryString) {
-        // TODO - Handle errors here, perhaps making this a callback!!
-        // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
-        return {
-            "startDate": queryString.d,
-            "nights": queryString.n,
-            "occupancy": queryString.o,
-            "currency": queryString.cur
-        }
-    }
-
-    /*
-     * Get rateplans that fit my requirements
-     *
-     * /hotel/{id}/rates/?d={date}&n={nights}&o={occupancy}&cur={currency}
-     *
-     */
-    app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
-            var requestParams = parseRatesParams(req.urlParams.query);
-            requestParams.hotelId = req.params.hotelId;
-            // Calculate keys for retrieving rate and availability
-            var rateDocKeys = [];
-            var startDate = moment(requestParams.startDate).format('YYYY-MM-DD');
-            var endDate = moment(startDate).add('days', requestParams.nights - 1).format('YYYY-MM-DD');    // Remember the last day is the exit day, not the last entry day!!
-            var range = moment().range(startDate, moment(endDate));
-            range.by('days', function (rateDate) {
-                // Get the keys!
-                rateDocKeys.push(createKey(requestParams.hotelId, rateDate.format('YYYY-MM-DD'), moment(rateDate).add('days', 1).format('YYYY-MM-DD')));     // TODO - Handle LOS in here somewhere!
-            });
-            var ratesResponse = new JSONR('{}', {});
-            // Now get docs from Couchbase
-            console.log(rateDocKeys);
-            ota2004Db.getMulti(rateDocKeys, {}, function (err, results) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    console.log(results);
-                if (err) console.log(err)       // TODO - No callback????!!!?!?!?
-                else {
-                    for (rates in results) {
-                        var processingDate = rates.split(':')[1];        // Get the date that this message relates to from the key
-                        console.log('Processing ' + processingDate);
-                        if (_.keys(results[rates].value, 'rates')) {
-                            // We have rates so let's progress
-                            var rateDetails = results[rates].value.rates;
-                            var ratePlans = _.keys(rateDetails);
-                            ratePlans.map(function (ratePlan) {
-                                var invCodes = _.keys(rateDetails[ratePlan]);                              // Mapping a rate plan gives us a list of invCodes
-                                invCodes.map(function (invCode) {
-                                    var occupancies = _.keys(rateDetails[ratePlan][invCode]);
-                                    // Within invCodes we have the occupancy for this room
-                                    if (_.contains(occupancies, requestParams.occupancy.toString())) {
-                                        // We have a valid rate!!!
-                                        var rateToProcess = rateDetails[ratePlan][invCode][requestParams.occupancy];
-                                        console.log(rateToProcess);
-                                        var pricePerNightDetails = {
-                                            price: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.AmountAfterTax,
-                                            currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
-                                            // TODO - handle additional guests
-=======
-=======
->>>>>>> node-version-of-poc
-                    if (err) console.log(err)       // TODO - No callback????!!!?!?!?
-                    else {
-                        for (rates in results) {
-                            var processingDate = rates.split(':')[1];        // Get the date that this message relates to from the key
-                            console.log('Processing ' + processingDate);
-                            if (_.keys(results[rates].value, 'rates')) {
-                                // We have rates so let's progress
-                                var rateDetails = results[rates].value.rates;
-                                var ratePlans = _.keys(rateDetails);
-                                ratePlans.map(function (ratePlan) {
-                                        var invCodes = _.keys(rateDetails[ratePlan]);                              // Mapping a rate plan gives us a list of invCodes
-                                        invCodes.map(function (invCode) {
-                                            var occupancies = _.keys(rateDetails[ratePlan][invCode]);
-                                            // Within invCodes we have the occupancy for this room
-                                            if (_.contains(occupancies, requestParams.occupancy.toString())) {
-                                                // We have a valid rate!!!
-                                                var rateToProcess = rateDetails[ratePlan][invCode][requestParams.occupancy];
-                                                console.log(rateToProcess);
-                                                var pricePerNightDetails = {
-                                                    price: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.AmountAfterTax,
-                                                    currency: rateToProcess.BaseByGuestAmts.BaseByGuestAmt.CurrencyCode
-                                                    // TODO - handle additional guests
-                                                }
-                                                ratesResponse.set(createKey('rates', ratePlan, invCode, processingDate), pricePerNightDetails);
-                                            }
-                                        })
-<<<<<<< HEAD
->>>>>>> node-version-of-poc
-=======
->>>>>>> node-version-of-poc
-                                    }
-                                )
-
-                            }
-                        }
-                        ;
-                        res.send(ratesResponse.data);
-                    }
-                }
-            )
-        }
-    )
-
-    ;
 
 
 // Get rates and availability
