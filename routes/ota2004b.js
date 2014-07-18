@@ -7,11 +7,12 @@
  *
  */
 
+
+
 var _ = require('underscore'),
     moment = require('moment'),
     range = require('moment-range'),
     url = require('url'),
-    async = require('async'),
     json = require("json-toolkit"),
     JSONR = json.Resource;
 ;
@@ -121,13 +122,6 @@ module.exports = function (ota2004Db, config, app) {
     var processResponse = function (ratesResponse, requestParams) {
         var response = [];   // Start to create response back to the customer
 
-        // Get rateplans
-        //ota2004Db.getMulti([requestParams.hotelId], {format: 'json'}, function (err, ratePlanDoc) {      // TODO - Fix json format for get rather than getMulti
-        //   if (err) console.log('Error retrieving ratePlan for hotelId ' + hotelId + ':' + JSON.stringify(err));
-        //   else {
-        //       console.log(ratePlanDoc);
-        //console.log('Generating JSON response...')
-
         for (invCode in ratesResponse.data) {
             //console.log(invCode);
             var rateResponse = ratesResponse.data[invCode];
@@ -179,8 +173,10 @@ module.exports = function (ota2004Db, config, app) {
      * NOTE: Code designed to work with PoC document format based on approach in C# (see BJSS for info!)
      *
      */
-    app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
+    //app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
+    var getOTA2004bRates = function (req, res, next) {
             var requestParams = parseRatesParams(req.urlParams.query);
+            console.log('getOTA2004bRates: reqParams:' + requestParams + ',' + req.params);
             requestParams.hotelId = req.params.hotelId;
             // Calculate keys for retrieving rate and availability
             var rateDocKeys = [];
@@ -213,14 +209,15 @@ module.exports = function (ota2004Db, config, app) {
                         ;
                         var response = processResponse(ratesResponse, requestParams);
                         res.send('OK');
-
+                        next();
                     }
                 }
             )
-        }
-    )
+            next();
 
-    ;
+        }
+
+        ;
 
 
     /*
