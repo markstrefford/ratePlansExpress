@@ -206,11 +206,10 @@ var getOTA2004bRates = function (req, res, next) {
                                 } else {
                                     var totalPrice = 0;
                                     var perNightRateInfo = _.toArray(aggregatedRates[aggregatedRatePlan][invCode][rate]);
-                                    console.log(perNightRateInfo);
+                                    //console.log(perNightRateInfo);
 
                                     perNightRateInfo.map(function (perNightRate) {
 
-                                        console.log(perNightRate);
                                         totalPrice += perNightRate.price;
                                         numGuests = perNightRate.numGuests;
                                     })
