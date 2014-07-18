@@ -89,7 +89,12 @@ var processRatePlansByDate = function (request, range, results) {
                     _.keys(results[key].value[ratePlan][roomType].Rates).map(function (rate) {
                         //console.log(results[key].value[ratePlan][roomType].Rates[rate]);
                         if (results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy) {
-                            ratesResponse.set(createJSONKey(ratePlan, roomType, rate, formattedRateDate), results[key].value[ratePlan][roomType].Rates[rate]);
+                            console.log(results[key].value[ratePlan][roomType].Rates[rate]);
+                            var rateJSON = {};
+                            rateJSON.price = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].AmountAfterTax;
+                            rateJSON.currency = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].CurrencyCode;
+                            rateJSON.numGuests = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests;
+                            ratesResponse.set(createJSONKey(ratePlan, roomType, rate, formattedRateDate), rateJSON);
                         };
                     })
                 })
@@ -178,14 +183,25 @@ var getOTA2004bRates = function (req, res, next) {
             else {
                 var aggregatedRates = processRatePlansByDate(request, range, results);
 
-                /*if ( aggregatedRates != null ) {
+                if ( aggregatedRates != null ) {
                     console.log('Aggregating...');
 
                     // Process by date
-                    _.keys(aggregatedRates).map(function(aggregatedRatesDate) {
-                        console.log(aggregatedRatesDate);
+                    _.keys(aggregatedRates).map(function(aggregatedRatePlan) {
+                        console.log(JSON.stringify(aggregatedRates[aggregatedRatePlan]));
 
-                        // now by RatePlanCode
+                        /*_.keys(aggregatedRates[aggregatedRatePlan]).map(function(invCode) {
+
+                            // Now get rates
+                            _.keys(aggregatedRates[aggregatedRatePlan][invCode]).map(function(rate) {
+                                var rateDates = _.keys(aggregatedRates[aggregatedRatePlan][invCode][rate]);
+                                if ( !rateDates.length != request.nights ) {
+                                    console.log('')
+                                }
+                            })
+                        })*/
+
+                        /*// now by RatePlanCode
                         _.keys(aggregatedRates[aggregatedRatesDate]).map(function(ratePlanCode) {
 
                             // now by room type
@@ -204,10 +220,10 @@ var getOTA2004bRates = function (req, res, next) {
 
                             })
 
-                        })
+                        })*/
 
                     })
-                }*/
+                }
 
 
                 /*roomRate = {
