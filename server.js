@@ -84,8 +84,6 @@ var processRatePlansByDate = function (request, range, results) {
                     // Store the rates for this date / rateplan / room
                     // We'll process occupancy later when we have everything together!
                     ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
-                    console.log(results[key].value[ratePlan][roomType].Rates);
-                    //ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), roomTypePerRatePlanPerDate[roomType].Rates);
                 })
 
             });
