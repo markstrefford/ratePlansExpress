@@ -1,7 +1,7 @@
 {
   "name": "ratePlansExpress",
   "version": "0.1.0",
-  "description": "HTNG2013B Rateplans service using CouchBase and Express",
+  "description": "HTNG2014A Rateplans service using CouchBase and Restify",
   "author": "Mark Strefford",
   "main": "server.js",
   "scripts": {
@@ -12,17 +12,13 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "adaro": "~0.1.x",
-    "async": "*",
     "couchbase": "*",
-    "dustjs-helpers": "~1.1.1",
-    "dustjs-linkedin": "~2.0.3",
-    "express": "~3.4.4",
     "json-toolkit": "^1.1.0",
-    "less": "~1.6.1",
-    "makara": "~0.3.0",
+    "moment": "^2.7.0",
+    "moment-range": "^1.0.2",
     "nconf": "~0.6.8",
-    "restify": "^2.8.1"
+    "restify": "^2.8.1",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
