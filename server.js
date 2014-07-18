@@ -49,7 +49,8 @@ app.configure('production', function () {
 var ratePlansDb = new couchbase.Connection({host: config.dbHost, bucket: 'rateplans'}),
     rateAvailDb = new couchbase.Connection({host: config.dbHost, bucket: 'rates_and_availability'}),
     liberateDb = new couchbase.Connection({host: config.dbHost, bucket: 'liberate'}),
-    ota2004Db = new couchbase.Connection({host: config.dbHost, bucket: 'ota2004'});
+    //ota2004Db = new couchbase.Connection({host: config.dbHost, bucket: 'ota2004'});
+    ota2004Db = new couchbase.Connection({host: config.dbHost, bucket: 'default'});   // Default bucket due to the way cbrestore from AWS linux instance seems to work???
 
 // Elastic Search config
 var esClient = new elasticsearch.Client();
