@@ -59,50 +59,41 @@ var createJSONKey = function () {
     return key;
 }
 
-var processBaseByGuestAmt = function (invCode, ratePlanCode, processingDate, rate, requestParams) {
+
+var processRatePlansByDate = function (request, range, results) {
     var ratesResponse = new JSONR('{}', {});
-    for (baseByGuestAmt in rate.BaseByGuestAmts) {
-        var rateDetails = rate.BaseByGuestAmts[baseByGuestAmt];
-        var numberOfGuests = rateDetails.NumberOfGuests;
-        //console.log("Checking occupancy: room: %s, request: %s", numberOfGuests, requestParams.occupancy);
-        if (numberOfGuests >= requestParams.occupancy) {
-            //console.log(invCode + " has sufficient occupancy");
+    var resultsKeys = _.keys(results);
+    // Process documents by date
+    range.by('days', function (rateDate) {
 
-            ratesResponse.set(createJSONKey(invCode, ratePlanCode, processingDate), rateDetails.AmountAfterTax);
-            // TODO - Need to add in stuff like booking limit, etc.
+        // Check that we got a rates & availability document for this hotel & day
+        var key = createKey(request.hotelId, rateDate.format('YYYY-MM-DD'));
+        if (!_.contains(resultsKeys, key)) {
+            //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+        } else {
+            // We have availability for this date
+
+            // Get details of room types per rateplan per date
+            _.keys(results[key].value).map(function (ratePlan) {
+                //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
+
+                // Now check rooms for availability
+                //_.keys(roomTypePerRatePlanPerDate).map(function (roomType) {
+                _.keys(results[key].value[ratePlan]).map(function (roomType) {
+
+                    // Store the rates for this date / rateplan / room
+                    // We'll process occupancy later when we have everything together!
+                    ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
+                    console.log(results[key].value[ratePlan][roomType].Rates);
+                    //ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), roomTypePerRatePlanPerDate[roomType].Rates);
+                })
+
+            });
+
+
         }
-
-
-    }
-    return ratesResponse;
-};
-
-
-var processRatePlans = function (ratePlans, processingDate, requestParams) {
-    var ratesResponse = {data: []}; //= new JSONR('{}', {});
-    //console.log(ratePlans);
-    for (ratePlanCode in ratePlans) {
-        //console.log(ratePlanCode);
-        var ratePlan = ratePlans[ratePlanCode];
-        for (invCode in ratePlan) {
-            var ratesAndAvail = ratePlan[invCode];
-            if (_.contains(_.keys(ratesAndAvail), 'Availability')) {
-                if (ratesAndAvail.Availability > 0) {
-                    //console.log('OK to check occupancy for %s:%s:%s, Availability=%s', rateDocKey, ratePlanCode, invCode, ratesAndAvail.Availability);
-                    if (_.contains(_.keys(ratesAndAvail), 'Rates')) {
-                        for (rate in ratesAndAvail.Rates) {
-                            //console.log('rate');
-                            ratesResponse.data.push(processBaseByGuestAmt(invCode, ratePlanCode, processingDate, ratesAndAvail.Rates[rate], requestParams));
-                        }
-                        /*} else {
-                         //console.log('No availability for %s:%s:%s', rateDocKey, ratePlanCode, invCode);*/
-                    }
-                }
-
-            }
-        }
-    }
-    return ratesResponse;
+    })
+    return ratesResponse.data;
 }
 
 
@@ -176,45 +167,10 @@ var getOTA2004bRates = function (req, res, next) {
     });
 
     // Gets docs from Couchbase
-    var ratesResponse = new JSONR('{}', {});
-
     ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-                //console.log(results);
-                var resultsKeys = _.keys(results);
-                // Process documents by date
-                range.by('days', function (rateDate) {
-
-                    // Check that we got a rates & availability document for this hotel & day
-                    var key = createKey(request.hotelId, rateDate.format('YYYY-MM-DD'));
-                    if (!_.contains(resultsKeys, key)) {
-                        //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
-                    } else {
-                        // We have availability for this date
-
-                        // Check availability
-
-                        // Get details of room types per rateplan per date
-                        _.keys(results[key].value).map(function (ratePlan) {
-                            var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
-
-
-                            // Now check rooms for availability
-                            _.keys(roomTypePerRatePlanPerDate).map(function (roomType) {
-                                //console.log('Availability %s found for %s', roomTypePerRatePlanPerDate[roomType].Availability, roomType);
-
-                                // Store the rates for this date / rateplan / room
-                                // We'll process occupancy later when we have everything together!
-                                ratesResponse.set(createJSONKey(rateDate, ratePlan, roomType), roomTypePerRatePlanPerDate[roomType].Rates);
-                            })
-
-                        });
-
-
-                    }
-
-                })
+                var aggregatedRates = processRatePlansByDate(request, range, results);
 
 
                 /*roomRate = {
