@@ -185,15 +185,15 @@ var getOTA2004bRates = function (req, res, next) {
     ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
+                var response = [];
                 var aggregatedRates = processRatePlansByDate(request, range, results);
 
                 if (aggregatedRates != null) {
-                    console.log('Aggregating...');
+                    //console.log('Aggregating...');
 
                     // Process by date
                     _.keys(aggregatedRates).map(function (aggregatedRatePlan) {
-                        console.log('---');
-                        console.log(JSON.stringify(aggregatedRates[aggregatedRatePlan]));
+
 
                         _.keys(aggregatedRates[aggregatedRatePlan]).map(function (invCode) {
 
@@ -202,80 +202,52 @@ var getOTA2004bRates = function (req, res, next) {
                             _.keys(aggregatedRates[aggregatedRatePlan][invCode]).map(function (rate) {
                                 var rateDates = _.keys(aggregatedRates[aggregatedRatePlan][invCode][rate]);
                                 if (rateDates.length != request.nights) {
-                                    console.log('Not enough nights with rates :-(');
+                                    //console.log('Not enough nights with rates :-(');
                                 } else {
-                                    console.log(aggregatedRates[aggregatedRatePlan][invCode][rate]);
-                                    var count = 0, price = 0;
+                                    var totalPrice = 0;
+                                    var perNightRateInfo = _.toArray(aggregatedRates[aggregatedRatePlan][invCode][rate]);
+                                    console.log(perNightRateInfo);
+
+                                    perNightRateInfo.map(function (perNightRate) {
+
+                                        console.log(perNightRate);
+                                        totalPrice += perNightRate.price;
+                                        numGuests = perNightRate.numGuests;
+                                    })
+
+                                    // Now create a response
+                                    roomRate = {
+                                        "id": invCode,
+                                        "price": totalPrice,
+                                        "cancellation_type": 1,
+                                        "rackrate": totalPrice,
+                                        "min_stay": 1,
+                                        "sleeps": {
+                                            "adults": request.occupancy
+                                        },
+                                        "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
+                                        "type": invCode,
+                                        "advanced_purchase": true,
+                                        "breakfast_included": true,
+                                        "ratecode": '', // TODO - Get ratePlanCode!!
+                                        "roomcode": invCode,
+                                        "PriceBreakdown": {},
+                                        "cancellation_policy": {}   // TODO - Get cancellation policy
+
+                                    };
+                                    response.push(roomRate);
 
                                 }
                             })
                         })
 
-                        /*// now by RatePlanCode
-                         _.keys(aggregatedRates[aggregatedRatesDate]).map(function(ratePlanCode) {
-
-                         // now by room type
-                         _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode]).map(function(roomType) {
-
-                         // Now by invCode
-                         _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType]).map(function(invCode) {
-                         console.log('InvCode:' + JSON.stringify(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode]));
-
-                         // Now get occupancy
-                         if (aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy);
-
-
-
-                         })
-
-                         })
-
-                         })*/
 
                     })
                 }
-
-
-                /*roomRate = {
-                 "id": invCode,
-                 "price": totalPrice,
-                 "cancellation_type": 1,
-                 "rackrate": totalPrice,
-                 "min_stay": 1,
-                 "sleeps": {
-                 "adults": requestParams.occupancy
-                 },
-                 "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
-                 "type": invCode,
-                 "advanced_purchase": true,
-                 "breakfast_included": true,
-                 "ratecode": ratePlanCode,
-                 "roomcode": invCode,
-                 "PriceBreakdown": {},
-                 "cancellation_policy": {}
-
-                 };*/
-
-                /* for (rateDocKey in results) {
-                 if (rateDocKey == requestParams.hotelId) {
-                 //console.log('Ignoring rateplan doc ' + rateDocKey + ' for now due to JSON issues!!')
-                 } else {
-                 var processingDate = rateDocKey.split('::')[1];        // Get the date that this message relates to from the key
-                 //console.log('Processing rates for ' + processingDate)
-                 var ratePlans = results[rateDocKey].value;
-
-                 ratesResponse = processRatePlans(ratePlans, processingDate, requestParams);
-                 }
-                 }
-                 ;
-                 var response = processResponse(ratesResponse, requestParams);
-                 res.send(response);*/
-                //next();
-                res.send(aggregatedRates);
+                res.send(response);
             }
         }
     )
-    //next();
 
 }
 
