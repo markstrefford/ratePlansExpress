@@ -65,45 +65,49 @@ var processRatePlansByDate = function (request, range, results) {
     var resultsKeys = _.keys(results);
     // Process documents by date
     range.by('days', function (rateDate) {
-        var formattedRateDate = rateDate.format('YYYY-MM-DD');
+            var formattedRateDate = rateDate.format('YYYY-MM-DD');
 
-        // Check that we got a rates & availability document for this hotel & day
-        var key = createKey(request.hotelId, formattedRateDate);
-        if (!_.contains(resultsKeys, key)) {
-            //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
-            return null;        // We have a date with no rates or availability
-        } else {
-            // We have availability for this date
+            // Check that we got a rates & availability document for this hotel & day
+            var key = createKey(request.hotelId, formattedRateDate);
+            if (!_.contains(resultsKeys, key)) {
+                //console.log('No rates/availability for hotel %s on day %s', request.hotelId, moment(rateDate).format('YYYY-MM-DD'));
+                return null;        // We have a date with no rates or availability
+            } else {
+                // We have availability for this date
 
-            // Get details of room types per rateplan per date
-            _.keys(results[key].value).map(function (ratePlan) {
-                //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
+                // Get details of room types per rateplan per date
+                _.keys(results[key].value).map(function (ratePlan) {
+                        //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
 
-                // Now check rooms for availability
-                _.keys(results[key].value[ratePlan]).map(function (roomType) {
+                        // Now check rooms for availability
+                        _.keys(results[key].value[ratePlan]).map(function (roomType) {
 
-                    // Store the rates for this date / rateplan / room
-                    // We'll process occupancy later when we have everything together!
-                    //ratesResponse.set(createJSONKey(formattedRateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
-                    //console.log(JSON.stringify(results[key].value[ratePlan][roomType].Rates));
-                    _.keys(results[key].value[ratePlan][roomType].Rates).map(function (rate) {
-                        //console.log(results[key].value[ratePlan][roomType].Rates[rate]);
-                        if (results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy) {
-                            console.log(results[key].value[ratePlan][roomType].Rates[rate]);
-                            var rateJSON = {};
-                            rateJSON.price = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].AmountAfterTax;
-                            rateJSON.currency = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].CurrencyCode;
-                            rateJSON.numGuests = results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests;
-                            ratesResponse.set(createJSONKey(ratePlan, roomType, rate, formattedRateDate), rateJSON);
-                        };
-                    })
-                })
+                            // Store the rates for this date / rateplan / room
+                            // We'll process occupancy later when we have everything together!
+                            //ratesResponse.set(createJSONKey(formattedRateDate, ratePlan, roomType), results[key].value[ratePlan][roomType].Rates);
+                            //console.log(JSON.stringify(results[key].value[ratePlan][roomType].Rates));
+                            _.keys(results[key].value[ratePlan][roomType].Rates).map(function (rate) {
+                                //console.log(results[key].value[ratePlan][roomType].Rates[rate]);
+                                if (results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy) {
+                                    var rateJSON = {
+                                        price: results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].AmountAfterTax,
+                                        currency: results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].CurrencyCode,
+                                        numGuests: results[key].value[ratePlan][roomType].Rates[rate].BaseByGuestAmts[0].NumberOfGuests
+                                    }
+                                    ratesResponse.set(createJSONKey(ratePlan, roomType, rate, formattedRateDate), rateJSON)
+                                }
+                                ;
+                            })
+                        })
 
-            });
+                    }
+                )
+                ;
 
 
+            }
         }
-    })
+    )
     return ratesResponse.data;
 }
 
@@ -183,44 +187,50 @@ var getOTA2004bRates = function (req, res, next) {
             else {
                 var aggregatedRates = processRatePlansByDate(request, range, results);
 
-                if ( aggregatedRates != null ) {
+                if (aggregatedRates != null) {
                     console.log('Aggregating...');
 
                     // Process by date
-                    _.keys(aggregatedRates).map(function(aggregatedRatePlan) {
+                    _.keys(aggregatedRates).map(function (aggregatedRatePlan) {
+                        console.log('---');
                         console.log(JSON.stringify(aggregatedRates[aggregatedRatePlan]));
 
-                        /*_.keys(aggregatedRates[aggregatedRatePlan]).map(function(invCode) {
+                        _.keys(aggregatedRates[aggregatedRatePlan]).map(function (invCode) {
 
                             // Now get rates
-                            _.keys(aggregatedRates[aggregatedRatePlan][invCode]).map(function(rate) {
+
+                            _.keys(aggregatedRates[aggregatedRatePlan][invCode]).map(function (rate) {
                                 var rateDates = _.keys(aggregatedRates[aggregatedRatePlan][invCode][rate]);
-                                if ( !rateDates.length != request.nights ) {
-                                    console.log('')
+                                if (rateDates.length != request.nights) {
+                                    console.log('Not enough nights with rates :-(');
+                                } else {
+                                    console.log(aggregatedRates[aggregatedRatePlan][invCode][rate]);
+                                    var count = 0, price = 0;
+
                                 }
                             })
-                        })*/
+                        })
 
                         /*// now by RatePlanCode
-                        _.keys(aggregatedRates[aggregatedRatesDate]).map(function(ratePlanCode) {
+                         _.keys(aggregatedRates[aggregatedRatesDate]).map(function(ratePlanCode) {
 
-                            // now by room type
-                            _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode]).map(function(roomType) {
+                         // now by room type
+                         _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode]).map(function(roomType) {
 
-                                // Now by invCode
-                                _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType]).map(function(invCode) {
-                                    console.log('InvCode:' + JSON.stringify(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode]));
+                         // Now by invCode
+                         _.keys(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType]).map(function(invCode) {
+                         console.log('InvCode:' + JSON.stringify(aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode]));
 
-                                    // Now get occupancy
-                                    if (aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy);
+                         // Now get occupancy
+                         if (aggregatedRates[aggregatedRatesDate][ratePlanCode][roomType][invCode].BaseByGuestAmts[0].NumberOfGuests >= request.occupancy);
 
 
 
-                                })
+                         })
 
-                            })
+                         })
 
-                        })*/
+                         })*/
 
                     })
                 }
