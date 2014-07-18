@@ -214,12 +214,12 @@ var getOTA2004bRates = function (req, res, next) {
                  ;
                  var response = processResponse(ratesResponse, requestParams);
                  res.send(response);
-                 next();
-                res.send('OK');
+                 //next();
+                //res.send('OK');
             }
         }
     )
-    next();
+    //next();
 
 }
 
