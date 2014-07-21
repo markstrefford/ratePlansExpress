@@ -2,8 +2,9 @@
  * Created by markstrefford on 02/04/2014.
  */
 
-
-var restify = require('restify'),
+var express = require('express'),
+    http = require('http'),
+    path = require('path'),
     nconf = require('nconf'),
     couchbase = require('couchbase'),
     _ = require('underscore'),
@@ -30,7 +31,7 @@ var parseRatesParams = function (params) {
     // TODO - Handle errors here, perhaps making this a callback!!
     // TODO - Check for sd < ed, 0 < ad < max, 0 =< ch <= max, etc.
     return {
-        "hotelId": params.hotelId,
+        //"hotelId": params.hotelId,
         "startDate": params.d,
         "nights": params.n,
         "occupancy": params.o,
@@ -169,7 +170,10 @@ var processResponse = function (ratesResponse, request) {
  */
 //app.get('/hotel/:hotelId/rates', parseUrlParams, function (req, res) {
 var getOTA2004bRates = function (req, res, next) {
-    var request = parseRatesParams(req.params);
+    //var request = parseRatesParams(req.params);
+    var request = parseRatesParams(req.query);
+    request.hotelId = req.params.hotelId;
+
     //console.log('getOTA2004bRates: reqParams:' + requestParams);
     //requestParams.hotelId = req.params.hotelId;
     // Calculate keys for retrieving rate and availability
@@ -253,19 +257,48 @@ var getOTA2004bRates = function (req, res, next) {
 
 
 var showReq = function (req, res, next) {
-    //console.log(req.params);
+    console.log(req.params);
     res.send('OK');
 }
-var server = restify.createServer({
+/*var server = restify.createServer({
     name: 'OTA2004B RatePlans API'
-});
-server.use(restify.queryParser());
-server.get('/hotel/:hotelId/rates', getOTA2004bRates);
+});*/
+
+var app = module.exports = express();
+
+// Set up web server
+var app = express();
+app.set('port', process.env.PORT || 3001);
+//app.set('views', __dirname + '/views');
+//app.set('view engine', 'ejs');
+//app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(morgan('dev'));
+//app.use(bodyParser.urlencoded());
+//app.use(bodyParser.json());
+//app.use(methodOverride());
+//app.use(express.static(path.join(__dirname, 'client')));
+//app.use(cookieParser());
+/*app.use(session(
+    {
+        secret: process.env.COOKIE_SECRET || "Superdupersecret"
+    }));
+app.use(express.static(path.join(__dirname, 'public')));*/
+
+//server.use(restify.queryParser());
+//server.get('/hotel/:hotelId/rates', getOTA2004bRates);
 //server.get('/hotel/:hotelId/rates', showReq);
 //server.head('/hello/:name', respond);
 
-server.listen(8080, function () {
-    console.log('%s listening at %s', server.name, server.url);
+//server.listen(8080, function () {
+//    console.log('%s listening at %s', server.name, server.url);
+//});
+
+app.get('/hotel/:hotelId/rates', getOTA2004bRates);
+//app.get('/hotel/:hotelId/rates', showReq);
+
+http.globalAgent.maxSockets = 128;   // From http://stackoverflow.com/questions/16472497/nodejs-max-socket-pooling-settings
+http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
 
 
