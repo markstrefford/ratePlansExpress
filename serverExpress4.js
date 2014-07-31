@@ -78,7 +78,9 @@ var processRatePlansByDate = function (request, range, results) {
                 // We have availability for this date
 
                 // Get details of room types per rateplan per date
-                _.keys(results[key].value).map(function (ratePlan) {
+                //_.keys(results[key].value).map(function (ratePlan) {
+                _.keys(_.toArray(results[key].value.toString())).map(function (ratePlan) {
+                        //console.log(ratePlan);
                         //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
 
                         // Now check rooms for availability
@@ -114,51 +116,7 @@ var processRatePlansByDate = function (request, range, results) {
 }
 
 
-var processResponse = function (ratesResponse, request) {
-    var response = [];   // Start to create response back to the customer
 
-    for (invCode in ratesResponse.data) {
-        //console.log(invCode);
-        var rateResponse = ratesResponse.data[invCode];
-        // TODO - Get rateplan docs somewhere...
-        for (ratePlanCode in rateResponse) {
-            //console.log(ratePlanCode);
-            var processedRate = rateResponse[ratePlanCode];
-            var count = 0, totalPrice = 0;
-            _.map(processedRate, function (pricePerDay) {
-                count += 1;
-                totalPrice += pricePerDay;
-                return (count, totalPrice)
-            })
-            //console.log(count, totalPrice);
-            if (count == request.nights) {
-                roomRate = {
-                    "id": invCode,
-                    "price": totalPrice,
-                    "cancellation_type": 1,
-                    "rackrate": totalPrice,
-                    "min_stay": 1,
-                    "sleeps": {
-                        "adults": request.occupancy
-                    },
-                    "remaining": 5,  // Hard coded just so we don't need to get data out from above!!
-                    "type": invCode,
-                    "advanced_purchase": true,
-                    "breakfast_included": true,
-                    "ratecode": ratePlanCode,
-                    "roomcode": invCode,
-                    "PriceBreakdown": {},
-                    "cancellation_policy": {}
-
-                };
-                //console.log(roomRate);
-                response.push(roomRate);
-            }
-        }
-    }
-    //res.send(response);
-    return response;
-}
 
 /*
  * Get rateplans that fit my requirements
@@ -187,9 +145,21 @@ var getOTA2004bRates = function (req, res, next) {
     });
 
     // Gets docs from Couchbase
+    /*ota2004Db.get('10000', {format:'raw'}, function(err, res) {
+        console.log(res.value.toString('hex'));
+    });*/
     ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
+    //ota2004Db.getMulti('10000', {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
+/*                console.log(results['10000'].value.length);
+                console.log('-----------');
+                console.log(results);
+                console.log('-----------');
+                console.log(_.toArray(results['10000'].value).toString());
+                console.log('-----------');*/
+
+
                 var response = [];
                 var aggregatedRates = processRatePlansByDate(request, range, results);
 
@@ -269,30 +239,6 @@ var app = module.exports = express();
 // Set up web server
 var app = express();
 app.set('port', process.env.PORT || 3001);
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'ejs');
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-//app.use(morgan('dev'));
-//app.use(bodyParser.urlencoded());
-//app.use(bodyParser.json());
-//app.use(methodOverride());
-//app.use(express.static(path.join(__dirname, 'client')));
-//app.use(cookieParser());
-/*app.use(session(
-    {
-        secret: process.env.COOKIE_SECRET || "Superdupersecret"
-    }));
-app.use(express.static(path.join(__dirname, 'public')));*/
-
-//server.use(restify.queryParser());
-//server.get('/hotel/:hotelId/rates', getOTA2004bRates);
-//server.get('/hotel/:hotelId/rates', showReq);
-//server.head('/hello/:name', respond);
-
-//server.listen(8080, function () {
-//    console.log('%s listening at %s', server.name, server.url);
-//});
-
 app.get('/hotel/:hotelId/rates', getOTA2004bRates);
 //app.get('/hotel/:hotelId/rates', showReq);
 
