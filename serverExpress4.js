@@ -145,10 +145,10 @@ var getOTA2004bRates = function (req, res, next) {
     });
 
     // Gets docs from Couchbase
-    /*ota2004Db.get('10000', {format:'raw'}, function(err, res) {
+    ota2004Db.get('10000', {format:'raw'}, function(err, res) {
         console.log(res.value.toString('hex'));
-    });*/
-    ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
+
+    //ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
     //ota2004Db.getMulti('10000', {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
