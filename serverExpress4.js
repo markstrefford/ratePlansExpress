@@ -153,8 +153,6 @@ var getOTA2004bRates = function (req, res, next) {
     ota2004Db.getMulti(rateDocKeys, {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-                console.log(results);
-
                 /*                console.log(results['10000'].value.length);
                                 console.log('-----------');
                                 console.log(results);
