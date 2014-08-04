@@ -78,8 +78,8 @@ var processRatePlansByDate = function (request, range, results) {
                 // We have availability for this date
 
                 // Get details of room types per rateplan per date
-                //_.keys(results[key].value).map(function (ratePlan) {
-                _.keys(_.toArray(results[key].value.toString())).map(function (ratePlan) {
+                _.keys(results[key].value).map(function (ratePlan) {
+                //_.keys(_.toArray(results[key].value.toString())).map(function (ratePlan) {
                         //console.log(ratePlan);
                         //var roomTypePerRatePlanPerDate = results[key].value[ratePlan];
 
@@ -145,20 +145,22 @@ var getOTA2004bRates = function (req, res, next) {
     });
 
     // Gets docs from Couchbase
-    ota2004Db.get('10000', {format:'raw'}, function(err, res) {
+    /*ota2004Db.get('10000', {format:'raw'}, function(err, res) {
         console.log(res.value.toString('hex'));
-        console.log(res.value);
+        console.log(res.value);*/
 
     //ota2004Db.getMulti(_.flatten([request.hotelId, rateDocKeys]), {format: 'json'}, function (err, results) {
-    //ota2004Db.getMulti('10000', {format: 'json'}, function (err, results) {
+    ota2004Db.getMulti(rateDocKeys, {format: 'json'}, function (err, results) {
             if (err) console.log(err)       // TODO - No callback????!!!?!?!?
             else {
-/*                console.log(results['10000'].value.length);
-                console.log('-----------');
                 console.log(results);
-                console.log('-----------');
-                console.log(_.toArray(results['10000'].value).toString());
-                console.log('-----------');*/
+
+                /*                console.log(results['10000'].value.length);
+                                console.log('-----------');
+                                console.log(results);
+                                console.log('-----------');
+                                console.log(_.toArray(results['10000'].value).toString());
+                                console.log('-----------');*/
 
 
                 var response = [];
